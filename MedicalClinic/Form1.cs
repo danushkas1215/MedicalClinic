@@ -27,5 +27,14 @@ namespace MedicalClinic
             // Display the new form.  
             newMDIChild.Show();
         }
+
+        private void companyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PharmaceuticalCom newMDIChild = new PharmaceuticalCom();
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
     }
 }
