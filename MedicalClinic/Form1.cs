@@ -30,27 +30,33 @@ namespace MedicalClinic
 
         private void companyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
             PharmaceuticalCom newMDIChild = new PharmaceuticalCom();
             newMDIChild.MdiParent = this;
             newMDIChild.MaximizeBox = false;
-            newMDIChild.WindowState = FormWindowState.Maximized;
             newMDIChild.Show();
+            newMDIChild.WindowState = FormWindowState.Maximized;
         }
 
-        private void genericNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void genericNamesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            GenericNames newMDIChild = new GenericNames();
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            GenericNames newMDIChild = new GenericNames(string.Empty);
             newMDIChild.MdiParent = this;
-            newMDIChild.WindowState = FormWindowState.Maximized;
             newMDIChild.Show();
+            newMDIChild.WindowState = FormWindowState.Maximized;
         }
 
-        private void genericNamesListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void genericNamesListToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
             GenericNamesList newMDIChild = new GenericNamesList();
             newMDIChild.MdiParent = this;
-            newMDIChild.WindowState = FormWindowState.Maximized;
             newMDIChild.Show();
+            newMDIChild.WindowState = FormWindowState.Maximized;
         }
     }
 }

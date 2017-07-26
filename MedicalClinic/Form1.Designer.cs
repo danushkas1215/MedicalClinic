@@ -34,7 +34,8 @@
             this.medicinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genericNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.genericNamesListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.genericNamesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.genericNamesListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,8 +71,7 @@
             // 
             this.medicinesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.companyToolStripMenuItem,
-            this.genericNamesToolStripMenuItem,
-            this.genericNamesListToolStripMenuItem});
+            this.genericNamesToolStripMenuItem});
             this.medicinesToolStripMenuItem.Name = "medicinesToolStripMenuItem";
             this.medicinesToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.medicinesToolStripMenuItem.Text = "Medicines";
@@ -85,17 +85,26 @@
             // 
             // genericNamesToolStripMenuItem
             // 
+            this.genericNamesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.genericNamesToolStripMenuItem1,
+            this.genericNamesListToolStripMenuItem1});
             this.genericNamesToolStripMenuItem.Name = "genericNamesToolStripMenuItem";
-            this.genericNamesToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
-            this.genericNamesToolStripMenuItem.Text = "Generic Names";
-            this.genericNamesToolStripMenuItem.Click += new System.EventHandler(this.genericNamesToolStripMenuItem_Click);
+            this.genericNamesToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.genericNamesToolStripMenuItem.Text = "Generics";
             // 
-            // genericNamesListToolStripMenuItem
+            // genericNamesToolStripMenuItem1
             // 
-            this.genericNamesListToolStripMenuItem.Name = "genericNamesListToolStripMenuItem";
-            this.genericNamesListToolStripMenuItem.Size = new System.Drawing.Size(210, 26);
-            this.genericNamesListToolStripMenuItem.Text = "Generic Names List";
-            this.genericNamesListToolStripMenuItem.Click += new System.EventHandler(this.genericNamesListToolStripMenuItem_Click);
+            this.genericNamesToolStripMenuItem1.Name = "genericNamesToolStripMenuItem1";
+            this.genericNamesToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.genericNamesToolStripMenuItem1.Text = "Generic Names";
+            this.genericNamesToolStripMenuItem1.Click += new System.EventHandler(this.genericNamesToolStripMenuItem1_Click);
+            // 
+            // genericNamesListToolStripMenuItem1
+            // 
+            this.genericNamesListToolStripMenuItem1.Name = "genericNamesListToolStripMenuItem1";
+            this.genericNamesListToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.genericNamesListToolStripMenuItem1.Text = "Generic Names List";
+            this.genericNamesListToolStripMenuItem1.Click += new System.EventHandler(this.genericNamesListToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -123,7 +132,8 @@
         private System.Windows.Forms.ToolStripMenuItem medicinesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem companyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem genericNamesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem genericNamesListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem genericNamesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem genericNamesListToolStripMenuItem1;
     }
 }
 
