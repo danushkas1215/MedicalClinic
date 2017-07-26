@@ -71,6 +71,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GenericNames.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenericNames.Designer.cs">
+      <DependentUpon>GenericNames.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenericNamesList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GenericNamesList.Designer.cs">
+      <DependentUpon>GenericNamesList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Patients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +99,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenericNames.resx">
+      <DependentUpon>GenericNames.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GenericNamesList.resx">
+      <DependentUpon>GenericNamesList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Patients.resx">
       <DependentUpon>Patients.cs</DependentUpon>

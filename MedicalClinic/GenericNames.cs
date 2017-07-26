@@ -11,9 +11,9 @@ using System.Data.OleDb;
 
 namespace MedicalClinic
 {
-    public partial class PharmaceuticalCom : Form
+    public partial class GenericNames : Form
     {
-        public PharmaceuticalCom()
+        public GenericNames()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@ namespace MedicalClinic
             OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
-            cmd.CommandText = "Insert into PharmaceuticalCompanies(CompanyName,CompanyAddress,CompanyPhone,CompanyEmail)Values('" + txtComName.Text + "','" + txtComAddress.Text + "','" + txtComPhone.Text + "','" + txtComEmail.Text + "')";
+            cmd.CommandText = "Insert into GenericNames(GenericName)Values('" + txtGenericName.Text + "')";
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             MessageBox.Show("Record Successfully Saved", "Message");
@@ -32,12 +32,14 @@ namespace MedicalClinic
             FormRefresh();
         }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            FormRefresh();
+        }
+
         public void FormRefresh()
         {
-            txtComName.Text = "";
-            txtComAddress.Text = "";
-            txtComPhone.Text = "";
-            txtComEmail.Text = "";
+            txtGenericName.Text = "";
         }
     }
 }

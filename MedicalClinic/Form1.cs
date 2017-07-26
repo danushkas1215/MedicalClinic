@@ -36,5 +36,21 @@ namespace MedicalClinic
             newMDIChild.WindowState = FormWindowState.Maximized;
             newMDIChild.Show();
         }
+
+        private void genericNamesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenericNames newMDIChild = new GenericNames();
+            newMDIChild.MdiParent = this;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
+
+        private void genericNamesListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GenericNamesList newMDIChild = new GenericNamesList();
+            newMDIChild.MdiParent = this;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
     }
 }
