@@ -38,6 +38,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.dataGridViewRep = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRep)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -70,12 +72,12 @@
             this.txtComAddress.Location = new System.Drawing.Point(272, 77);
             this.txtComAddress.Multiline = true;
             this.txtComAddress.Name = "txtComAddress";
-            this.txtComAddress.Size = new System.Drawing.Size(518, 101);
+            this.txtComAddress.Size = new System.Drawing.Size(518, 77);
             this.txtComAddress.TabIndex = 3;
             // 
             // txtComPhone
             // 
-            this.txtComPhone.Location = new System.Drawing.Point(272, 202);
+            this.txtComPhone.Location = new System.Drawing.Point(272, 180);
             this.txtComPhone.Name = "txtComPhone";
             this.txtComPhone.Size = new System.Drawing.Size(518, 22);
             this.txtComPhone.TabIndex = 5;
@@ -83,7 +85,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 207);
+            this.label3.Location = new System.Drawing.Point(50, 185);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 17);
             this.label3.TabIndex = 4;
@@ -91,7 +93,7 @@
             // 
             // txtComEmail
             // 
-            this.txtComEmail.Location = new System.Drawing.Point(272, 248);
+            this.txtComEmail.Location = new System.Drawing.Point(272, 226);
             this.txtComEmail.Name = "txtComEmail";
             this.txtComEmail.Size = new System.Drawing.Size(518, 22);
             this.txtComEmail.TabIndex = 7;
@@ -99,7 +101,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(50, 253);
+            this.label4.Location = new System.Drawing.Point(53, 231);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 17);
             this.label4.TabIndex = 6;
@@ -107,7 +109,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(314, 313);
+            this.btnAdd.Location = new System.Drawing.Point(288, 448);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 8;
@@ -117,18 +119,28 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(439, 313);
+            this.btnCancel.Location = new System.Drawing.Point(369, 448);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewRep
+            // 
+            this.dataGridViewRep.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewRep.Location = new System.Drawing.Point(272, 273);
+            this.dataGridViewRep.Name = "dataGridViewRep";
+            this.dataGridViewRep.RowTemplate.Height = 24;
+            this.dataGridViewRep.Size = new System.Drawing.Size(518, 150);
+            this.dataGridViewRep.TabIndex = 10;
+            // 
             // PharmaceuticalCom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 514);
+            this.ClientSize = new System.Drawing.Size(828, 677);
+            this.Controls.Add(this.dataGridViewRep);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.txtComEmail);
@@ -141,6 +153,7 @@
             this.Controls.Add(this.label1);
             this.Name = "PharmaceuticalCom";
             this.Text = "PharmaceuticalCom";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRep)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +171,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.DataGridView dataGridViewRep;
     }
 }
