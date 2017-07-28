@@ -28,17 +28,6 @@ namespace MedicalClinic
             newMDIChild.Show();
         }
 
-        private void companyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (ActiveMdiChild != null)
-                ActiveMdiChild.Close();
-            PharmaceuticalCom newMDIChild = new PharmaceuticalCom();
-            newMDIChild.MdiParent = this;
-            newMDIChild.MaximizeBox = false;
-            newMDIChild.Show();
-            newMDIChild.WindowState = FormWindowState.Maximized;
-        }
-
         private void genericNamesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (ActiveMdiChild != null)
@@ -55,6 +44,28 @@ namespace MedicalClinic
                 ActiveMdiChild.Close();
             GenericNamesList newMDIChild = new GenericNamesList();
             newMDIChild.MdiParent = this;
+            newMDIChild.Show();
+            newMDIChild.WindowState = FormWindowState.Maximized;
+        }
+
+        private void companyListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            PharmaceuticalComList newMDIChild = new PharmaceuticalComList();
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.Show();
+            newMDIChild.WindowState = FormWindowState.Maximized;
+        }
+
+        private void companyToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            PharmaceuticalCom newMDIChild = new PharmaceuticalCom(string.Empty);
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
             newMDIChild.Show();
             newMDIChild.WindowState = FormWindowState.Maximized;
         }
