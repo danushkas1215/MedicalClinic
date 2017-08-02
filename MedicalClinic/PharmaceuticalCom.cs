@@ -17,7 +17,10 @@ namespace MedicalClinic
         {
             InitializeComponent();
             txtComID.Text = strID;
-            InitiateDatagrid();
+            if(string.IsNullOrEmpty(strID))
+            {
+                InitiateDatagrid();
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -55,6 +58,7 @@ namespace MedicalClinic
                     FormRefresh();
                     txtComID.Text = string.Empty;
                     txtComName.Enabled = true;
+                    btnAdd.Text = "Add";
                 }
             }
 
@@ -104,9 +108,31 @@ namespace MedicalClinic
             con.Close();
         }
 
-        public void RetrieveRepData()
+        public void RetrieveRepData(string strComId)
         {
-
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from MedicalRep where CompanyID = " + int.Parse(strComId) + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Name");
+                dt.Columns.Add("Mobile");
+                dt.Columns.Add("Email");
+                    while (reader.Read())
+                    {
+                        DataRow row = dt.NewRow();
+                        row["Name"] = reader["RepName"];
+                        row["Mobile"] = reader["RepMobile"];
+                        row["Email"] = reader["RepEmail"];
+                        dt.Rows.Add(row);
+                    }
+                    dataGridViewRep.DataSource = dt;
+            }
+            reader.Close();
+            con.Close();
         }
 
         public string RetrieveID()
@@ -151,6 +177,7 @@ namespace MedicalClinic
                 }
                 reader.Close();
                 con.Close();
+                RetrieveRepData(txtComID.Text);
                 btnAdd.Text = "Update";
                 txtComName.Enabled = false;
                 btnDelete.Enabled = true;
