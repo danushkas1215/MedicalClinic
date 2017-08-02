@@ -20,7 +20,20 @@ namespace MedicalClinic
             if(string.IsNullOrEmpty(strID))
             {
                 InitiateDatagrid();
+                InitiateDistributorDatagrid();
             }
+            this.dataGridViewRep.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewRep.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewRep.Columns["Name"].Width = 220;
+            this.dataGridViewRep.Columns["Mobile"].Width = 125;
+            this.dataGridViewRep.Columns["Email"].Width = 190;
+
+            this.dataGridViewDistributor.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewDistributor.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewDistributor.Columns["Name"].Width = 200;
+            this.dataGridViewDistributor.Columns["Adress"].Width = 190;
+            this.dataGridViewDistributor.Columns["Email"].Width = 65;
+            this.dataGridViewDistributor.Columns["Phone"].Width = 100;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -38,6 +51,7 @@ namespace MedicalClinic
                     con.Close();
                     string strID = RetrieveID();
                     AddRepData(strID);
+                    AddDistributorData(strID);
                     MessageBox.Show("Record Successfully Saved", "Message");
                     FormRefresh();
                 }
@@ -52,7 +66,10 @@ namespace MedicalClinic
                     OleDbCommand cmd = new OleDbCommand(strUpdate, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
-
+                    DeleteRepData(txtComID.Text);
+                    AddRepData(txtComID.Text);
+                    DeleteDistributorData(txtComID.Text);
+                    AddDistributorData(txtComID.Text);
                     MessageBox.Show("Record Successfuly Updated", "Message");
 
                     FormRefresh();
@@ -73,7 +90,10 @@ namespace MedicalClinic
             txtComEmail.Text = "";
 
             InitiateDatagrid();
+            InitiateDistributorDatagrid();
             btnDelete.Enabled = false;
+            txtComName.Enabled = true;
+            btnAdd.Text = "Add";
         }
 
         public void InitiateDatagrid()
@@ -94,13 +114,30 @@ namespace MedicalClinic
             con.Open();
             foreach (DataGridViewRow ro in dataGridViewRep.Rows)
             {
-                if (ro.Cells[0].Value != null)
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
                 {
                     cmd.CommandText = "Insert into MedicalRep(CompanyID, RepName, RepMobile, RepEmail)Values("
                     + int.Parse(strID) + ",'"
                     + ro.Cells[0].Value + "','"
                     + ro.Cells[1].Value + "','"
                     + ro.Cells[2].Value + "')";
+                    cmd.Connection = con;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            con.Close();
+        }
+
+        public void DeleteRepData(string strID)
+        {
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            OleDbCommand cmd = con.CreateCommand();
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewRep.Rows)
+            {
+                if (ro.Cells[0].Value != null)
+                {
+                    cmd.CommandText = "DELETE FROM MedicalRep WHERE CompanyID = "+int.Parse(strID)+"";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                 }
@@ -156,6 +193,86 @@ namespace MedicalClinic
             return strID;
         }
 
+        public void InitiateDistributorDatagrid()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Adress");
+            dt.Columns.Add("Phone");
+            dt.Columns.Add("Email");
+            dataGridViewDistributor.AllowUserToAddRows = true;
+            dataGridViewDistributor.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            dataGridViewDistributor.DataSource = dt;
+        }
+
+        public void AddDistributorData(string strID)
+        {
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            OleDbCommand cmd = con.CreateCommand();
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewDistributor.Rows)
+            {
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
+                {
+                    cmd.CommandText = "Insert into MedicalDistributors(DisCompanyID, DistributorName, DistributorAddress, DistributorPhone, DistributorEmail)Values("
+                    + int.Parse(strID) + ",'"
+                    + ro.Cells[0].Value + "','"
+                    + ro.Cells[1].Value + "','"
+                    + ro.Cells[2].Value + "','"
+                    + ro.Cells[3].Value + "')";
+                    cmd.Connection = con;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            con.Close();
+        }
+
+        public void DeleteDistributorData(string strID)
+        {
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            OleDbCommand cmd = con.CreateCommand();
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewDistributor.Rows)
+            {
+                if (ro.Cells[0].Value != null)
+                {
+                    cmd.CommandText = "DELETE FROM MedicalDistributors WHERE DisCompanyID = " + int.Parse(strID) + "";
+                    cmd.Connection = con;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            con.Close();
+        }
+
+        public void RetrieveDistributorData(string strComId)
+        {
+            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from MedicalDistributors where DisCompanyID = " + int.Parse(strComId) + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Name");
+                dt.Columns.Add("Adress");
+                dt.Columns.Add("Phone");
+                dt.Columns.Add("Email");
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["Name"] = reader["DistributorName"];
+                    row["Adress"] = reader["DistributorAddress"];
+                    row["Phone"] = reader["DistributorPhone"];
+                    row["Email"] = reader["DistributorEmail"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewDistributor.DataSource = dt;
+            }
+            reader.Close();
+            con.Close();
+        }
+
         private void txtComID_TextChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtComID.Text))
@@ -178,6 +295,7 @@ namespace MedicalClinic
                 reader.Close();
                 con.Close();
                 RetrieveRepData(txtComID.Text);
+                RetrieveDistributorData(txtComID.Text);
                 btnAdd.Text = "Update";
                 txtComName.Enabled = false;
                 btnDelete.Enabled = true;
@@ -218,6 +336,10 @@ namespace MedicalClinic
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
+
+                    DeleteRepData(txtComID.Text);
+                    DeleteDistributorData(txtComID.Text);
+
                     MessageBox.Show("Records Successfuly Deleted");
 
                     FormRefresh();

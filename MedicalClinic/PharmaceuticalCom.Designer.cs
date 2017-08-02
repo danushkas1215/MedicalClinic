@@ -41,13 +41,15 @@
             this.dataGridViewRep = new System.Windows.Forms.DataGridView();
             this.txtComID = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.dataGridViewDistributor = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDistributor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(50, 37);
+            this.label1.Location = new System.Drawing.Point(50, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 17);
             this.label1.TabIndex = 0;
@@ -63,7 +65,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(50, 82);
+            this.label2.Location = new System.Drawing.Point(50, 80);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(123, 17);
             this.label2.TabIndex = 2;
@@ -87,7 +89,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(50, 185);
+            this.label3.Location = new System.Drawing.Point(50, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(112, 17);
             this.label3.TabIndex = 4;
@@ -103,7 +105,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(53, 231);
+            this.label4.Location = new System.Drawing.Point(50, 229);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 17);
             this.label4.TabIndex = 6;
@@ -111,7 +113,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(288, 448);
+            this.btnAdd.Location = new System.Drawing.Point(288, 626);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 8;
@@ -121,7 +123,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(500, 448);
+            this.btnCancel.Location = new System.Drawing.Point(500, 626);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 9;
@@ -135,7 +137,7 @@
             this.dataGridViewRep.Location = new System.Drawing.Point(272, 273);
             this.dataGridViewRep.Name = "dataGridViewRep";
             this.dataGridViewRep.RowTemplate.Height = 24;
-            this.dataGridViewRep.Size = new System.Drawing.Size(518, 150);
+            this.dataGridViewRep.Size = new System.Drawing.Size(800, 150);
             this.dataGridViewRep.TabIndex = 10;
             // 
             // txtComID
@@ -144,11 +146,12 @@
             this.txtComID.Name = "txtComID";
             this.txtComID.Size = new System.Drawing.Size(100, 22);
             this.txtComID.TabIndex = 11;
+            this.txtComID.Visible = false;
             this.txtComID.TextChanged += new System.EventHandler(this.txtComID_TextChanged);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(397, 448);
+            this.btnDelete.Location = new System.Drawing.Point(397, 626);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 12;
@@ -156,11 +159,21 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
+            // dataGridViewDistributor
+            // 
+            this.dataGridViewDistributor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDistributor.Location = new System.Drawing.Point(272, 451);
+            this.dataGridViewDistributor.Name = "dataGridViewDistributor";
+            this.dataGridViewDistributor.RowTemplate.Height = 24;
+            this.dataGridViewDistributor.Size = new System.Drawing.Size(800, 150);
+            this.dataGridViewDistributor.TabIndex = 13;
+            // 
             // PharmaceuticalCom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(828, 677);
+            this.ClientSize = new System.Drawing.Size(1138, 677);
+            this.Controls.Add(this.dataGridViewDistributor);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.txtComID);
             this.Controls.Add(this.dataGridViewRep);
@@ -177,6 +190,7 @@
             this.Name = "PharmaceuticalCom";
             this.Text = "PharmaceuticalCom";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDistributor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,5 +211,6 @@
         private System.Windows.Forms.DataGridView dataGridViewRep;
         private System.Windows.Forms.TextBox txtComID;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DataGridView dataGridViewDistributor;
     }
 }
