@@ -32,12 +32,15 @@
             this.pToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.genericNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.genericNamesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.genericNamesListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.companyListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.genericNamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.genericNamesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.genericNamesListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicineListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,10 +76,34 @@
             // 
             this.medicinesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
-            this.genericNamesToolStripMenuItem});
+            this.genericNamesToolStripMenuItem,
+            this.medicinesToolStripMenuItem1});
             this.medicinesToolStripMenuItem.Name = "medicinesToolStripMenuItem";
             this.medicinesToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.medicinesToolStripMenuItem.Text = "Medicines";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.companyToolStripMenuItem,
+            this.companyListToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem1.Text = "Companies";
+            // 
+            // companyToolStripMenuItem
+            // 
+            this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
+            this.companyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.companyToolStripMenuItem.Text = "Company";
+            this.companyToolStripMenuItem.Click += new System.EventHandler(this.companyToolStripMenuItem_Click_1);
+            // 
+            // companyListToolStripMenuItem
+            // 
+            this.companyListToolStripMenuItem.Name = "companyListToolStripMenuItem";
+            this.companyListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.companyListToolStripMenuItem.Text = "Company List";
+            this.companyListToolStripMenuItem.Click += new System.EventHandler(this.companyListToolStripMenuItem_Click);
             // 
             // genericNamesToolStripMenuItem
             // 
@@ -101,28 +128,27 @@
             this.genericNamesListToolStripMenuItem1.Text = "Generic Names List";
             this.genericNamesListToolStripMenuItem1.Click += new System.EventHandler(this.genericNamesListToolStripMenuItem1_Click);
             // 
-            // toolStripMenuItem1
+            // medicinesToolStripMenuItem1
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.companyToolStripMenuItem,
-            this.companyListToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
-            this.toolStripMenuItem1.Text = "Companies";
+            this.medicinesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.medicineToolStripMenuItem,
+            this.medicineListToolStripMenuItem});
+            this.medicinesToolStripMenuItem1.Name = "medicinesToolStripMenuItem1";
+            this.medicinesToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.medicinesToolStripMenuItem1.Text = "Medicines";
             // 
-            // companyToolStripMenuItem
+            // medicineListToolStripMenuItem
             // 
-            this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
-            this.companyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.companyToolStripMenuItem.Text = "Company";
-            this.companyToolStripMenuItem.Click += new System.EventHandler(this.companyToolStripMenuItem_Click_1);
+            this.medicineListToolStripMenuItem.Name = "medicineListToolStripMenuItem";
+            this.medicineListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.medicineListToolStripMenuItem.Text = "Medicine List";
+            this.medicineListToolStripMenuItem.Click += new System.EventHandler(this.medicineListToolStripMenuItem_Click);
             // 
-            // companyListToolStripMenuItem
+            // medicineToolStripMenuItem
             // 
-            this.companyListToolStripMenuItem.Name = "companyListToolStripMenuItem";
-            this.companyListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.companyListToolStripMenuItem.Text = "Company List";
-            this.companyListToolStripMenuItem.Click += new System.EventHandler(this.companyListToolStripMenuItem_Click);
+            this.medicineToolStripMenuItem.Name = "medicineToolStripMenuItem";
+            this.medicineToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.medicineToolStripMenuItem.Text = "Medicine";
             // 
             // Form1
             // 
@@ -154,6 +180,9 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem companyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem companyListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medicinesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem medicineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medicineListToolStripMenuItem;
     }
 }
 

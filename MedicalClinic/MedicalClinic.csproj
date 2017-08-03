@@ -83,6 +83,18 @@
     <Compile Include="GenericNamesList.Designer.cs">
       <DependentUpon>GenericNamesList.cs</DependentUpon>
     </Compile>
+    <Compile Include="MedicineList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicineList.Designer.cs">
+      <DependentUpon>MedicineList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medicines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Medicines.Designer.cs">
+      <DependentUpon>Medicines.cs</DependentUpon>
+    </Compile>
     <Compile Include="Patients.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +123,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenericNamesList.resx">
       <DependentUpon>GenericNamesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicineList.resx">
+      <DependentUpon>MedicineList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medicines.resx">
+      <DependentUpon>Medicines.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Patients.resx">
       <DependentUpon>Patients.cs</DependentUpon>
