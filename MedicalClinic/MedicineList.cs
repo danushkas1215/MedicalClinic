@@ -23,6 +23,11 @@ namespace MedicalClinic
             this.dataGridView1.Columns["Medicine Name"].Width = 220;
             this.dataGridView1.Columns["Generic Name"].Width = 175;
             this.dataGridView1.Columns["Company"].Width = 150;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

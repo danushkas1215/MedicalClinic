@@ -34,6 +34,18 @@ namespace MedicalClinic
             this.dataGridViewDistributor.Columns["Adress"].Width = 190;
             this.dataGridViewDistributor.Columns["Email"].Width = 65;
             this.dataGridViewDistributor.Columns["Phone"].Width = 100;
+
+            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewRep.EnableHeadersVisualStyles = false;
+            this.dataGridViewRep.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewDistributor.EnableHeadersVisualStyles = false;
+            this.dataGridViewDistributor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

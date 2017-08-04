@@ -15,6 +15,7 @@ namespace MedicalClinic
         public Form1()
         {
             InitializeComponent();
+            this.WindowState = FormWindowState.Maximized;
         }
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,8 +45,8 @@ namespace MedicalClinic
                 ActiveMdiChild.Close();
             GenericNamesList newMDIChild = new GenericNamesList();
             newMDIChild.MdiParent = this;
-            newMDIChild.Show();
             newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
         }
 
         private void companyListToolStripMenuItem_Click(object sender, EventArgs e)

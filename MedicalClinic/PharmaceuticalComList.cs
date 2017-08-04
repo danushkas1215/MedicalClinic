@@ -17,6 +17,14 @@ namespace MedicalClinic
         {
             InitializeComponent();
             GetData();
+
+            this.dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
