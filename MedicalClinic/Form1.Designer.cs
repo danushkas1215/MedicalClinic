@@ -39,8 +39,8 @@
             this.genericNamesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.genericNamesListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.medicinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.medicineListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicineListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,14 +94,14 @@
             // companyToolStripMenuItem
             // 
             this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
-            this.companyToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.companyToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.companyToolStripMenuItem.Text = "Company";
             this.companyToolStripMenuItem.Click += new System.EventHandler(this.companyToolStripMenuItem_Click_1);
             // 
             // companyListToolStripMenuItem
             // 
             this.companyListToolStripMenuItem.Name = "companyListToolStripMenuItem";
-            this.companyListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.companyListToolStripMenuItem.Size = new System.Drawing.Size(173, 26);
             this.companyListToolStripMenuItem.Text = "Company List";
             this.companyListToolStripMenuItem.Click += new System.EventHandler(this.companyListToolStripMenuItem_Click);
             // 
@@ -137,18 +137,19 @@
             this.medicinesToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.medicinesToolStripMenuItem1.Text = "Medicines";
             // 
+            // medicineToolStripMenuItem
+            // 
+            this.medicineToolStripMenuItem.Name = "medicineToolStripMenuItem";
+            this.medicineToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.medicineToolStripMenuItem.Text = "Medicine";
+            this.medicineToolStripMenuItem.Click += new System.EventHandler(this.medicineToolStripMenuItem_Click);
+            // 
             // medicineListToolStripMenuItem
             // 
             this.medicineListToolStripMenuItem.Name = "medicineListToolStripMenuItem";
             this.medicineListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.medicineListToolStripMenuItem.Text = "Medicine List";
             this.medicineListToolStripMenuItem.Click += new System.EventHandler(this.medicineListToolStripMenuItem_Click);
-            // 
-            // medicineToolStripMenuItem
-            // 
-            this.medicineToolStripMenuItem.Name = "medicineToolStripMenuItem";
-            this.medicineToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.medicineToolStripMenuItem.Text = "Medicine";
             // 
             // Form1
             // 

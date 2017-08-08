@@ -81,5 +81,16 @@ namespace MedicalClinic
             newMDIChild.Show();
             newMDIChild.WindowState = FormWindowState.Maximized;
         }
+
+        private void medicineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            Medicines newMDIChild = new Medicines(string.Empty);
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.Show();
+            newMDIChild.WindowState = FormWindowState.Maximized;
+        }
     }
 }

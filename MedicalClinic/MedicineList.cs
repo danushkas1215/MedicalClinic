@@ -40,7 +40,7 @@ namespace MedicalClinic
             if (e.ColumnIndex == dataGridView1.Columns["edit_column"].Index)
             {
                 string intID = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                GenericNames myform = new GenericNames(intID);
+                Medicines myform = new Medicines(intID);
                 myform.MdiParent = this.ParentForm;
                 myform.WindowState = FormWindowState.Maximized;
                 myform.Show();
