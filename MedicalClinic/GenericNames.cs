@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Configuration;
 
 namespace MedicalClinic
 {
@@ -25,7 +26,8 @@ namespace MedicalClinic
             {
                 if (btnAdd.Text == "Add")
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     OleDbCommand cmd = con.CreateCommand();
                     con.Open();
                     cmd.CommandText = "Insert into GenericNames(GenericName)Values('" + txtGenericName.Text + "')";
@@ -38,7 +40,8 @@ namespace MedicalClinic
                 }
                 else
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     con.Open();
                     string strUpdate = "update GenericNames set GenericName='" + txtGenericName.Text.Trim() + "' where ID=" + txtID.Text.Trim() + "";
                     OleDbCommand cmd = new OleDbCommand(strUpdate, con);
@@ -77,7 +80,8 @@ namespace MedicalClinic
 
         private void txtID_TextChanged(object sender, EventArgs e)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from GenericNames where ID = " + txtID.Text + "";
             con.Open();
@@ -104,7 +108,8 @@ namespace MedicalClinic
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     string strDelete = "delete from GenericNames where id=@id";
                     OleDbCommand cmd = new OleDbCommand(strDelete, con);
                     cmd.Parameters.AddWithValue("@id", txtID.Text);

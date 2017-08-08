@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
@@ -47,7 +48,8 @@ namespace MedicalClinic
 
         public void GetData()
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             OleDbDataAdapter da = new OleDbDataAdapter("select ID, CompanyName from PharmaceuticalCompanies", con);

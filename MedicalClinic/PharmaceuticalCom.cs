@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
+using System.Configuration;
 
 namespace MedicalClinic
 {
@@ -54,7 +55,8 @@ namespace MedicalClinic
             {
                 if (btnAdd.Text == "Add")
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     OleDbCommand cmd = con.CreateCommand();
                     con.Open();
                     cmd.CommandText = "Insert into PharmaceuticalCompanies(CompanyName,CompanyAddress,CompanyPhone,CompanyEmail)Values('" + txtComName.Text + "','" + txtComAddress.Text + "','" + txtComPhone.Text + "','" + txtComEmail.Text + "')";
@@ -69,7 +71,8 @@ namespace MedicalClinic
                 }
                 else
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     con.Open();
                     string strUpdate = "update PharmaceuticalCompanies set " +
                         "CompanyAddress ='" + txtComAddress.Text.Trim() + "', " +
@@ -121,7 +124,8 @@ namespace MedicalClinic
 
         public void AddRepData(string strID)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             foreach (DataGridViewRow ro in dataGridViewRep.Rows)
@@ -142,7 +146,8 @@ namespace MedicalClinic
 
         public void DeleteRepData(string strID)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             foreach (DataGridViewRow ro in dataGridViewRep.Rows)
@@ -159,7 +164,8 @@ namespace MedicalClinic
 
         public void RetrieveRepData(string strComId)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from MedicalRep where CompanyID = " + int.Parse(strComId) + "";
             con.Open();
@@ -187,7 +193,8 @@ namespace MedicalClinic
         public string RetrieveID()
         {
             string strID = string.Empty;
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from PharmaceuticalCompanies where CompanyName = '" + txtComName.Text + "'";
             con.Open();
@@ -219,7 +226,8 @@ namespace MedicalClinic
 
         public void AddDistributorData(string strID)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             foreach (DataGridViewRow ro in dataGridViewDistributor.Rows)
@@ -241,7 +249,8 @@ namespace MedicalClinic
 
         public void DeleteDistributorData(string strID)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             foreach (DataGridViewRow ro in dataGridViewDistributor.Rows)
@@ -258,7 +267,8 @@ namespace MedicalClinic
 
         public void RetrieveDistributorData(string strComId)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from MedicalDistributors where DisCompanyID = " + int.Parse(strComId) + "";
             con.Open();
@@ -289,7 +299,8 @@ namespace MedicalClinic
         {
             if (!string.IsNullOrEmpty(txtComID.Text))
             {
-                OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                OleDbConnection con = new OleDbConnection(conString);
                 OleDbCommand cmd = con.CreateCommand();
                 cmd.CommandText = "select * from PharmaceuticalCompanies where ID = " + txtComID.Text + "";
                 con.Open();
@@ -341,7 +352,8 @@ namespace MedicalClinic
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     string strDelete = "delete from PharmaceuticalCompanies where id=@id";
                     OleDbCommand cmd = new OleDbCommand(strDelete, con);
                     cmd.Parameters.AddWithValue("@id", txtComID.Text);

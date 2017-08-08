@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace MedicalClinic
 {
@@ -23,7 +24,8 @@ namespace MedicalClinic
 
         private void txtID_TextChanged(object sender, EventArgs e)
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from Medicines where ID = " + txtID.Text + "";
             con.Open();
@@ -48,7 +50,8 @@ namespace MedicalClinic
 
         public void PopulateGeneticName()
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             OleDbDataAdapter da = new OleDbDataAdapter("select ID, GenericName from GenericNames", con);
@@ -63,7 +66,8 @@ namespace MedicalClinic
 
         public void PopulateCompany()
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             OleDbDataAdapter da = new OleDbDataAdapter("select ID, CompanyName from PharmaceuticalCompanies", con);
@@ -82,7 +86,8 @@ namespace MedicalClinic
             {
                 if (btnAdd.Text == "Add")
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     OleDbCommand cmd = con.CreateCommand();
                     con.Open();
                     cmd.CommandText = "Insert into Medicines(MedicineName, MedGenericNameID, MedCompanyID, MedContents, MedPrice, MedUnits, MedUoM)" +
@@ -102,7 +107,8 @@ namespace MedicalClinic
                 }
                 else
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     con.Open();
                     string strUpdate = "UPDATE Medicines SET MedicineName = '" + txtMedicineName.Text.Trim() + "', MedGenericNameID = " + comGenericName.SelectedValue + " " +
                         ", MedCompanyID = " + comCompany.SelectedValue + ", MedContents = '" + txtContents.Text.Trim() + "' " +
@@ -185,7 +191,8 @@ namespace MedicalClinic
 
                 if (result == System.Windows.Forms.DialogResult.Yes)
                 {
-                    OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+                    string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                    OleDbConnection con = new OleDbConnection(conString);
                     string strDelete = "DELETE FROM Medicines where id=@id";
                     OleDbCommand cmd = new OleDbCommand(strDelete, con);
                     cmd.Parameters.AddWithValue("@id", txtID.Text);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
@@ -50,7 +51,8 @@ namespace MedicalClinic
 
         public void GetData()
         {
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select ID, MedicineName, MedGenericNameID, MedCompanyID from Medicines";
             con.Open();
@@ -75,14 +77,7 @@ namespace MedicalClinic
             }
             reader.Close();
             con.Close();
-            //DataSet ds = new DataSet();
-            //da.Fill(ds, "Medicines");
-            //dataGridView1.DataSource = ds.Tables[0];
             dataGridView1.Columns["ID"].Visible = false;
-            //dataGridView1.Columns["MedicineName"].Width = 200;
-            //dataGridView1.Columns["MedicineName"].HeaderText = "Medicine Name";
-            //dataGridView1.Columns["MedGenericNameID"].HeaderText = "Generic Name";
-            //dataGridView1.Columns["MedCompanyID"].HeaderText = "Company";
 
             DataGridViewButtonColumn btnEditButtonColumn = new DataGridViewButtonColumn();
             btnEditButtonColumn.Name = "edit_column";
@@ -104,7 +99,8 @@ namespace MedicalClinic
         public string GetGenericName(string strGenericId)
         {
             string strGenericName = string.Empty;
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from GenericNames where ID = " + strGenericId + "";
             con.Open();
@@ -125,7 +121,8 @@ namespace MedicalClinic
         public string GetCompanyName(string strCompanyId)
         {
             string strCompanyName = string.Empty;
-            OleDbConnection con = new OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\dsi.SL\\Documents\\Visual Studio 2017\\Projects\\MedicalClinic\\MedicalClinic\\MedicalClinic.accdb");
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             cmd.CommandText = "select * from PharmaceuticalCompanies where ID = " + strCompanyId + "";
             con.Open();
