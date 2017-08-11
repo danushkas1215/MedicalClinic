@@ -59,7 +59,8 @@ namespace MedicalClinic
                     OleDbConnection con = new OleDbConnection(conString);
                     OleDbCommand cmd = con.CreateCommand();
                     con.Open();
-                    cmd.CommandText = "Insert into PharmaceuticalCompanies(CompanyName,CompanyAddress,CompanyPhone,CompanyEmail)Values('" + txtComName.Text + "','" + txtComAddress.Text + "','" + txtComPhone.Text + "','" + txtComEmail.Text + "')";
+                    cmd.CommandText = "Insert into PharmaceuticalCompanies(CompanyName,CompanyAddress,CompanyPhone,CompanyEmail)Values('" + txtComName.Text + "'," +
+                        "'" + txtComAddress.Text + "','" + txtComPhone.Text + "','" + txtComEmail.Text + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                     con.Close();
@@ -67,6 +68,9 @@ namespace MedicalClinic
                     AddRepData(strID);
                     AddDistributorData(strID);
                     MessageBox.Show("Record Successfully Saved", "Message");
+                    string strId = RetrieveID();
+                    LoggingHelper.LogEntry("Pharmaceutical company", "Add", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim() 
+                        + "|" + txtComEmail.Text.Trim(), int.Parse(strId));
                     FormRefresh();
                 }
                 else
@@ -85,6 +89,8 @@ namespace MedicalClinic
                     AddRepData(txtComID.Text);
                     DeleteDistributorData(txtComID.Text);
                     AddDistributorData(txtComID.Text);
+                    LoggingHelper.LogEntry("Pharmaceutical company", "Update", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim() 
+                        + "|" + txtComEmail.Text.Trim(), int.Parse(txtComID.Text.Trim()));
                     MessageBox.Show("Record Successfuly Updated", "Message");
 
                     FormRefresh();
@@ -364,6 +370,8 @@ namespace MedicalClinic
                     DeleteRepData(txtComID.Text);
                     DeleteDistributorData(txtComID.Text);
 
+                    LoggingHelper.LogEntry("Pharmaceutical company", "Delete", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim()
+                        + "|" + txtComEmail.Text.Trim(), int.Parse(txtComID.Text.Trim()));
                     MessageBox.Show("Records Successfuly Deleted");
 
                     FormRefresh();

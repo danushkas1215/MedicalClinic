@@ -85,6 +85,7 @@
     <Compile Include="GenericNamesList.Designer.cs">
       <DependentUpon>GenericNamesList.cs</DependentUpon>
     </Compile>
+    <Compile Include="LoggingHelper.cs" />
     <Compile Include="MedicineList.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -33,8 +33,10 @@ namespace MedicalClinic
                     cmd.CommandText = "Insert into GenericNames(GenericName)Values('" + txtGenericName.Text + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Record Successfully Saved", "Message");
                     con.Close();
+                    MessageBox.Show("Record Successfully Saved", "Message");
+                    int intId = int.Parse(this.RetrieveID());
+                    LoggingHelper.LogEntry("Generic Names", "Add", txtGenericName.Text, intId);
 
                     FormRefresh();
                 }
@@ -47,7 +49,7 @@ namespace MedicalClinic
                     OleDbCommand cmd = new OleDbCommand(strUpdate, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
-
+                    LoggingHelper.LogEntry("Generic Names", "Update", txtGenericName.Text, int.Parse(txtID.Text.Trim()));
                     MessageBox.Show("Record Successfuly Updated", "Message");
 
                     FormRefresh();
@@ -117,10 +119,32 @@ namespace MedicalClinic
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Records Successfuly Deleted");
-
+                    LoggingHelper.LogEntry("Generic Names", "Delete", txtGenericName.Text, int.Parse(txtID.Text.Trim()));
                     FormRefresh();
                 }
             }
+        }
+
+        public string RetrieveID()
+        {
+            string strID = string.Empty;
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from GenericNames where GenericName = '" + txtGenericName.Text + "'";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    strID = reader["ID"].ToString();
+                }
+            }
+            reader.Close();
+            con.Close();
+
+            return strID;
         }
     }
 }

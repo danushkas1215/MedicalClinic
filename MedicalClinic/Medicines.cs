@@ -102,7 +102,10 @@ namespace MedicalClinic
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record Successfully Saved", "Message");
                     con.Close();
-
+                    int intId = int.Parse(RetrieveID());
+                    LoggingHelper.LogEntry("Medicine", "Add", 
+                        txtMedicineName.Text.Trim() +"|"+ comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
+                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim(), intId);
                     FormRefresh();
                 }
                 else
@@ -117,7 +120,9 @@ namespace MedicalClinic
                     OleDbCommand cmd = new OleDbCommand(strUpdate, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
-
+                    LoggingHelper.LogEntry("Medicine", "Update",
+                        txtMedicineName.Text.Trim() + "|" + comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
+                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim(), int.Parse(txtID.Text.Trim()));
                     MessageBox.Show("Record Successfuly Updated", "Message");
 
                     FormRefresh();
@@ -200,10 +205,34 @@ namespace MedicalClinic
                     cmd.ExecuteNonQuery();
                     con.Close();
                     MessageBox.Show("Records Successfuly Deleted");
-
+                    LoggingHelper.LogEntry("Medicine", "Delete",
+                        txtMedicineName.Text.Trim() + "|" + comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
+                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim(), int.Parse(txtID.Text.Trim()));
                     FormRefresh();
                 }
             }
+        }
+
+        public string RetrieveID()
+        {
+            string strID = string.Empty;
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from Medicines where MedicineName = '" + txtMedicineName.Text + "'";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                if (reader.Read())
+                {
+                    strID = reader["ID"].ToString();
+                }
+            }
+            reader.Close();
+            con.Close();
+
+            return strID;
         }
     }
 }
