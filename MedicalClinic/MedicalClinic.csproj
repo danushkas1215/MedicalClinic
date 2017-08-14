@@ -92,6 +92,12 @@
     <Compile Include="MedicineList.Designer.cs">
       <DependentUpon>MedicineList.cs</DependentUpon>
     </Compile>
+    <Compile Include="MedicineOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MedicineOrders.Designer.cs">
+      <DependentUpon>MedicineOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Medicines.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MedicineList.resx">
       <DependentUpon>MedicineList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MedicineOrders.resx">
+      <DependentUpon>MedicineOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Medicines.resx">
       <DependentUpon>Medicines.cs</DependentUpon>

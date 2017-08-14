@@ -42,6 +42,8 @@
             this.txtComID = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dataGridViewDistributor = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewRep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDistributor)).BeginInit();
             this.SuspendLayout();
@@ -152,7 +154,7 @@
             // 
             // txtComID
             // 
-            this.txtComID.Location = new System.Drawing.Point(53, 310);
+            this.txtComID.Location = new System.Drawing.Point(835, 226);
             this.txtComID.Name = "txtComID";
             this.txtComID.Size = new System.Drawing.Size(100, 22);
             this.txtComID.TabIndex = 11;
@@ -179,11 +181,33 @@
             this.dataGridViewDistributor.Size = new System.Drawing.Size(800, 150);
             this.dataGridViewDistributor.TabIndex = 13;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(50, 273);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Rep Details";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(50, 451);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(165, 20);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Distributor Details";
+            // 
             // PharmaceuticalCom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1138, 677);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.dataGridViewDistributor);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.txtComID);
@@ -223,5 +247,7 @@
         private System.Windows.Forms.TextBox txtComID;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dataGridViewDistributor;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
