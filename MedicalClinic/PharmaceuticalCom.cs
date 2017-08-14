@@ -23,30 +23,6 @@ namespace MedicalClinic
                 InitiateDatagrid();
                 InitiateDistributorDatagrid();
             }
-            this.dataGridViewRep.RowsDefaultCellStyle.BackColor = Color.LightBlue;
-            this.dataGridViewRep.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridViewRep.Columns["Name"].Width = 220;
-            this.dataGridViewRep.Columns["Mobile"].Width = 125;
-            this.dataGridViewRep.Columns["Email"].Width = 190;
-
-            this.dataGridViewDistributor.RowsDefaultCellStyle.BackColor = Color.LightBlue;
-            this.dataGridViewDistributor.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridViewDistributor.Columns["Name"].Width = 200;
-            this.dataGridViewDistributor.Columns["Adress"].Width = 190;
-            this.dataGridViewDistributor.Columns["Email"].Width = 65;
-            this.dataGridViewDistributor.Columns["Phone"].Width = 100;
-
-            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
-            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
-            this.dataGridViewRep.EnableHeadersVisualStyles = false;
-            this.dataGridViewRep.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-
-            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
-            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
-            this.dataGridViewDistributor.EnableHeadersVisualStyles = false;
-            this.dataGridViewDistributor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -123,9 +99,8 @@ namespace MedicalClinic
             dt.Columns.Add("Name");
             dt.Columns.Add("Mobile");
             dt.Columns.Add("Email");
-            dataGridViewRep.AllowUserToAddRows = true;
-            dataGridViewRep.EditMode = DataGridViewEditMode.EditOnKeystroke;
             dataGridViewRep.DataSource = dt;
+            SetRepGridStyles();
         }
 
         public void AddRepData(string strID)
@@ -182,15 +157,21 @@ namespace MedicalClinic
                 dt.Columns.Add("Name");
                 dt.Columns.Add("Mobile");
                 dt.Columns.Add("Email");
-                    while (reader.Read())
-                    {
-                        DataRow row = dt.NewRow();
-                        row["Name"] = reader["RepName"];
-                        row["Mobile"] = reader["RepMobile"];
-                        row["Email"] = reader["RepEmail"];
-                        dt.Rows.Add(row);
-                    }
-                    dataGridViewRep.DataSource = dt;
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["Name"] = reader["RepName"];
+                    row["Mobile"] = reader["RepMobile"];
+                    row["Email"] = reader["RepEmail"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewRep.DataSource = dt;
+
+                SetRepGridStyles();
+            }
+            else
+            {
+                InitiateDatagrid();
             }
             reader.Close();
             con.Close();
@@ -225,9 +206,8 @@ namespace MedicalClinic
             dt.Columns.Add("Adress");
             dt.Columns.Add("Phone");
             dt.Columns.Add("Email");
-            dataGridViewDistributor.AllowUserToAddRows = true;
-            dataGridViewDistributor.EditMode = DataGridViewEditMode.EditOnKeystroke;
             dataGridViewDistributor.DataSource = dt;
+            SetDistributorGridStyles();
         }
 
         public void AddDistributorData(string strID)
@@ -296,6 +276,12 @@ namespace MedicalClinic
                     dt.Rows.Add(row);
                 }
                 dataGridViewDistributor.DataSource = dt;
+
+                SetDistributorGridStyles();
+            }
+            else
+            {
+                InitiateDistributorDatagrid();
             }
             reader.Close();
             con.Close();
@@ -378,6 +364,41 @@ namespace MedicalClinic
                     txtComID.Text = string.Empty;
                 }
             }
+        }
+
+        public void SetRepGridStyles()
+        {
+            this.dataGridViewRep.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewRep.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewRep.Columns["Name"].Width = 220;
+            this.dataGridViewRep.Columns["Mobile"].Width = 125;
+            this.dataGridViewRep.Columns["Email"].Width = 190;
+            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewRep.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewRep.EnableHeadersVisualStyles = false;
+            this.dataGridViewRep.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewRep.AllowUserToAddRows = true;
+            this.dataGridViewRep.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridViewRep.AllowUserToDeleteRows = true;
+        }
+
+        public void SetDistributorGridStyles()
+        {
+            this.dataGridViewDistributor.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewDistributor.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewDistributor.Columns["Name"].Width = 200;
+            this.dataGridViewDistributor.Columns["Adress"].Width = 190;
+            this.dataGridViewDistributor.Columns["Email"].Width = 65;
+            this.dataGridViewDistributor.Columns["Phone"].Width = 100;
+            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewDistributor.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewDistributor.EnableHeadersVisualStyles = false;
+            this.dataGridViewDistributor.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewDistributor.AllowUserToAddRows = true;
+            this.dataGridViewDistributor.AllowUserToDeleteRows = true;
+            this.dataGridViewDistributor.EditMode = DataGridViewEditMode.EditOnKeystroke;
         }
     }
 }
