@@ -20,12 +20,12 @@ namespace MedicalClinic
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
             Patients newMDIChild = new Patients();
-            // Set the Parent Form of the Child window.  
             newMDIChild.MdiParent = this;
             newMDIChild.MaximizeBox = false;
             newMDIChild.WindowState = FormWindowState.Maximized;
-            // Display the new form.  
             newMDIChild.Show();
         }
 
@@ -92,5 +92,16 @@ namespace MedicalClinic
             newMDIChild.Show();
             newMDIChild.WindowState = FormWindowState.Maximized;
         }
+
+        //private void medicineOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (ActiveMdiChild != null)
+        //        ActiveMdiChild.Close();
+        //    MedicineOrders newMDIChild = new MedicineOrders();
+        //    newMDIChild.MdiParent = this;
+        //    newMDIChild.MaximizeBox = false;
+        //    newMDIChild.Show();
+        //    newMDIChild.WindowState = FormWindowState.Maximized;
+        //}
     }
 }

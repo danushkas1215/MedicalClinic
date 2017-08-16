@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +42,7 @@
             this.medicinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.medicineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicineListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicineOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +90,7 @@
             this.companyToolStripMenuItem,
             this.companyListToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 26);
             this.toolStripMenuItem1.Text = "Companies";
             // 
             // companyToolStripMenuItem
@@ -111,7 +113,7 @@
             this.genericNamesToolStripMenuItem1,
             this.genericNamesListToolStripMenuItem1});
             this.genericNamesToolStripMenuItem.Name = "genericNamesToolStripMenuItem";
-            this.genericNamesToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.genericNamesToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.genericNamesToolStripMenuItem.Text = "Generics";
             // 
             // genericNamesToolStripMenuItem1
@@ -134,22 +136,27 @@
             this.medicineToolStripMenuItem,
             this.medicineListToolStripMenuItem});
             this.medicinesToolStripMenuItem1.Name = "medicinesToolStripMenuItem1";
-            this.medicinesToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.medicinesToolStripMenuItem1.Size = new System.Drawing.Size(158, 26);
             this.medicinesToolStripMenuItem1.Text = "Medicines";
             // 
             // medicineToolStripMenuItem
             // 
             this.medicineToolStripMenuItem.Name = "medicineToolStripMenuItem";
-            this.medicineToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.medicineToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.medicineToolStripMenuItem.Text = "Medicine";
             this.medicineToolStripMenuItem.Click += new System.EventHandler(this.medicineToolStripMenuItem_Click);
             // 
             // medicineListToolStripMenuItem
             // 
             this.medicineListToolStripMenuItem.Name = "medicineListToolStripMenuItem";
-            this.medicineListToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.medicineListToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.medicineListToolStripMenuItem.Text = "Medicine List";
             this.medicineListToolStripMenuItem.Click += new System.EventHandler(this.medicineListToolStripMenuItem_Click);
+            // 
+            // medicineOrderToolStripMenuItem
+            // 
+            this.medicineOrderToolStripMenuItem.Name = "medicineOrderToolStripMenuItem";
+            this.medicineOrderToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
             // Form1
             // 
@@ -157,6 +164,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(792, 503);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -183,6 +191,7 @@
         private System.Windows.Forms.ToolStripMenuItem medicinesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem medicineToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem medicineListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medicineOrderToolStripMenuItem;
     }
 }
 
