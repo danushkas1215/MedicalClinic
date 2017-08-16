@@ -104,9 +104,10 @@ namespace MedicalClinic
                         " '" + txtTradeName.Text.Trim() + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
+                    cmd.CommandText = "Select @@Identity";
+                    int intId = (int)cmd.ExecuteScalar();
                     MessageBox.Show("Record Successfully Saved", "Message");
                     con.Close();
-                    int intId = int.Parse(RetrieveID());
                     LoggingHelper.LogEntry("Medicine", "Add", 
                         txtMedicineName.Text.Trim() +"|"+ comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
                         + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked + "|" + txtTradeName.Text.Trim(), intId);
@@ -218,28 +219,6 @@ namespace MedicalClinic
                     FormRefresh();
                 }
             }
-        }
-
-        public string RetrieveID()
-        {
-            string strID = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from Medicines where MedicineName = '" + txtMedicineName.Text + "'";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strID = reader["ID"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strID;
         }
     }
 }

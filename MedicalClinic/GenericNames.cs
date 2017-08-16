@@ -33,9 +33,10 @@ namespace MedicalClinic
                     cmd.CommandText = "Insert into GenericNames(GenericName)Values('" + txtGenericName.Text + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
+                    cmd.CommandText = "Select @@Identity";
+                    int intId = (int)cmd.ExecuteScalar();
                     con.Close();
                     MessageBox.Show("Record Successfully Saved", "Message");
-                    int intId = int.Parse(this.RetrieveID());
                     LoggingHelper.LogEntry("Generic Names", "Add", txtGenericName.Text, intId);
 
                     FormRefresh();
@@ -123,28 +124,6 @@ namespace MedicalClinic
                     FormRefresh();
                 }
             }
-        }
-
-        public string RetrieveID()
-        {
-            string strID = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from GenericNames where GenericName = '" + txtGenericName.Text + "'";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strID = reader["ID"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strID;
         }
     }
 }

@@ -39,14 +39,14 @@ namespace MedicalClinic
                         "'" + txtComAddress.Text + "','" + txtComPhone.Text + "','" + txtComEmail.Text + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
+                    cmd.CommandText = "Select @@Identity";
+                    int intId = (int)cmd.ExecuteScalar();
                     con.Close();
-                    string strID = RetrieveID();
-                    AddRepData(strID);
-                    AddDistributorData(strID);
+                    AddRepData(intId.ToString());
+                    AddDistributorData(intId.ToString());
                     MessageBox.Show("Record Successfully Saved", "Message");
-                    string strId = RetrieveID();
                     LoggingHelper.LogEntry("Pharmaceutical company", "Add", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim() 
-                        + "|" + txtComEmail.Text.Trim(), int.Parse(strId));
+                        + "|" + txtComEmail.Text.Trim(), intId);
                     FormRefresh();
                 }
                 else
@@ -175,28 +175,6 @@ namespace MedicalClinic
             }
             reader.Close();
             con.Close();
-        }
-
-        public string RetrieveID()
-        {
-            string strID = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from PharmaceuticalCompanies where CompanyName = '" + txtComName.Text + "'";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strID = reader["ID"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strID;
         }
 
         public void InitiateDistributorDatagrid()
