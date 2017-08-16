@@ -48,6 +48,8 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.chkDispensing = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtTradeName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -72,7 +74,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(682, 46);
+            this.label2.Location = new System.Drawing.Point(682, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 20);
             this.label2.TabIndex = 2;
@@ -82,7 +84,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(45, 197);
+            this.label3.Location = new System.Drawing.Point(45, 200);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 20);
             this.label3.TabIndex = 3;
@@ -139,7 +141,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(682, 147);
+            this.label6.Location = new System.Drawing.Point(682, 203);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(93, 20);
             this.label6.TabIndex = 9;
@@ -149,7 +151,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(682, 96);
+            this.label7.Location = new System.Drawing.Point(682, 152);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(184, 20);
             this.label7.TabIndex = 10;
@@ -158,7 +160,7 @@
             // txtUnits
             // 
             this.txtUnits.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUnits.Location = new System.Drawing.Point(945, 46);
+            this.txtUnits.Location = new System.Drawing.Point(945, 102);
             this.txtUnits.Name = "txtUnits";
             this.txtUnits.Size = new System.Drawing.Size(171, 27);
             this.txtUnits.TabIndex = 13;
@@ -169,7 +171,7 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(945, 145);
+            this.txtPrice.Location = new System.Drawing.Point(945, 201);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(171, 27);
             this.txtPrice.TabIndex = 14;
@@ -180,7 +182,7 @@
             // txtUOM
             // 
             this.txtUOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtUOM.Location = new System.Drawing.Point(945, 94);
+            this.txtUOM.Location = new System.Drawing.Point(945, 150);
             this.txtUOM.Name = "txtUOM";
             this.txtUOM.Size = new System.Drawing.Size(171, 27);
             this.txtUOM.TabIndex = 15;
@@ -220,7 +222,7 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(945, 266);
+            this.txtID.Location = new System.Drawing.Point(12, 330);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 22);
             this.txtID.TabIndex = 19;
@@ -230,7 +232,7 @@
             // chkDispensing
             // 
             this.chkDispensing.AutoSize = true;
-            this.chkDispensing.Location = new System.Drawing.Point(945, 195);
+            this.chkDispensing.Location = new System.Drawing.Point(945, 251);
             this.chkDispensing.Name = "chkDispensing";
             this.chkDispensing.Size = new System.Drawing.Size(18, 17);
             this.chkDispensing.TabIndex = 20;
@@ -240,17 +242,37 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(682, 193);
+            this.label8.Location = new System.Drawing.Point(682, 249);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(150, 20);
             this.label8.TabIndex = 21;
             this.label8.Text = "Dispensing Drug";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(682, 46);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(111, 20);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Trade Name";
+            // 
+            // txtTradeName
+            // 
+            this.txtTradeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTradeName.Location = new System.Drawing.Point(945, 51);
+            this.txtTradeName.Name = "txtTradeName";
+            this.txtTradeName.Size = new System.Drawing.Size(171, 27);
+            this.txtTradeName.TabIndex = 23;
             // 
             // Medicines
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1229, 643);
+            this.Controls.Add(this.txtTradeName);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkDispensing);
             this.Controls.Add(this.txtID);
@@ -300,5 +322,7 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.CheckBox chkDispensing;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtTradeName;
     }
 }

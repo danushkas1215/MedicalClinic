@@ -42,6 +42,7 @@ namespace MedicalClinic
                     txtUnits.Text = reader["MedUnits"].ToString();
                     txtUOM.Text = reader["MedUoM"].ToString();
                     chkDispensing.Checked = bool.Parse(reader["MedDispensing"].ToString());
+                    txtTradeName.Text = reader["MedTradeName"].ToString();
                 }
             }
             reader.Close();
@@ -91,15 +92,16 @@ namespace MedicalClinic
                     OleDbConnection con = new OleDbConnection(conString);
                     OleDbCommand cmd = con.CreateCommand();
                     con.Open();
-                    cmd.CommandText = "Insert into Medicines(MedicineName, MedGenericNameID, MedCompanyID, MedContents, MedPrice, MedUnits, MedUoM, MedDispensing)" +
+                    cmd.CommandText = "Insert into Medicines(MedicineName, MedGenericNameID, MedCompanyID, MedContents, MedPrice, MedUnits, MedUoM, MedDispensing, MedTradeName)" +
                         "Values('" + txtMedicineName.Text.Trim() + "'," +
                         " " +comGenericName.SelectedValue+ ", "+
                         " " + comCompany.SelectedValue + ", " +
                         " '" + txtContents.Text.Trim() + "', " +
                         " " + txtPrice.Text.Trim() + ", " +
                         " " + txtUnits.Text.Trim() + ", " +
-                        " '" + txtUOM.Text.Trim() + "'," +
-                        " " +chkDispensing.Checked +" )";
+                        " '" + txtUOM.Text.Trim() + "', " +
+                        " " +chkDispensing.Checked +", " +
+                        " '" + txtTradeName.Text.Trim() + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                     MessageBox.Show("Record Successfully Saved", "Message");
@@ -107,7 +109,7 @@ namespace MedicalClinic
                     int intId = int.Parse(RetrieveID());
                     LoggingHelper.LogEntry("Medicine", "Add", 
                         txtMedicineName.Text.Trim() +"|"+ comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
-                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked, intId);
+                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked + "|" + txtTradeName.Text.Trim(), intId);
                     FormRefresh();
                 }
                 else
@@ -118,13 +120,14 @@ namespace MedicalClinic
                     string strUpdate = "UPDATE Medicines SET MedicineName = '" + txtMedicineName.Text.Trim() + "', MedGenericNameID = " + comGenericName.SelectedValue + " " +
                         ", MedCompanyID = " + comCompany.SelectedValue + ", MedContents = '" + txtContents.Text.Trim() + "' " +
                         ", MedPrice = " + txtPrice.Text.Trim() + ", MedUnits = " + txtUnits.Text.Trim() + " " +
-                        ", MedUoM = '" + txtUOM.Text.Trim() + "', MedDispensing = " + chkDispensing.Checked + " WHERE ID = " + txtID.Text.Trim() + "";
+                        ", MedUoM = '" + txtUOM.Text.Trim() + "', MedDispensing = " + chkDispensing.Checked + 
+                        ", MedTradeName = '" + txtTradeName.Text.Trim() + "' WHERE ID = " + txtID.Text.Trim() + "";
                     OleDbCommand cmd = new OleDbCommand(strUpdate, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     LoggingHelper.LogEntry("Medicine", "Update",
                         txtMedicineName.Text.Trim() + "|" + comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
-                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked, int.Parse(txtID.Text.Trim()));
+                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked + "|" + txtTradeName.Text.Trim(), int.Parse(txtID.Text.Trim()));
                     MessageBox.Show("Record Successfuly Updated", "Message");
 
                     FormRefresh();
@@ -153,6 +156,7 @@ namespace MedicalClinic
             txtUnits.Text = "0";
             txtPrice.Text = "0";
             chkDispensing.Checked = false;
+            txtTradeName.Text = "";
             btnAdd.Text = "Add";
         }
 
@@ -210,7 +214,7 @@ namespace MedicalClinic
                     MessageBox.Show("Records Successfuly Deleted");
                     LoggingHelper.LogEntry("Medicine", "Delete",
                         txtMedicineName.Text.Trim() + "|" + comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
-                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim(), int.Parse(txtID.Text.Trim()));
+                        + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked + "|" + txtTradeName.Text.Trim(), int.Parse(txtID.Text.Trim()));
                     FormRefresh();
                 }
             }
