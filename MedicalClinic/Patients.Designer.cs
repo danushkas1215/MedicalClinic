@@ -44,13 +44,16 @@
             this.label8 = new System.Windows.Forms.Label();
             this.comBloodGroup = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.txtNIC = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comMaritalStatus = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.txtID = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -80,7 +83,7 @@
             this.txtBirthday.Location = new System.Drawing.Point(176, 265);
             this.txtBirthday.Name = "txtBirthday";
             this.txtBirthday.Size = new System.Drawing.Size(327, 27);
-            this.txtBirthday.TabIndex = 4;
+            this.txtBirthday.TabIndex = 3;
             this.txtBirthday.CloseUp += new System.EventHandler(this.txtBirthday_CloseUp);
             this.txtBirthday.ValueChanged += new System.EventHandler(this.txtBirthday_ValueChanged);
             this.txtBirthday.DropDown += new System.EventHandler(this.txtBirthday_DropDown);
@@ -101,7 +104,7 @@
             this.txtAge.Location = new System.Drawing.Point(176, 315);
             this.txtAge.Name = "txtAge";
             this.txtAge.Size = new System.Drawing.Size(81, 27);
-            this.txtAge.TabIndex = 7;
+            this.txtAge.TabIndex = 4;
             // 
             // label4
             // 
@@ -120,7 +123,7 @@
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(330, 100);
-            this.txtAddress.TabIndex = 9;
+            this.txtAddress.TabIndex = 2;
             // 
             // label5
             // 
@@ -138,7 +141,7 @@
             this.txtHomePhone.Location = new System.Drawing.Point(726, 21);
             this.txtHomePhone.Name = "txtHomePhone";
             this.txtHomePhone.Size = new System.Drawing.Size(284, 27);
-            this.txtHomePhone.TabIndex = 11;
+            this.txtHomePhone.TabIndex = 5;
             this.txtHomePhone.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtHomePhone_KeyPress);
             // 
             // label6
@@ -157,7 +160,7 @@
             this.txtMobile.Location = new System.Drawing.Point(726, 68);
             this.txtMobile.Name = "txtMobile";
             this.txtMobile.Size = new System.Drawing.Size(284, 27);
-            this.txtMobile.TabIndex = 13;
+            this.txtMobile.TabIndex = 6;
             // 
             // label7
             // 
@@ -180,7 +183,7 @@
             this.comSex.Location = new System.Drawing.Point(726, 318);
             this.comSex.Name = "comSex";
             this.comSex.Size = new System.Drawing.Size(104, 28);
-            this.comSex.TabIndex = 14;
+            this.comSex.TabIndex = 11;
             // 
             // label8
             // 
@@ -210,7 +213,7 @@
             this.comBloodGroup.Location = new System.Drawing.Point(726, 267);
             this.comBloodGroup.Name = "comBloodGroup";
             this.comBloodGroup.Size = new System.Drawing.Size(123, 28);
-            this.comBloodGroup.TabIndex = 16;
+            this.comBloodGroup.TabIndex = 10;
             // 
             // label9
             // 
@@ -222,15 +225,16 @@
             this.label9.TabIndex = 17;
             this.label9.Text = "Blood Group";
             // 
-            // button1
+            // btnAdd
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(176, 395);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 30);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(176, 395);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(100, 30);
+            this.btnAdd.TabIndex = 12;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtNIC
             // 
@@ -238,22 +242,23 @@
             this.txtNIC.Location = new System.Drawing.Point(726, 167);
             this.txtNIC.Name = "txtNIC";
             this.txtNIC.Size = new System.Drawing.Size(217, 27);
-            this.txtNIC.TabIndex = 19;
+            this.txtNIC.TabIndex = 8;
             // 
-            // comboBox1
+            // comMaritalStatus
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.comMaritalStatus.BackColor = System.Drawing.SystemColors.Window;
+            this.comMaritalStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comMaritalStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comMaritalStatus.FormattingEnabled = true;
+            this.comMaritalStatus.Items.AddRange(new object[] {
             "Single",
             "Married",
             "Divorced or Separated",
             "Widowed"});
-            this.comboBox1.Location = new System.Drawing.Point(726, 117);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(217, 28);
-            this.comboBox1.TabIndex = 20;
+            this.comMaritalStatus.Location = new System.Drawing.Point(726, 117);
+            this.comMaritalStatus.Name = "comMaritalStatus";
+            this.comMaritalStatus.Size = new System.Drawing.Size(217, 28);
+            this.comMaritalStatus.TabIndex = 7;
             // 
             // label2
             // 
@@ -271,7 +276,7 @@
             this.txtEmail.Location = new System.Drawing.Point(726, 215);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(284, 27);
-            this.txtEmail.TabIndex = 22;
+            this.txtEmail.TabIndex = 9;
             // 
             // label10
             // 
@@ -293,18 +298,51 @@
             this.label11.TabIndex = 25;
             this.label11.Text = "Email";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(361, 395);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 30);
+            this.btnDelete.TabIndex = 13;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(556, 395);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 30);
+            this.btnCancel.TabIndex = 14;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // txtID
+            // 
+            this.txtID.Location = new System.Drawing.Point(782, 395);
+            this.txtID.Name = "txtID";
+            this.txtID.Size = new System.Drawing.Size(100, 22);
+            this.txtID.TabIndex = 28;
+            this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
+            // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1158, 710);
+            this.Controls.Add(this.txtID);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtEmail);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comMaritalStatus);
             this.Controls.Add(this.txtNIC);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.comBloodGroup);
             this.Controls.Add(this.label8);
@@ -347,12 +385,15 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comBloodGroup;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtNIC;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comMaritalStatus;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtID;
     }
 }
