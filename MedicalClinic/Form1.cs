@@ -93,6 +93,28 @@ namespace MedicalClinic
             newMDIChild.WindowState = FormWindowState.Maximized;
         }
 
+        private void patientToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            Patients newMDIChild = new Patients();
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
+
+        private void medicalRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            PatientMedicalRecord newMDIChild = new PatientMedicalRecord();
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
+
         //private void medicineOrderToolStripMenuItem_Click(object sender, EventArgs e)
         //{
         //    if (ActiveMdiChild != null)
