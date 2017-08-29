@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtContactNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -60,17 +60,16 @@
             this.txtExaminationFindings = new System.Windows.Forms.TextBox();
             this.txtHistoryOfPresentComplaint = new System.Windows.Forms.TextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.dataGridView6 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewAllergyHistory = new System.Windows.Forms.DataGridView();
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewFamilyHistory = new System.Windows.Forms.DataGridView();
             this.dataGridViewPastMedicalHistory = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridViewPrescription = new System.Windows.Forms.DataGridView();
@@ -79,21 +78,27 @@
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Disease = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Diagnosed = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Relationship = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtIsPastMedicalHistory = new System.Windows.Forms.TextBox();
+            this.IDFamilyHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiseaseFamilyHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RelationshipFamilyHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDAllergyHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescriptionAllergyHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewSocialHistory = new System.Windows.Forms.DataGridView();
+            this.IDSocialHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeSocialHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DetailsSocialHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllergyHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFamilyHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPastMedicalHistory)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPrescription)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSocialHistory)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -387,18 +392,17 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.txtIsPastMedicalHistory);
-            this.tabPage1.Controls.Add(this.textBox9);
+            this.tabPage1.Controls.Add(this.dataGridViewSocialHistory);
             this.tabPage1.Controls.Add(this.label15);
             this.tabPage1.Controls.Add(this.label14);
             this.tabPage1.Controls.Add(this.label13);
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.dataGridView6);
+            this.tabPage1.Controls.Add(this.dataGridViewAllergyHistory);
             this.tabPage1.Controls.Add(this.dataGridView5);
             this.tabPage1.Controls.Add(this.dataGridView4);
-            this.tabPage1.Controls.Add(this.dataGridView3);
+            this.tabPage1.Controls.Add(this.dataGridViewFamilyHistory);
             this.tabPage1.Controls.Add(this.dataGridViewPastMedicalHistory);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
@@ -408,15 +412,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Medical History";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(623, 33);
-            this.textBox9.Multiline = true;
-            this.textBox9.Name = "textBox9";
-            this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox9.Size = new System.Drawing.Size(550, 150);
-            this.textBox9.TabIndex = 15;
             // 
             // label15
             // 
@@ -478,14 +473,18 @@
             this.label10.TabIndex = 13;
             this.label10.Text = "Past Medical History";
             // 
-            // dataGridView6
+            // dataGridViewAllergyHistory
             // 
-            this.dataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView6.Location = new System.Drawing.Point(17, 417);
-            this.dataGridView6.Name = "dataGridView6";
-            this.dataGridView6.RowTemplate.Height = 24;
-            this.dataGridView6.Size = new System.Drawing.Size(550, 150);
-            this.dataGridView6.TabIndex = 5;
+            this.dataGridViewAllergyHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAllergyHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDAllergyHistory,
+            this.DescriptionAllergyHistory});
+            this.dataGridViewAllergyHistory.Location = new System.Drawing.Point(17, 417);
+            this.dataGridViewAllergyHistory.Name = "dataGridViewAllergyHistory";
+            this.dataGridViewAllergyHistory.RowHeadersVisible = false;
+            this.dataGridViewAllergyHistory.RowTemplate.Height = 24;
+            this.dataGridViewAllergyHistory.Size = new System.Drawing.Size(550, 150);
+            this.dataGridViewAllergyHistory.TabIndex = 5;
             // 
             // dataGridView5
             // 
@@ -505,30 +504,30 @@
             this.dataGridView4.Size = new System.Drawing.Size(550, 150);
             this.dataGridView4.TabIndex = 3;
             // 
-            // dataGridView3
+            // dataGridViewFamilyHistory
             // 
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.Relationship});
-            this.dataGridView3.Location = new System.Drawing.Point(17, 218);
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.RowHeadersVisible = false;
-            this.dataGridView3.RowTemplate.Height = 24;
-            this.dataGridView3.Size = new System.Drawing.Size(550, 150);
-            this.dataGridView3.TabIndex = 2;
+            this.dataGridViewFamilyHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewFamilyHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDFamilyHistory,
+            this.DiseaseFamilyHistory,
+            this.RelationshipFamilyHistory});
+            this.dataGridViewFamilyHistory.Location = new System.Drawing.Point(17, 218);
+            this.dataGridViewFamilyHistory.Name = "dataGridViewFamilyHistory";
+            this.dataGridViewFamilyHistory.RowHeadersVisible = false;
+            this.dataGridViewFamilyHistory.RowTemplate.Height = 24;
+            this.dataGridViewFamilyHistory.Size = new System.Drawing.Size(550, 150);
+            this.dataGridViewFamilyHistory.TabIndex = 2;
             // 
             // dataGridViewPastMedicalHistory
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPastMedicalHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPastMedicalHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewPastMedicalHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPastMedicalHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -594,8 +593,8 @@
             // Disease
             // 
             this.Disease.DataPropertyName = "Disease";
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Disease.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Disease.DefaultCellStyle = dataGridViewCellStyle8;
             this.Disease.HeaderText = "Disease";
             this.Disease.Name = "Disease";
             this.Disease.Width = 289;
@@ -603,37 +602,78 @@
             // Diagnosed
             // 
             this.Diagnosed.DataPropertyName = "Diagnosed";
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Diagnosed.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Diagnosed.DefaultCellStyle = dataGridViewCellStyle9;
             this.Diagnosed.HeaderText = "Diagnosed (Year)";
             this.Diagnosed.Name = "Diagnosed";
             this.Diagnosed.Width = 120;
             // 
-            // dataGridViewTextBoxColumn1
+            // IDFamilyHistory
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Visible = false;
+            this.IDFamilyHistory.DataPropertyName = "IDFamilyHistory";
+            this.IDFamilyHistory.HeaderText = "ID";
+            this.IDFamilyHistory.Name = "IDFamilyHistory";
+            this.IDFamilyHistory.Visible = false;
             // 
-            // dataGridViewTextBoxColumn2
+            // DiseaseFamilyHistory
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Disease";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Disease";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.DiseaseFamilyHistory.DataPropertyName = "DiseaseFamilyHistory";
+            this.DiseaseFamilyHistory.HeaderText = "Disease";
+            this.DiseaseFamilyHistory.Name = "DiseaseFamilyHistory";
             // 
-            // Relationship
+            // RelationshipFamilyHistory
             // 
-            this.Relationship.DataPropertyName = "Relationship";
-            this.Relationship.HeaderText = "Relationship";
-            this.Relationship.Name = "Relationship";
+            this.RelationshipFamilyHistory.DataPropertyName = "RelationshipFamilyHistory";
+            this.RelationshipFamilyHistory.HeaderText = "Relationship";
+            this.RelationshipFamilyHistory.Name = "RelationshipFamilyHistory";
             // 
-            // txtIsPastMedicalHistory
+            // IDAllergyHistory
             // 
-            this.txtIsPastMedicalHistory.Location = new System.Drawing.Point(17, 576);
-            this.txtIsPastMedicalHistory.Name = "txtIsPastMedicalHistory";
-            this.txtIsPastMedicalHistory.Size = new System.Drawing.Size(49, 27);
-            this.txtIsPastMedicalHistory.TabIndex = 16;
+            this.IDAllergyHistory.DataPropertyName = "IDAllergyHistory";
+            this.IDAllergyHistory.HeaderText = "ID";
+            this.IDAllergyHistory.Name = "IDAllergyHistory";
+            this.IDAllergyHistory.Visible = false;
+            // 
+            // DescriptionAllergyHistory
+            // 
+            this.DescriptionAllergyHistory.DataPropertyName = "DescriptionAllergyHistory";
+            this.DescriptionAllergyHistory.HeaderText = "Description";
+            this.DescriptionAllergyHistory.Name = "DescriptionAllergyHistory";
+            // 
+            // dataGridViewSocialHistory
+            // 
+            this.dataGridViewSocialHistory.AllowUserToAddRows = false;
+            this.dataGridViewSocialHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSocialHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDSocialHistory,
+            this.TypeSocialHistory,
+            this.DetailsSocialHistory});
+            this.dataGridViewSocialHistory.Location = new System.Drawing.Point(623, 33);
+            this.dataGridViewSocialHistory.Name = "dataGridViewSocialHistory";
+            this.dataGridViewSocialHistory.RowHeadersVisible = false;
+            this.dataGridViewSocialHistory.RowTemplate.Height = 24;
+            this.dataGridViewSocialHistory.Size = new System.Drawing.Size(550, 150);
+            this.dataGridViewSocialHistory.TabIndex = 15;
+            // 
+            // IDSocialHistory
+            // 
+            this.IDSocialHistory.DataPropertyName = "IDSocialHistory";
+            this.IDSocialHistory.HeaderText = "ID";
+            this.IDSocialHistory.Name = "IDSocialHistory";
+            this.IDSocialHistory.Visible = false;
+            // 
+            // TypeSocialHistory
+            // 
+            this.TypeSocialHistory.DataPropertyName = "TypeSocialHistory";
+            this.TypeSocialHistory.HeaderText = "Type";
+            this.TypeSocialHistory.Name = "TypeSocialHistory";
+            this.TypeSocialHistory.ReadOnly = true;
+            // 
+            // DetailsSocialHistory
+            // 
+            this.DetailsSocialHistory.DataPropertyName = "DetailsSocialHistory";
+            this.DetailsSocialHistory.HeaderText = "Details";
+            this.DetailsSocialHistory.Name = "DetailsSocialHistory";
             // 
             // PatientMedicalRecord
             // 
@@ -654,13 +694,14 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllergyHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFamilyHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPastMedicalHistory)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPrescription)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSocialHistory)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -690,9 +731,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView dataGridView4;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView dataGridViewFamilyHistory;
         private System.Windows.Forms.DataGridView dataGridViewPastMedicalHistory;
-        private System.Windows.Forms.DataGridView dataGridView6;
+        private System.Windows.Forms.DataGridView dataGridViewAllergyHistory;
         private System.Windows.Forms.DataGridView dataGridView5;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
@@ -700,7 +741,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
@@ -716,9 +756,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Disease;
         private System.Windows.Forms.DataGridViewTextBoxColumn Diagnosed;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Relationship;
-        private System.Windows.Forms.TextBox txtIsPastMedicalHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDFamilyHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DiseaseFamilyHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RelationshipFamilyHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDAllergyHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionAllergyHistory;
+        private System.Windows.Forms.DataGridView dataGridViewSocialHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDSocialHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeSocialHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DetailsSocialHistory;
     }
 }

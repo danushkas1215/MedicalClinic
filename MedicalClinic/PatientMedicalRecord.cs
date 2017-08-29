@@ -44,6 +44,9 @@ namespace MedicalClinic
             con.Close();
 
             RetrievePastMedicalHistory();
+            RetrieveFamilyHistory();
+            RetrieveAllergyHistory();
+            RetrieveSocialHistory();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -54,6 +57,9 @@ namespace MedicalClinic
                 //AddPrescriptionData();
                 //ReducePrescriptionData();
                 AddUpdatePastMedicalHistory();
+                AddUpdateFamilyHistory();
+                AddUpdateAllergyHistory();
+                AddUpdateSocialHistory();
                 MessageBox.Show("Record Successfully Saved", "Message");
             }
         }
@@ -187,16 +193,26 @@ namespace MedicalClinic
         #region Past Medical History
         public void AddUpdatePastMedicalHistory()
         {
-            if (txtIsPastMedicalHistory.Text.Equals("N"))
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewPastMedicalHistory.Rows)
             {
-                string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-                OleDbConnection con = new OleDbConnection(conString);
-                OleDbCommand cmd = con.CreateCommand();
-                con.Open();
-                foreach (DataGridViewRow ro in dataGridViewPastMedicalHistory.Rows)
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
+                {
+                    string strUpdate = "UPDATE PatientPastMedicalHistory SET Disease = '" + ro.Cells[1].Value.ToString().Trim() + "', DiagnosedYear = " + ro.Cells[2].Value.ToString().Trim() + " " +
+                        " WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
+                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                    cmdUpdate.ExecuteNonQuery();
+
+                    LoggingHelper.LogEntry("Patient Past Medical History", "Update",
+                        txtID.Text + "|" + ro.Cells[1].Value.ToString().Trim() + "|" + ro.Cells[2].Value.ToString().Trim(), int.Parse(ro.Cells[0].Value.ToString().Trim()));
+                }
+                else
                 {
                     if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
                     {
+                        OleDbCommand cmd = con.CreateCommand();
                         cmd.CommandText = "INSERT INTO PatientPastMedicalHistory(PatientID, Disease, DiagnosedYear)VALUES("
                         + int.Parse(txtID.Text) + ",'"
                         + ro.Cells[1].Value + "',"
@@ -210,29 +226,8 @@ namespace MedicalClinic
                             ro.Cells[2].Value.ToString(), intId);
                     }
                 }
-                con.Close();
             }
-            else if (txtIsPastMedicalHistory.Text.Equals("Y"))
-            {
-                string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-                OleDbConnection con = new OleDbConnection(conString);
-                con.Open();
-                foreach (DataGridViewRow ro in dataGridViewPastMedicalHistory.Rows)
-                {
-                    if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
-                    {
-                        string strUpdate = "UPDATE PatientPastMedicalHistory SET Disease = '" + ro.Cells[1].Value.ToString().Trim() + "', DiagnosedYear = " + ro.Cells[2].Value.ToString().Trim() + " " +
-                            " WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
-                        OleDbCommand cmd = new OleDbCommand(strUpdate, con);
-                        cmd.ExecuteNonQuery();
-
-                        LoggingHelper.LogEntry("Patient Past Medical History", "Update",
-                            ro.Cells[1].Value.ToString().Trim() + "|" + ro.Cells[2].Value.ToString().Trim(), int.Parse(ro.Cells[0].Value.ToString().Trim()));
-                        MessageBox.Show("Record Successfuly Updated", "Message");
-                    }
-                }
-                con.Close();
-            }
+            con.Close();
         }
 
         public void RetrievePastMedicalHistory()
@@ -245,7 +240,6 @@ namespace MedicalClinic
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
-                txtIsPastMedicalHistory.Text = "Y";
                 DataTable dt = new DataTable();
                 dt.Columns.Add("ID");
                 dt.Columns.Add("Disease");
@@ -264,7 +258,6 @@ namespace MedicalClinic
             }
             else
             {
-                txtIsPastMedicalHistory.Text = "N";
                 InitiateDataGridPastMedicalHistory();
             }
             reader.Close();
@@ -302,7 +295,322 @@ namespace MedicalClinic
 
         #region Family History
 
+        public void AddUpdateFamilyHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewFamilyHistory.Rows)
+            {
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
+                {
+                    string strUpdate = "UPDATE PatientFamilyHistory SET Disease = '" + ro.Cells[1].Value.ToString().Trim() + "', Relationship = '" + ro.Cells[2].Value.ToString().Trim() + "' " +
+                        " WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
+                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                    cmdUpdate.ExecuteNonQuery();
 
+                    LoggingHelper.LogEntry("Patient Family History", "Update",
+                        txtID.Text + "|" + ro.Cells[1].Value.ToString().Trim() + "|" + ro.Cells[2].Value.ToString().Trim(), int.Parse(ro.Cells[0].Value.ToString().Trim()));
+                }
+                else
+                {
+                    if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
+                    {
+                        OleDbCommand cmd = con.CreateCommand();
+                        cmd.CommandText = "INSERT INTO PatientFamilyHistory(PatientID, Disease, Relationship)VALUES("
+                        + int.Parse(txtID.Text) + ",'"
+                        + ro.Cells[1].Value + "','"
+                        + ro.Cells[2].Value + "')";
+                        cmd.Connection = con;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "Select @@Identity";
+                        int intId = (int)cmd.ExecuteScalar();
+
+                        LoggingHelper.LogEntry("Patient Family History", "Add", txtID.Text + "|" + ro.Cells[1].Value.ToString() + "|" +
+                            ro.Cells[2].Value.ToString(), intId);
+                    }
+                }
+            }
+            con.Close();
+        }
+
+        public void RetrieveFamilyHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from PatientFamilyHistory where PatientID = " + txtID.Text + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("IDFamilyHistory");
+                dt.Columns.Add("DiseaseFamilyHistory");
+                dt.Columns.Add("RelationshipFamilyHistory");
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["IDFamilyHistory"] = reader["ID"];
+                    row["DiseaseFamilyHistory"] = reader["Disease"];
+                    row["RelationshipFamilyHistory"] = reader["Relationship"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewFamilyHistory.DataSource = dt;
+
+                SetGridStylesFamilyHistory();
+            }
+            else
+            {
+                InitiateDataGridFamilyHistory();
+            }
+            reader.Close();
+            con.Close();
+        }
+
+        public void InitiateDataGridFamilyHistory()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IDFamilyHistory");
+            dt.Columns.Add("DiseaseFamilyHistory");
+            dt.Columns.Add("RelationshipFamilyHistory");
+            dataGridViewFamilyHistory.DataSource = dt;
+            SetGridStylesFamilyHistory();
+        }
+
+        public void SetGridStylesFamilyHistory()
+        {
+            this.dataGridViewFamilyHistory.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewFamilyHistory.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewFamilyHistory.Columns["DiseaseFamilyHistory"].Width = 289;
+            this.dataGridViewFamilyHistory.Columns["RelationshipFamilyHistory"].Width = 120;
+            this.dataGridViewFamilyHistory.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewFamilyHistory.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewFamilyHistory.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewFamilyHistory.EnableHeadersVisualStyles = false;
+            this.dataGridViewFamilyHistory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewFamilyHistory.AllowUserToAddRows = true;
+            this.dataGridViewFamilyHistory.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridViewFamilyHistory.AllowUserToDeleteRows = false;
+        }
+
+        #endregion
+
+        #region Allergy History
+
+        public void AddUpdateAllergyHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewAllergyHistory.Rows)
+            {
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
+                {
+                    string strUpdate = "UPDATE PatientAllergyHistory SET Description = '" + ro.Cells[1].Value.ToString().Trim() + "' " +
+                        " WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
+                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                    cmdUpdate.ExecuteNonQuery();
+
+                    LoggingHelper.LogEntry("Patient Allergy History", "Update",
+                        txtID.Text + "|" + ro.Cells[1].Value.ToString().Trim(), int.Parse(ro.Cells[0].Value.ToString().Trim()));
+                }
+                else
+                {
+                    if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
+                    {
+                        OleDbCommand cmd = con.CreateCommand();
+                        cmd.CommandText = "INSERT INTO PatientAllergyHistory(PatientID, Description)VALUES("
+                        + int.Parse(txtID.Text) + ",'"
+                        + ro.Cells[1].Value + "')";
+                        cmd.Connection = con;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "Select @@Identity";
+                        int intId = (int)cmd.ExecuteScalar();
+
+                        LoggingHelper.LogEntry("Patient Allergy History", "Add", txtID.Text + "|" + ro.Cells[1].Value.ToString(), intId);
+                    }
+                }
+            }
+            con.Close();
+        }
+
+        public void RetrieveAllergyHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from PatientAllergyHistory where PatientID = " + txtID.Text + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("IDAllergyHistory");
+                dt.Columns.Add("DescriptionAllergyHistory");
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["IDAllergyHistory"] = reader["ID"];
+                    row["DescriptionAllergyHistory"] = reader["Description"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewAllergyHistory.DataSource = dt;
+
+                SetGridStylesAllergyHistory();
+            }
+            else
+            {
+                InitiateDataGridAllergyHistory();
+            }
+            reader.Close();
+            con.Close();
+        }
+
+        public void InitiateDataGridAllergyHistory()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IDAllergyHistory");
+            dt.Columns.Add("DescriptionAllergyHistory");
+            dataGridViewAllergyHistory.DataSource = dt;
+            SetGridStylesAllergyHistory();
+        }
+
+        public void SetGridStylesAllergyHistory()
+        {
+            this.dataGridViewAllergyHistory.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewAllergyHistory.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewAllergyHistory.Columns["DescriptionAllergyHistory"].Width = 409;
+            //this.dataGridViewAllergyHistory.Columns["RelationshipFamilyHistory"].Width = 120;
+            this.dataGridViewAllergyHistory.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewAllergyHistory.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewAllergyHistory.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewAllergyHistory.EnableHeadersVisualStyles = false;
+            this.dataGridViewAllergyHistory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewAllergyHistory.AllowUserToAddRows = true;
+            this.dataGridViewAllergyHistory.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridViewAllergyHistory.AllowUserToDeleteRows = false;
+        }
+
+        #endregion
+
+        #region Social History
+
+        public void AddUpdateSocialHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewSocialHistory.Rows)
+            {
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
+                {
+                    string strUpdate = "UPDATE PatientSocialHistory SET Type = '" + ro.Cells[1].Value.ToString().Trim() + "', Details = '" + ro.Cells[2].Value.ToString().Trim() + "' " +
+                        " WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
+                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                    cmdUpdate.ExecuteNonQuery();
+
+                    LoggingHelper.LogEntry("Patient Social History", "Update",
+                        txtID.Text + "|" + ro.Cells[1].Value.ToString().Trim() + "|" + ro.Cells[2].Value.ToString().Trim(), int.Parse(ro.Cells[0].Value.ToString().Trim()));
+                }
+                else
+                {
+                    if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
+                    {
+                        OleDbCommand cmd = con.CreateCommand();
+                        cmd.CommandText = "INSERT INTO PatientSocialHistory(PatientID, Type, Details)VALUES("
+                        + int.Parse(txtID.Text) + ",'"
+                        + ro.Cells[1].Value + "','"
+                        + ro.Cells[2].Value + "')";
+                        cmd.Connection = con;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "Select @@Identity";
+                        int intId = (int)cmd.ExecuteScalar();
+
+                        LoggingHelper.LogEntry("Patient Social History", "Add", txtID.Text + "|" + ro.Cells[1].Value.ToString() + "|" +
+                            ro.Cells[2].Value.ToString(), intId);
+                    }
+                }
+            }
+            con.Close();
+        }
+
+        public void RetrieveSocialHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from PatientSocialHistory where PatientID = " + txtID.Text + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("IDSocialHistory");
+                dt.Columns.Add("TypeSocialHistory");
+                dt.Columns.Add("DetailsSocialHistory");
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["IDSocialHistory"] = reader["ID"];
+                    row["TypeSocialHistory"] = reader["Type"];
+                    row["DetailsSocialHistory"] = reader["Details"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewSocialHistory.DataSource = dt;
+
+                SetGridStylesSocialHistory();
+            }
+            else
+            {
+                InitiateDataGridSocialHistory();
+            }
+            reader.Close();
+            con.Close();
+        }
+
+        public void InitiateDataGridSocialHistory()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IDSocialHistory");
+            dt.Columns.Add("TypeSocialHistory");
+            dt.Columns.Add("DetailsSocialHistory");
+
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from SocialHistoryTypes";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["TypeSocialHistory"] = reader["SocialHistoryTypes"];
+                    dt.Rows.Add(row);
+                }
+            }
+
+            dataGridViewSocialHistory.DataSource = dt;
+            SetGridStylesSocialHistory();
+        }
+
+        public void SetGridStylesSocialHistory()
+        {
+            this.dataGridViewSocialHistory.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewSocialHistory.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewSocialHistory.Columns["TypeSocialHistory"].Width = 289;
+            this.dataGridViewSocialHistory.Columns["DetailsSocialHistory"].Width = 120;
+            this.dataGridViewSocialHistory.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewSocialHistory.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewSocialHistory.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewSocialHistory.EnableHeadersVisualStyles = false;
+            this.dataGridViewSocialHistory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewSocialHistory.AllowUserToAddRows = false;
+            this.dataGridViewSocialHistory.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridViewSocialHistory.AllowUserToDeleteRows = false;
+        }
 
         #endregion
 
@@ -427,8 +735,6 @@ namespace MedicalClinic
             txtOccupation.Text = string.Empty;
             txtNic.Text = string.Empty;
             txtContactNo.Text = string.Empty;
-
-            txtIsPastMedicalHistory.Text = string.Empty;
         }
     }
 }
