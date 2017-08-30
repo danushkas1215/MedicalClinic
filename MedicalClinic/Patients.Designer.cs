@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Patients));
             this.label1 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtBirthday = new System.Windows.Forms.DateTimePicker();
@@ -56,6 +57,7 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.txtOccupation = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnPatientArrived = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -324,7 +326,7 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(782, 432);
+            this.txtID.Location = new System.Drawing.Point(726, 369);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 22);
             this.txtID.TabIndex = 28;
@@ -349,11 +351,22 @@
             this.label12.TabIndex = 30;
             this.label12.Text = "Occupation";
             // 
+            // btnPatientArrived
+            // 
+            this.btnPatientArrived.Image = ((System.Drawing.Image)(resources.GetObject("btnPatientArrived.Image")));
+            this.btnPatientArrived.Location = new System.Drawing.Point(726, 421);
+            this.btnPatientArrived.Name = "btnPatientArrived";
+            this.btnPatientArrived.Size = new System.Drawing.Size(136, 139);
+            this.btnPatientArrived.TabIndex = 31;
+            this.btnPatientArrived.UseVisualStyleBackColor = true;
+            this.btnPatientArrived.Click += new System.EventHandler(this.btnPatientArrived_Click);
+            // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1158, 710);
+            this.Controls.Add(this.btnPatientArrived);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtOccupation);
             this.Controls.Add(this.txtID);
@@ -420,5 +433,6 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TextBox txtOccupation;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnPatientArrived;
     }
 }
