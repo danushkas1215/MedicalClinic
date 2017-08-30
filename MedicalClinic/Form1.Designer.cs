@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.patientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.patientToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicalRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,9 +44,7 @@
             this.medicineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicineListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicineOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.patientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.patientToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.medicalRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.patientsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,30 @@
             this.menuStrip1.Size = new System.Drawing.Size(792, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // patientToolStripMenuItem
+            // 
+            this.patientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.patientToolStripMenuItem1,
+            this.patientsListToolStripMenuItem,
+            this.medicalRecordToolStripMenuItem});
+            this.patientToolStripMenuItem.Name = "patientToolStripMenuItem";
+            this.patientToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
+            this.patientToolStripMenuItem.Text = "Patient Record";
+            // 
+            // patientToolStripMenuItem1
+            // 
+            this.patientToolStripMenuItem1.Name = "patientToolStripMenuItem1";
+            this.patientToolStripMenuItem1.Size = new System.Drawing.Size(188, 26);
+            this.patientToolStripMenuItem1.Text = "Patient";
+            this.patientToolStripMenuItem1.Click += new System.EventHandler(this.patientToolStripMenuItem1_Click);
+            // 
+            // medicalRecordToolStripMenuItem
+            // 
+            this.medicalRecordToolStripMenuItem.Name = "medicalRecordToolStripMenuItem";
+            this.medicalRecordToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.medicalRecordToolStripMenuItem.Text = "Medical Record";
+            this.medicalRecordToolStripMenuItem.Click += new System.EventHandler(this.medicalRecordToolStripMenuItem_Click);
             // 
             // medicinesToolStripMenuItem
             // 
@@ -75,7 +100,7 @@
             this.companyToolStripMenuItem,
             this.companyListToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 26);
             this.toolStripMenuItem1.Text = "Companies";
             // 
             // companyToolStripMenuItem
@@ -98,7 +123,7 @@
             this.genericNamesToolStripMenuItem1,
             this.genericNamesListToolStripMenuItem1});
             this.genericNamesToolStripMenuItem.Name = "genericNamesToolStripMenuItem";
-            this.genericNamesToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.genericNamesToolStripMenuItem.Size = new System.Drawing.Size(158, 26);
             this.genericNamesToolStripMenuItem.Text = "Generics";
             // 
             // genericNamesToolStripMenuItem1
@@ -121,7 +146,7 @@
             this.medicineToolStripMenuItem,
             this.medicineListToolStripMenuItem});
             this.medicinesToolStripMenuItem1.Name = "medicinesToolStripMenuItem1";
-            this.medicinesToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.medicinesToolStripMenuItem1.Size = new System.Drawing.Size(158, 26);
             this.medicinesToolStripMenuItem1.Text = "Medicines";
             // 
             // medicineToolStripMenuItem
@@ -143,28 +168,12 @@
             this.medicineOrderToolStripMenuItem.Name = "medicineOrderToolStripMenuItem";
             this.medicineOrderToolStripMenuItem.Size = new System.Drawing.Size(32, 19);
             // 
-            // patientToolStripMenuItem
+            // patientsListToolStripMenuItem
             // 
-            this.patientToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.patientToolStripMenuItem1,
-            this.medicalRecordToolStripMenuItem});
-            this.patientToolStripMenuItem.Name = "patientToolStripMenuItem";
-            this.patientToolStripMenuItem.Size = new System.Drawing.Size(117, 24);
-            this.patientToolStripMenuItem.Text = "Patient Record";
-            // 
-            // patientToolStripMenuItem1
-            // 
-            this.patientToolStripMenuItem1.Name = "patientToolStripMenuItem1";
-            this.patientToolStripMenuItem1.Size = new System.Drawing.Size(188, 26);
-            this.patientToolStripMenuItem1.Text = "Patient";
-            this.patientToolStripMenuItem1.Click += new System.EventHandler(this.patientToolStripMenuItem1_Click);
-            // 
-            // medicalRecordToolStripMenuItem
-            // 
-            this.medicalRecordToolStripMenuItem.Name = "medicalRecordToolStripMenuItem";
-            this.medicalRecordToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
-            this.medicalRecordToolStripMenuItem.Text = "Medical Record";
-            this.medicalRecordToolStripMenuItem.Click += new System.EventHandler(this.medicalRecordToolStripMenuItem_Click);
+            this.patientsListToolStripMenuItem.Name = "patientsListToolStripMenuItem";
+            this.patientsListToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
+            this.patientsListToolStripMenuItem.Text = "Patients List";
+            this.patientsListToolStripMenuItem.Click += new System.EventHandler(this.patientsListToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -201,6 +210,7 @@
         private System.Windows.Forms.ToolStripMenuItem patientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem patientToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem medicalRecordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem patientsListToolStripMenuItem;
     }
 }
 

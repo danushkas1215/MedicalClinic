@@ -89,6 +89,12 @@
       <DependentUpon>GenericNamesList.cs</DependentUpon>
     </Compile>
     <Compile Include="LoggingHelper.cs" />
+    <Compile Include="PatientsList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientsList.Designer.cs">
+      <DependentUpon>PatientsList.cs</DependentUpon>
+    </Compile>
     <Compile Include="MedicineList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GenericNamesList.resx">
       <DependentUpon>GenericNamesList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientsList.resx">
+      <DependentUpon>PatientsList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MedicineList.resx">
       <DependentUpon>MedicineList.cs</DependentUpon>

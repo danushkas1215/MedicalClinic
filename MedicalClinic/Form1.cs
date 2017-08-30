@@ -22,7 +22,7 @@ namespace MedicalClinic
         {
             if (ActiveMdiChild != null)
                 ActiveMdiChild.Close();
-            Patients newMDIChild = new Patients();
+            Patients newMDIChild = new Patients(string.Empty);
             newMDIChild.MdiParent = this;
             newMDIChild.MaximizeBox = false;
             newMDIChild.WindowState = FormWindowState.Maximized;
@@ -97,7 +97,7 @@ namespace MedicalClinic
         {
             if (ActiveMdiChild != null)
                 ActiveMdiChild.Close();
-            Patients newMDIChild = new Patients();
+            Patients newMDIChild = new Patients(string.Empty);
             newMDIChild.MdiParent = this;
             newMDIChild.MaximizeBox = false;
             newMDIChild.WindowState = FormWindowState.Maximized;
@@ -109,6 +109,17 @@ namespace MedicalClinic
             if (ActiveMdiChild != null)
                 ActiveMdiChild.Close();
             PatientMedicalRecord newMDIChild = new PatientMedicalRecord();
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
+
+        private void patientsListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            PatientsList newMDIChild = new PatientsList();
             newMDIChild.MdiParent = this;
             newMDIChild.MaximizeBox = false;
             newMDIChild.WindowState = FormWindowState.Maximized;

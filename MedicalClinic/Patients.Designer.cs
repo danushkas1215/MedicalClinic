@@ -328,6 +328,7 @@
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 22);
             this.txtID.TabIndex = 28;
+            this.txtID.Visible = false;
             this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
             // 
             // txtOccupation

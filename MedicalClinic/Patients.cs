@@ -14,12 +14,13 @@ namespace MedicalClinic
 {
     public partial class Patients : Form
     {
-        public Patients()
+        public Patients(string strID)
         {
             InitializeComponent();
             comBloodGroup.SelectedIndex = 0;
             comSex.SelectedIndex = 0;
             comMaritalStatus.SelectedIndex = 0;
+            txtID.Text = strID;
         }
 
         private void txtHomePhone_KeyPress(object sender, KeyPressEventArgs e)
