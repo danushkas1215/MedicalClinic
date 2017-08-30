@@ -21,6 +21,8 @@ namespace MedicalClinic
 
         private void txtID_TextChanged(object sender, EventArgs e)
         {
+            FormRefresh();
+
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
@@ -75,9 +77,9 @@ namespace MedicalClinic
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             cmd.CommandText = "INSERT INTO PatientPresentComplaint(PatientID, HistoryOfPresentComplaint, ExaminationFindings," +
-                "RelevantInvestigation, ProblemListCurrent)VALUES(" + txtID.Text + ",'" + txtHistoryOfPresentComplaint.Text + "'," +
+                "RelevantInvestigation, ProblemListCurrent, LogDate)VALUES(" + txtID.Text + ",'" + txtHistoryOfPresentComplaint.Text + "'," +
                 "'" + txtExaminationFindings.Text + "', '" + txtRelevantInvestigation.Text + "'," +
-                "'" + txtProblemListCurrent.Text + "')";
+                "'" + txtProblemListCurrent.Text + "', '" + DateTime.Now + "')";
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             cmd.CommandText = "Select @@Identity";
@@ -151,12 +153,13 @@ namespace MedicalClinic
             {
                 if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
                 {
-                    cmd.CommandText = "INSERT INTO PatientPrescription(PatientID, MedicineID, MedicineTimes, MedicineQuantity, MedicineDays)VALUES("
+                    cmd.CommandText = "INSERT INTO PatientPrescription(PatientID, MedicineID, MedicineTimes, MedicineQuantity, MedicineDays, LogDate)VALUES("
                     + int.Parse(txtID.Text) + ","
                     + ro.Cells[0].Value + ",'"
                     + ro.Cells[1].Value + "',"
                     + ro.Cells[2].Value + ","
-                    + ro.Cells[3].Value + ")";
+                    + ro.Cells[3].Value + ",'"
+                    + DateTime.Now + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                 }
@@ -961,6 +964,7 @@ namespace MedicalClinic
             InitiateDataGridSocialHistory();
             InitiateDataGridDrugHistory();
             InitiateDataGridVaccination();
+            AddComboboxColumn();
         }
     }
 }
