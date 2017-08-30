@@ -28,9 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtContactNo = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -67,8 +71,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.dataGridViewAllergyHistory = new System.Windows.Forms.DataGridView();
-            this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.dataGridView4 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewVaccination = new System.Windows.Forms.DataGridView();
+            this.dataGridViewDrugHistory = new System.Windows.Forms.DataGridView();
             this.dataGridViewFamilyHistory = new System.Windows.Forms.DataGridView();
             this.dataGridViewPastMedicalHistory = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -87,13 +91,19 @@
             this.IDSocialHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeSocialHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DetailsSocialHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDDrugHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameDrugHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DoseDrugHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DurationDrugHistory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IDVaccination = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescriptionVaccination = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllergyHistory)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVaccination)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDrugHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFamilyHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPastMedicalHistory)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -360,6 +370,7 @@
             // 
             // txtProblemListCurrent
             // 
+            this.txtProblemListCurrent.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProblemListCurrent.Location = new System.Drawing.Point(617, 258);
             this.txtProblemListCurrent.Multiline = true;
             this.txtProblemListCurrent.Name = "txtProblemListCurrent";
@@ -368,6 +379,7 @@
             // 
             // txtRelevantInvestigation
             // 
+            this.txtRelevantInvestigation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRelevantInvestigation.Location = new System.Drawing.Point(17, 258);
             this.txtRelevantInvestigation.Multiline = true;
             this.txtRelevantInvestigation.Name = "txtRelevantInvestigation";
@@ -376,6 +388,7 @@
             // 
             // txtExaminationFindings
             // 
+            this.txtExaminationFindings.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtExaminationFindings.Location = new System.Drawing.Point(617, 43);
             this.txtExaminationFindings.Multiline = true;
             this.txtExaminationFindings.Name = "txtExaminationFindings";
@@ -384,6 +397,7 @@
             // 
             // txtHistoryOfPresentComplaint
             // 
+            this.txtHistoryOfPresentComplaint.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHistoryOfPresentComplaint.Location = new System.Drawing.Point(16, 43);
             this.txtHistoryOfPresentComplaint.Multiline = true;
             this.txtHistoryOfPresentComplaint.Name = "txtHistoryOfPresentComplaint";
@@ -400,8 +414,8 @@
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.dataGridViewAllergyHistory);
-            this.tabPage1.Controls.Add(this.dataGridView5);
-            this.tabPage1.Controls.Add(this.dataGridView4);
+            this.tabPage1.Controls.Add(this.dataGridViewVaccination);
+            this.tabPage1.Controls.Add(this.dataGridViewDrugHistory);
             this.tabPage1.Controls.Add(this.dataGridViewFamilyHistory);
             this.tabPage1.Controls.Add(this.dataGridViewPastMedicalHistory);
             this.tabPage1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -475,6 +489,14 @@
             // 
             // dataGridViewAllergyHistory
             // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewAllergyHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewAllergyHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAllergyHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDAllergyHistory,
@@ -486,26 +508,52 @@
             this.dataGridViewAllergyHistory.Size = new System.Drawing.Size(550, 150);
             this.dataGridViewAllergyHistory.TabIndex = 5;
             // 
-            // dataGridView5
+            // dataGridViewVaccination
             // 
-            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView5.Location = new System.Drawing.Point(623, 417);
-            this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.RowTemplate.Height = 24;
-            this.dataGridView5.Size = new System.Drawing.Size(550, 150);
-            this.dataGridView5.TabIndex = 4;
+            this.dataGridViewVaccination.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVaccination.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDVaccination,
+            this.DescriptionVaccination});
+            this.dataGridViewVaccination.Location = new System.Drawing.Point(623, 417);
+            this.dataGridViewVaccination.Name = "dataGridViewVaccination";
+            this.dataGridViewVaccination.RowHeadersVisible = false;
+            this.dataGridViewVaccination.RowTemplate.Height = 24;
+            this.dataGridViewVaccination.Size = new System.Drawing.Size(550, 150);
+            this.dataGridViewVaccination.TabIndex = 4;
             // 
-            // dataGridView4
+            // dataGridViewDrugHistory
             // 
-            this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView4.Location = new System.Drawing.Point(623, 218);
-            this.dataGridView4.Name = "dataGridView4";
-            this.dataGridView4.RowTemplate.Height = 24;
-            this.dataGridView4.Size = new System.Drawing.Size(550, 150);
-            this.dataGridView4.TabIndex = 3;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewDrugHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            this.dataGridViewDrugHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewDrugHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDDrugHistory,
+            this.NameDrugHistory,
+            this.DoseDrugHistory,
+            this.DurationDrugHistory});
+            this.dataGridViewDrugHistory.Location = new System.Drawing.Point(623, 218);
+            this.dataGridViewDrugHistory.Name = "dataGridViewDrugHistory";
+            this.dataGridViewDrugHistory.RowHeadersVisible = false;
+            this.dataGridViewDrugHistory.RowTemplate.Height = 24;
+            this.dataGridViewDrugHistory.Size = new System.Drawing.Size(550, 150);
+            this.dataGridViewDrugHistory.TabIndex = 3;
             // 
             // dataGridViewFamilyHistory
             // 
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewFamilyHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewFamilyHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewFamilyHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDFamilyHistory,
@@ -520,14 +568,14 @@
             // 
             // dataGridViewPastMedicalHistory
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewPastMedicalHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPastMedicalHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewPastMedicalHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewPastMedicalHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -593,8 +641,8 @@
             // Disease
             // 
             this.Disease.DataPropertyName = "Disease";
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Disease.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Disease.DefaultCellStyle = dataGridViewCellStyle19;
             this.Disease.HeaderText = "Disease";
             this.Disease.Name = "Disease";
             this.Disease.Width = 289;
@@ -602,8 +650,8 @@
             // Diagnosed
             // 
             this.Diagnosed.DataPropertyName = "Diagnosed";
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Diagnosed.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Diagnosed.DefaultCellStyle = dataGridViewCellStyle20;
             this.Diagnosed.HeaderText = "Diagnosed (Year)";
             this.Diagnosed.Name = "Diagnosed";
             this.Diagnosed.Width = 120;
@@ -643,6 +691,14 @@
             // dataGridViewSocialHistory
             // 
             this.dataGridViewSocialHistory.AllowUserToAddRows = false;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewSocialHistory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewSocialHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewSocialHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDSocialHistory,
@@ -675,6 +731,44 @@
             this.DetailsSocialHistory.HeaderText = "Details";
             this.DetailsSocialHistory.Name = "DetailsSocialHistory";
             // 
+            // IDDrugHistory
+            // 
+            this.IDDrugHistory.DataPropertyName = "IDDrugHistory";
+            this.IDDrugHistory.HeaderText = "ID";
+            this.IDDrugHistory.Name = "IDDrugHistory";
+            this.IDDrugHistory.Visible = false;
+            // 
+            // NameDrugHistory
+            // 
+            this.NameDrugHistory.DataPropertyName = "NameDrugHistory";
+            this.NameDrugHistory.HeaderText = "Name";
+            this.NameDrugHistory.Name = "NameDrugHistory";
+            // 
+            // DoseDrugHistory
+            // 
+            this.DoseDrugHistory.DataPropertyName = "DoseDrugHistory";
+            this.DoseDrugHistory.HeaderText = "Dose";
+            this.DoseDrugHistory.Name = "DoseDrugHistory";
+            // 
+            // DurationDrugHistory
+            // 
+            this.DurationDrugHistory.DataPropertyName = "DurationDrugHistory";
+            this.DurationDrugHistory.HeaderText = "Duration";
+            this.DurationDrugHistory.Name = "DurationDrugHistory";
+            // 
+            // IDVaccination
+            // 
+            this.IDVaccination.DataPropertyName = "IDVaccination";
+            this.IDVaccination.HeaderText = "ID";
+            this.IDVaccination.Name = "IDVaccination";
+            this.IDVaccination.Visible = false;
+            // 
+            // DescriptionVaccination
+            // 
+            this.DescriptionVaccination.DataPropertyName = "DescriptionVaccination";
+            this.DescriptionVaccination.HeaderText = "Description";
+            this.DescriptionVaccination.Name = "DescriptionVaccination";
+            // 
             // PatientMedicalRecord
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -695,8 +789,8 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAllergyHistory)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVaccination)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewDrugHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFamilyHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPastMedicalHistory)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -730,11 +824,11 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridView dataGridView4;
+        private System.Windows.Forms.DataGridView dataGridViewDrugHistory;
         private System.Windows.Forms.DataGridView dataGridViewFamilyHistory;
         private System.Windows.Forms.DataGridView dataGridViewPastMedicalHistory;
         private System.Windows.Forms.DataGridView dataGridViewAllergyHistory;
-        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.DataGridView dataGridViewVaccination;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -765,5 +859,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IDSocialHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeSocialHistory;
         private System.Windows.Forms.DataGridViewTextBoxColumn DetailsSocialHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDDrugHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameDrugHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DoseDrugHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DurationDrugHistory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDVaccination;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescriptionVaccination;
     }
 }

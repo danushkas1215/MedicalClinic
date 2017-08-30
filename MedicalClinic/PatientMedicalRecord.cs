@@ -47,19 +47,23 @@ namespace MedicalClinic
             RetrieveFamilyHistory();
             RetrieveAllergyHistory();
             RetrieveSocialHistory();
+            RetrieveDrugHistory();
+            RetrieveVaccinationHistory();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (ValidateForm())
             {
-                //AddPresentComplaint();
-                //AddPrescriptionData();
-                //ReducePrescriptionData();
+                AddPresentComplaint();
+                AddPrescriptionData();
+                ReducePrescriptionData();
                 AddUpdatePastMedicalHistory();
                 AddUpdateFamilyHistory();
                 AddUpdateAllergyHistory();
                 AddUpdateSocialHistory();
+                AddUpdateDrugHistory();
+                AddUpdateVaccinationHistory();
                 MessageBox.Show("Record Successfully Saved", "Message");
             }
         }
@@ -190,7 +194,7 @@ namespace MedicalClinic
             con.Close();
         }
 
-        #region Past Medical History
+#region Past Medical History
         public void AddUpdatePastMedicalHistory()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
@@ -291,10 +295,9 @@ namespace MedicalClinic
             this.dataGridViewPastMedicalHistory.AllowUserToDeleteRows = false;
         }
 
-        #endregion
+#endregion
 
-        #region Family History
-
+#region Family History
         public void AddUpdateFamilyHistory()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
@@ -394,10 +397,9 @@ namespace MedicalClinic
             this.dataGridViewFamilyHistory.AllowUserToDeleteRows = false;
         }
 
-        #endregion
+#endregion
 
-        #region Allergy History
-
+#region Allergy History
         public void AddUpdateAllergyHistory()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
@@ -492,10 +494,9 @@ namespace MedicalClinic
             this.dataGridViewAllergyHistory.AllowUserToDeleteRows = false;
         }
 
-        #endregion
+#endregion
 
-        #region Social History
-
+#region Social History
         public void AddUpdateSocialHistory()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
@@ -614,48 +615,261 @@ namespace MedicalClinic
 
         #endregion
 
-        public Boolean ValidateForm()
+#region Drug History
+
+        public void AddUpdateDrugHistory()
         {
-            bool isValidated = false;
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
             con.Open();
-            if (dataGridViewPrescription.Rows.Count > 1)
+            foreach (DataGridViewRow ro in dataGridViewDrugHistory.Rows)
             {
-                foreach (DataGridViewRow ro in dataGridViewPrescription.Rows)
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
                 {
-                    if (Convert.ToString(ro.Cells[2].Value) != string.Empty)
+                    string strUpdate = "UPDATE PatientDrugHistory SET DrugName = '" + ro.Cells[1].Value.ToString().Trim() + "', Dose = '" + ro.Cells[2].Value.ToString().Trim() + "', " +
+                        "Duration = '" + ro.Cells[3].Value.ToString().Trim() + "' WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
+                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                    cmdUpdate.ExecuteNonQuery();
+
+                    LoggingHelper.LogEntry("Patient Drug History", "Update",
+                        txtID.Text + "|" + ro.Cells[1].Value.ToString().Trim() + "|" + ro.Cells[2].Value.ToString().Trim() + "|" + ro.Cells[3].Value.ToString().Trim(), 
+                        int.Parse(ro.Cells[0].Value.ToString().Trim()));
+                }
+                else
+                {
+                    if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
                     {
-                        cmd.CommandText = "SELECT * FROM Medicines WHERE ID = " + ro.Cells[0].Value + "";
-                        OleDbDataReader reader = cmd.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                int intTotalMedicines = int.Parse(reader["MedUnits"].ToString());
-                                int intBalanceMedicines = intTotalMedicines - int.Parse(ro.Cells[2].Value.ToString());
-                                if (intBalanceMedicines <= 0)
-                                {
-                                    MessageBox.Show(reader["MedicineName"].ToString() + " does not have enough medicines to issue", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    goto endOfLoop;
-                                }
-                                else
-                                {
-                                    isValidated = true;
-                                }
-                            }
-                        }
-                        reader.Close();
+                        OleDbCommand cmd = con.CreateCommand();
+                        cmd.CommandText = "INSERT INTO PatientDrugHistory(PatientID, DrugName, Dose, Duration)VALUES("
+                        + int.Parse(txtID.Text) + ",'"
+                        + ro.Cells[1].Value + "', '"
+                        + ro.Cells[2].Value + "', '"
+                        + ro.Cells[3].Value + "')";
+                        cmd.Connection = con;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "Select @@Identity";
+                        int intId = (int)cmd.ExecuteScalar();
+
+                        LoggingHelper.LogEntry("Patient Drug History", "Add", txtID.Text + "|" + ro.Cells[1].Value.ToString() + "|" + ro.Cells[2].Value.ToString().Trim() 
+                            + "|" + ro.Cells[3].Value.ToString().Trim(), intId);
                     }
                 }
             }
+            con.Close();
+        }
+
+        public void RetrieveDrugHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from PatientDrugHistory where PatientID = " + txtID.Text + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("IDDrugHistory");
+                dt.Columns.Add("NameDrugHistory");
+                dt.Columns.Add("DoseDrugHistory");
+                dt.Columns.Add("DurationDrugHistory");
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["IDDrugHistory"] = reader["ID"];
+                    row["NameDrugHistory"] = reader["DrugName"];
+                    row["DoseDrugHistory"] = reader["Dose"];
+                    row["DurationDrugHistory"] = reader["Duration"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewDrugHistory.DataSource = dt;
+
+                SetGridStylesDrugHistory();
+            }
             else
             {
-                isValidated = true;
+                InitiateDataGridDrugHistory();
             }
-            endOfLoop:
+            reader.Close();
             con.Close();
+        }
+
+        public void InitiateDataGridDrugHistory()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IDDrugHistory");
+            dt.Columns.Add("NameDrugHistory");
+            dt.Columns.Add("DoseDrugHistory");
+            dt.Columns.Add("DurationDrugHistory");
+            dataGridViewDrugHistory.DataSource = dt;
+            SetGridStylesDrugHistory();
+        }
+
+        public void SetGridStylesDrugHistory()
+        {
+            this.dataGridViewDrugHistory.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewDrugHistory.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewDrugHistory.Columns["NameDrugHistory"].Width = 269;
+            this.dataGridViewDrugHistory.Columns["DoseDrugHistory"].Width = 60;
+            this.dataGridViewDrugHistory.Columns["DurationDrugHistory"].Width = 80;
+            this.dataGridViewDrugHistory.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewDrugHistory.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewDrugHistory.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewDrugHistory.EnableHeadersVisualStyles = false;
+            this.dataGridViewDrugHistory.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewDrugHistory.AllowUserToAddRows = true;
+            this.dataGridViewDrugHistory.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridViewDrugHistory.AllowUserToDeleteRows = false;
+        }
+
+        #endregion
+
+#region Vaccination
+        public void AddUpdateVaccinationHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+            foreach (DataGridViewRow ro in dataGridViewVaccination.Rows)
+            {
+                if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
+                {
+                    string strUpdate = "UPDATE PatientVaccination SET Description = '" + ro.Cells[1].Value.ToString().Trim() + "' " +
+                        " WHERE ID = " + ro.Cells[0].Value.ToString().Trim() + "";
+                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                    cmdUpdate.ExecuteNonQuery();
+
+                    LoggingHelper.LogEntry("Patient Vaccination", "Update",
+                        txtID.Text + "|" + ro.Cells[1].Value.ToString().Trim(), int.Parse(ro.Cells[0].Value.ToString().Trim()));
+                }
+                else
+                {
+                    if (Convert.ToString(ro.Cells[1].Value) != string.Empty)
+                    {
+                        OleDbCommand cmd = con.CreateCommand();
+                        cmd.CommandText = "INSERT INTO PatientVaccination(PatientID, Description)VALUES("
+                        + int.Parse(txtID.Text) + ",'"
+                        + ro.Cells[1].Value + "')";
+                        cmd.Connection = con;
+                        cmd.ExecuteNonQuery();
+                        cmd.CommandText = "Select @@Identity";
+                        int intId = (int)cmd.ExecuteScalar();
+
+                        LoggingHelper.LogEntry("Patient Vaccination", "Add", txtID.Text + "|" + ro.Cells[1].Value.ToString(), intId);
+                    }
+                }
+            }
+            con.Close();
+        }
+
+        public void RetrieveVaccinationHistory()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from PatientVaccination where PatientID = " + txtID.Text + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("IDVaccination");
+                dt.Columns.Add("DescriptionVaccination");
+                while (reader.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    row["IDVaccination"] = reader["ID"];
+                    row["DescriptionVaccination"] = reader["Description"];
+                    dt.Rows.Add(row);
+                }
+                dataGridViewVaccination.DataSource = dt;
+
+                SetGridStylesVaccination();
+            }
+            else
+            {
+                InitiateDataGridVaccination();
+            }
+            reader.Close();
+            con.Close();
+        }
+
+        public void InitiateDataGridVaccination()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("IDVaccination");
+            dt.Columns.Add("DescriptionVaccination");
+            dataGridViewVaccination.DataSource = dt;
+            SetGridStylesVaccination();
+        }
+
+        public void SetGridStylesVaccination()
+        {
+            this.dataGridViewVaccination.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+            this.dataGridViewVaccination.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+            this.dataGridViewVaccination.Columns["DescriptionVaccination"].Width = 409;
+            this.dataGridViewVaccination.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+            this.dataGridViewVaccination.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            this.dataGridViewVaccination.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+            this.dataGridViewVaccination.EnableHeadersVisualStyles = false;
+            this.dataGridViewVaccination.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            this.dataGridViewVaccination.AllowUserToAddRows = true;
+            this.dataGridViewVaccination.EditMode = DataGridViewEditMode.EditOnKeystroke;
+            this.dataGridViewVaccination.AllowUserToDeleteRows = false;
+        }
+
+#endregion
+
+        public Boolean ValidateForm()
+        {
+            bool isValidated = false;
+
+            if (!string.IsNullOrEmpty(txtID.Text))
+            {
+                string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                OleDbConnection con = new OleDbConnection(conString);
+                OleDbCommand cmd = con.CreateCommand();
+                con.Open();
+                if (dataGridViewPrescription.Rows.Count > 1)
+                {
+                    foreach (DataGridViewRow ro in dataGridViewPrescription.Rows)
+                    {
+                        if (Convert.ToString(ro.Cells[2].Value) != string.Empty)
+                        {
+                            cmd.CommandText = "SELECT * FROM Medicines WHERE ID = " + ro.Cells[0].Value + "";
+                            OleDbDataReader reader = cmd.ExecuteReader();
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    int intTotalMedicines = int.Parse(reader["MedUnits"].ToString());
+                                    int intBalanceMedicines = intTotalMedicines - int.Parse(ro.Cells[2].Value.ToString());
+                                    if (intBalanceMedicines <= 0)
+                                    {
+                                        MessageBox.Show(reader["MedicineName"].ToString() + " does not have enough medicines to issue", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        goto endOfLoop;
+                                    }
+                                    else
+                                    {
+                                        isValidated = true;
+                                    }
+                                }
+                            }
+                            reader.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    isValidated = true;
+                }
+                endOfLoop:
+                con.Close();
+            }
+            else
+            {
+                MessageBox.Show("Need to select a Patient to proceed.", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             return isValidated;
         }
@@ -727,7 +941,7 @@ namespace MedicalClinic
 
         public void FormRefresh()
         {
-            txtID.Text = string.Empty;
+            //txtID.Text = string.Empty;
             txtName.Text = string.Empty;
             txtDoB.Text = string.Empty;
             txtMaritalStatus.Text = string.Empty;
@@ -735,6 +949,18 @@ namespace MedicalClinic
             txtOccupation.Text = string.Empty;
             txtNic.Text = string.Empty;
             txtContactNo.Text = string.Empty;
+
+            txtHistoryOfPresentComplaint.Text = string.Empty;
+            txtRelevantInvestigation.Text = string.Empty;
+            txtExaminationFindings.Text = string.Empty;
+            txtProblemListCurrent.Text = string.Empty;
+
+            InitiateDataGridPastMedicalHistory();
+            InitiateDataGridFamilyHistory();
+            InitiateDataGridAllergyHistory();
+            InitiateDataGridSocialHistory();
+            InitiateDataGridDrugHistory();
+            InitiateDataGridVaccination();
         }
     }
 }
