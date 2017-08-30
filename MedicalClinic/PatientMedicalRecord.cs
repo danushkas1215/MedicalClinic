@@ -37,7 +37,7 @@ namespace MedicalClinic
                     txtDoB.Text = DateTime.Parse( reader["Birthday"].ToString()).ToString("dd/MMM/yyyy");
                     txtMaritalStatus.Text = reader["MaritalStatus"].ToString();
                     txtSex.Text = reader["Sex"].ToString();
-                    txtOccupation.Text = reader["Birthday"].ToString();
+                    txtOccupation.Text = reader["Occupation"].ToString();
                     txtNic.Text = reader["NIC"].ToString();
                     txtContactNo.Text = reader["Mobile"].ToString();
                 }

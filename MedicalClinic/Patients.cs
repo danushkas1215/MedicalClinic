@@ -59,17 +59,18 @@ namespace MedicalClinic
 
         public void FormRefresh()
         {
-            txtName.Text = "";
-            txtAddress.Text = "";
+            txtName.Text = string.Empty;
+            txtAddress.Text = string.Empty;
             txtBirthday.Value = System.DateTime.Today;
-            txtAge.Text = "";
-            txtHomePhone.Text = "";
-            txtMobile.Text = "";
+            txtAge.Text = string.Empty;
+            txtHomePhone.Text = string.Empty;
+            txtMobile.Text = string.Empty;
             comMaritalStatus.SelectedIndex = 0;
-            txtNIC.Text = "";
-            txtEmail.Text = "";
+            txtNIC.Text = string.Empty;
+            txtEmail.Text = string.Empty;
             comBloodGroup.SelectedIndex = 0;
             comSex.SelectedIndex = 0;
+            txtOccupation.Text = string.Empty;
             btnAdd.Text = "Add";
             //txtID.Text = "";
         }
@@ -84,10 +85,10 @@ namespace MedicalClinic
                     OleDbConnection con = new OleDbConnection(conString);
                     OleDbCommand cmd = con.CreateCommand();
                     con.Open();
-                    cmd.CommandText = "Insert into Patients(FullName, Birthday, Address, HomePhone, Mobile, Sex, BloodGroup, MaritalStatus, NIC, Email, Age)" +
+                    cmd.CommandText = "Insert into Patients(FullName, Birthday, Address, HomePhone, Mobile, Sex, BloodGroup, MaritalStatus, NIC, Email, Age, Occupation)" +
                         "Values('" + txtName.Text + "', '" + txtBirthday.Text + "', '" + txtAddress.Text + "', '" + txtHomePhone.Text + "', '" + txtMobile.Text + "'" +
                         ", '" + comSex.SelectedItem.ToString() + "', '" + comBloodGroup.SelectedItem.ToString() + "', '" + comMaritalStatus.SelectedItem.ToString() + "'" +
-                        ", '" + txtNIC.Text + "', '" + txtEmail.Text + "', '" + txtAge.Text + "')";
+                        ", '" + txtNIC.Text + "', '" + txtEmail.Text + "', '" + txtAge.Text + "', '" + txtOccupation.Text + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = "Select @@Identity";
@@ -96,7 +97,7 @@ namespace MedicalClinic
                     MessageBox.Show("Record Successfully Saved", "Message");
                     LoggingHelper.LogEntry("Patients", "Add", txtName.Text + "|" + txtBirthday.Text + "|" + txtAddress.Text + "|" + txtHomePhone.Text + "|" + txtMobile.Text + 
                         "|" + comSex.SelectedItem.ToString() + "|" + comBloodGroup.SelectedItem.ToString() + "|" + comMaritalStatus.SelectedItem.ToString() + 
-                        "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text, intId);
+                        "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text + "|" + txtOccupation.Text, intId);
 
                     FormRefresh();
                 }
@@ -109,13 +110,13 @@ namespace MedicalClinic
                         ", Address = '" + txtAddress.Text + "', HomePhone = '" + txtHomePhone.Text + "', Mobile = '" + txtMobile.Text + "' " +
                         ", Sex = '" + comSex.SelectedItem.ToString() + "', BloodGroup = '" + comBloodGroup.SelectedItem.ToString() + "' " +
                         ", MaritalStatus = '" + comMaritalStatus.SelectedItem.ToString() + "', NIC = '" + txtNIC.Text + "' " +
-                        ", Email = '" + txtEmail.Text + "', Age = '" + txtAge.Text + "' where ID=" + txtID.Text.Trim() + "";
+                        ", Email = '" + txtEmail.Text + "', Age = '" + txtAge.Text + "', Occupation = '" + txtOccupation.Text + "' where ID=" + txtID.Text.Trim() + "";
                     OleDbCommand cmd = new OleDbCommand(strUpdate, con);
                     cmd.ExecuteNonQuery();
                     con.Close();
                     LoggingHelper.LogEntry("Patients", "Update", txtName.Text + "|" + txtBirthday.Text + "|" + txtAddress.Text + "|" + txtHomePhone.Text + "|" + txtMobile.Text +
                         "|" + comSex.SelectedItem.ToString() + "|" + comBloodGroup.SelectedItem.ToString() + "|" + comMaritalStatus.SelectedItem.ToString() +
-                        "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text, int.Parse(txtID.Text.Trim()));
+                        "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text + "|" + txtOccupation.Text, int.Parse(txtID.Text.Trim()));
                     MessageBox.Show("Record Successfuly Updated", "Message");
 
                     FormRefresh();
@@ -151,6 +152,7 @@ namespace MedicalClinic
                     txtNIC.Text = reader["NIC"].ToString();
                     txtEmail.Text = reader["Email"].ToString();
                     txtAge.Text = reader["Age"].ToString();
+                    txtOccupation.Text = reader["Occupation"].ToString();
                 }
             }
             reader.Close();
@@ -178,7 +180,7 @@ namespace MedicalClinic
                     MessageBox.Show("Records Successfuly Deleted");
                     LoggingHelper.LogEntry("Patients", "Delete", txtName.Text + "|" + txtBirthday.Text + "|" + txtAddress.Text + "|" + txtHomePhone.Text + "|" + txtMobile.Text +
                         "|" + comSex.SelectedItem.ToString() + "|" + comBloodGroup.SelectedItem.ToString() + "|" + comMaritalStatus.SelectedItem.ToString() +
-                        "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text, int.Parse(txtID.Text.Trim()));
+                        "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text + "|" + txtOccupation.Text, int.Parse(txtID.Text.Trim()));
 
                     FormRefresh();
                 }

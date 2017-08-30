@@ -54,6 +54,8 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
+            this.txtOccupation = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -180,7 +182,7 @@
             this.comSex.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.comSex.Location = new System.Drawing.Point(726, 318);
+            this.comSex.Location = new System.Drawing.Point(176, 363);
             this.comSex.Name = "comSex";
             this.comSex.Size = new System.Drawing.Size(104, 28);
             this.comSex.TabIndex = 11;
@@ -189,7 +191,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(574, 321);
+            this.label8.Location = new System.Drawing.Point(27, 363);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 20);
             this.label8.TabIndex = 15;
@@ -228,7 +230,7 @@
             // btnAdd
             // 
             this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(176, 395);
+            this.btnAdd.Location = new System.Drawing.Point(176, 432);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 30);
             this.btnAdd.TabIndex = 12;
@@ -241,7 +243,7 @@
             this.txtNIC.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNIC.Location = new System.Drawing.Point(726, 167);
             this.txtNIC.Name = "txtNIC";
-            this.txtNIC.Size = new System.Drawing.Size(217, 27);
+            this.txtNIC.Size = new System.Drawing.Size(284, 27);
             this.txtNIC.TabIndex = 8;
             // 
             // comMaritalStatus
@@ -257,7 +259,7 @@
             "Widowed"});
             this.comMaritalStatus.Location = new System.Drawing.Point(726, 117);
             this.comMaritalStatus.Name = "comMaritalStatus";
-            this.comMaritalStatus.Size = new System.Drawing.Size(217, 28);
+            this.comMaritalStatus.Size = new System.Drawing.Size(284, 28);
             this.comMaritalStatus.TabIndex = 7;
             // 
             // label2
@@ -301,7 +303,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(361, 395);
+            this.btnDelete.Location = new System.Drawing.Point(361, 432);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 30);
             this.btnDelete.TabIndex = 13;
@@ -312,7 +314,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(556, 395);
+            this.btnCancel.Location = new System.Drawing.Point(556, 432);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
             this.btnCancel.TabIndex = 14;
@@ -322,17 +324,37 @@
             // 
             // txtID
             // 
-            this.txtID.Location = new System.Drawing.Point(782, 395);
+            this.txtID.Location = new System.Drawing.Point(782, 432);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(100, 22);
             this.txtID.TabIndex = 28;
             this.txtID.TextChanged += new System.EventHandler(this.txtID_TextChanged);
+            // 
+            // txtOccupation
+            // 
+            this.txtOccupation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOccupation.Location = new System.Drawing.Point(726, 318);
+            this.txtOccupation.Name = "txtOccupation";
+            this.txtOccupation.Size = new System.Drawing.Size(284, 27);
+            this.txtOccupation.TabIndex = 29;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(574, 321);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(104, 20);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Occupation";
             // 
             // Patients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1158, 710);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtOccupation);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnDelete);
@@ -395,5 +417,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.TextBox txtID;
+        private System.Windows.Forms.TextBox txtOccupation;
+        private System.Windows.Forms.Label label12;
     }
 }
