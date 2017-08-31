@@ -137,6 +137,17 @@ namespace MedicalClinic
             newMDIChild.Show();
         }
 
+        private void nursingViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveMdiChild != null)
+                ActiveMdiChild.Close();
+            ViewNurse newMDIChild = new ViewNurse();
+            newMDIChild.MdiParent = this;
+            newMDIChild.MaximizeBox = false;
+            newMDIChild.WindowState = FormWindowState.Maximized;
+            newMDIChild.Show();
+        }
+
         //private void medicineOrderToolStripMenuItem_Click(object sender, EventArgs e)
         //{
         //    if (ActiveMdiChild != null)

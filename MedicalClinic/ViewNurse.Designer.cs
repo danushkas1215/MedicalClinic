@@ -1,6 +1,6 @@
 ﻿namespace MedicalClinic
 {
-    partial class ViewDoctor
+    partial class ViewNurse
     {
         /// <summary>
         /// Required designer variable.
@@ -61,7 +61,7 @@
             this.ClientSize = new System.Drawing.Size(1304, 610);
             this.Controls.Add(this.dataGridView1);
             this.Name = "ViewDoctor";
-            this.Text = "ViewDoctor";
+            this.Text = "PharmaceuticalComList";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

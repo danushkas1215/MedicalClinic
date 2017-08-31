@@ -47,6 +47,7 @@
             this.patientsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doctorViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nursingViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -181,7 +182,8 @@
             // viewsToolStripMenuItem
             // 
             this.viewsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.doctorViewToolStripMenuItem});
+            this.doctorViewToolStripMenuItem,
+            this.nursingViewToolStripMenuItem});
             this.viewsToolStripMenuItem.Name = "viewsToolStripMenuItem";
             this.viewsToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.viewsToolStripMenuItem.Text = "Views";
@@ -192,6 +194,13 @@
             this.doctorViewToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.doctorViewToolStripMenuItem.Text = "Doctor View";
             this.doctorViewToolStripMenuItem.Click += new System.EventHandler(this.doctorViewToolStripMenuItem_Click);
+            // 
+            // nursingViewToolStripMenuItem
+            // 
+            this.nursingViewToolStripMenuItem.Name = "nursingViewToolStripMenuItem";
+            this.nursingViewToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.nursingViewToolStripMenuItem.Text = "Nursing View";
+            this.nursingViewToolStripMenuItem.Click += new System.EventHandler(this.nursingViewToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -231,6 +240,7 @@
         private System.Windows.Forms.ToolStripMenuItem patientsListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem doctorViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nursingViewToolStripMenuItem;
     }
 }
 
