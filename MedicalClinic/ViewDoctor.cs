@@ -28,16 +28,11 @@ namespace MedicalClinic
             this.dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
         }
 
-        //private void txtSearch_TextChanged(object sender, EventArgs e)
-        //{
-        //    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("CompanyName LIKE '%{0}%'", txtSearch.Text);
-        //}
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridView1.Columns["edit_column"].Index)
             {
-                string intID = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string intID = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString() +"|"+ dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
                 PatientMedicalRecord myform = new PatientMedicalRecord(intID);
                 myform.MdiParent = this.ParentForm;
                 myform.WindowState = FormWindowState.Maximized;
@@ -48,23 +43,10 @@ namespace MedicalClinic
 
         public void GetData()
         {
-            //string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            //OleDbConnection con = new OleDbConnection(conString);
-            //OleDbCommand cmd = con.CreateCommand();
-            //con.Open();
-            //OleDbDataAdapter da = new OleDbDataAdapter("SELECT ID, PatientID, LogDate FROM PatientsArrival", con);
-            //DataSet ds = new DataSet();
-            //da.Fill(ds, "PharmaceuticalCompanies");
-            //dataGridView1.DataSource = ds.Tables[0];
-            //dataGridView1.Columns["ID"].Visible = false;
-            //dataGridView1.Columns["PatientID"].Visible = false;
-            //dataGridView1.Columns["LogDate"].Width = 500;
-            //dataGridView1.Columns["LogDate"].HeaderText = "Company Name";
-
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT ID, PatientID, LogDate FROM PatientsArrival";
+            cmd.CommandText = "SELECT ID, PatientID, LogDate FROM PatientsArrival WHERE PatientStatus = 'Arrived'";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -85,12 +67,6 @@ namespace MedicalClinic
                     dt.Rows.Add(row);
                 }
                 dataGridView1.DataSource = dt;
-
-            //    SetGridStylesSocialHistory();
-            //}
-            //else
-            //{
-            //    InitiateDataGridSocialHistory();
             }
             reader.Close();
             con.Close();
@@ -108,7 +84,6 @@ namespace MedicalClinic
             }
             dataGridView1.CellClick += dataGridView1_CellClick;
 
-            //ds.Tables.Clear();
             dataGridView1.Columns["ID"].Visible = false;
             dataGridView1.Columns["PatientID"].Visible = false;
             dataGridView1.Columns["LogDate"].Width = 170;

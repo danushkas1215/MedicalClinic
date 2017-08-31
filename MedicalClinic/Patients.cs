@@ -196,15 +196,15 @@ namespace MedicalClinic
                 OleDbConnection con = new OleDbConnection(conString);
                 OleDbCommand cmd = con.CreateCommand();
                 con.Open();
-                cmd.CommandText = "Insert into PatientsArrival(PatientID, LogDate)" +
-                    "Values('" + txtID.Text + "', '" + DateTime.Now + "')";
+                cmd.CommandText = "Insert into PatientsArrival(PatientID, LogDate, PatientStatus)" +
+                    "Values('" + txtID.Text + "', '" + DateTime.Now + "', 'Arrived')";
                 cmd.Connection = con;
                 cmd.ExecuteNonQuery();
                 cmd.CommandText = "Select @@Identity";
                 int intId = (int)cmd.ExecuteScalar();
                 con.Close();
                 MessageBox.Show("Patient's arrival noticed by the system", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoggingHelper.LogEntry("Patient Arrived", "Add", txtID.Text + "|" + DateTime.Now, intId);
+                LoggingHelper.LogEntry("Patient Arrived", "Add", txtID.Text + "|" + DateTime.Now + "|Arrived", intId);
 
                 FormRefresh();
             }

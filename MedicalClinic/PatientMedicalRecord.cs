@@ -13,10 +13,15 @@ namespace MedicalClinic
 {
     public partial class PatientMedicalRecord : Form
     {
+        public String strArrivalID = string.Empty;
         public PatientMedicalRecord(string strID)
         {
             InitializeComponent();
-            txtID.Text = strID;
+            string[] strArr = null;
+            char[] splitchar = { '|' };
+            strArr = strID.Split(splitchar);
+            txtID.Text = strArr[0].ToString();
+            strArrivalID = strArr[1].ToString();
             AddComboboxColumn();
         }
 
@@ -968,6 +973,21 @@ namespace MedicalClinic
             AddComboboxColumn();
         }
 
+        public void UpdateArrivalStatus()
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+
+            string strUpdate = "UPDATE PatientsArrival SET PatientStatus = 'Consulted' " +
+                " WHERE ID = " + int.Parse(strArrivalID) + " AND PatientID = "+ int.Parse(txtID.Text) + "";
+            OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+            cmdUpdate.ExecuteNonQuery();
+
+            LoggingHelper.LogEntry("Patients Arrival", "Update", txtID.Text + "|Consulted|", int.Parse(strArrivalID));
+            con.Close();
+        }
+
         private void btnSign_Click(object sender, EventArgs e)
         {
             if (ValidateForm())
@@ -981,6 +1001,7 @@ namespace MedicalClinic
                 AddUpdateSocialHistory();
                 AddUpdateDrugHistory();
                 AddUpdateVaccinationHistory();
+                UpdateArrivalStatus();
                 MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 ViewDoctor viewDoctorForm = new ViewDoctor();
