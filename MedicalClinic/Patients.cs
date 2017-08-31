@@ -53,7 +53,7 @@ namespace MedicalClinic
             if (string.IsNullOrEmpty(txtName.Text.Trim()))
             {
                 blnValidated = true;
-                MessageBox.Show("Patient Name cannot be empty", "Message");
+                MessageBox.Show("Patient Name cannot be empty", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return blnValidated;
         }
@@ -190,21 +190,24 @@ namespace MedicalClinic
 
         private void btnPatientArrived_Click(object sender, EventArgs e)
         {
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            con.Open();
-            cmd.CommandText = "Insert into PatientsArrival(PatientID, LogDate)" +
-                "Values('" + txtID.Text + "', '" + DateTime.Now + "')";
-            cmd.Connection = con;
-            cmd.ExecuteNonQuery();
-            cmd.CommandText = "Select @@Identity";
-            int intId = (int)cmd.ExecuteScalar();
-            con.Close();
-            MessageBox.Show("Patient's arrival noticed by the system", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LoggingHelper.LogEntry("Patient Arrived", "Add", txtID.Text + "|" + DateTime.Now, intId);
+            if (!FormValidate())
+            {
+                string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+                OleDbConnection con = new OleDbConnection(conString);
+                OleDbCommand cmd = con.CreateCommand();
+                con.Open();
+                cmd.CommandText = "Insert into PatientsArrival(PatientID, LogDate)" +
+                    "Values('" + txtID.Text + "', '" + DateTime.Now + "')";
+                cmd.Connection = con;
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "Select @@Identity";
+                int intId = (int)cmd.ExecuteScalar();
+                con.Close();
+                MessageBox.Show("Patient's arrival noticed by the system", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LoggingHelper.LogEntry("Patient Arrived", "Add", txtID.Text + "|" + DateTime.Now, intId);
 
-            FormRefresh();
+                FormRefresh();
+            }
         }
     }
 }

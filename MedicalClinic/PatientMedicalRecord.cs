@@ -13,9 +13,10 @@ namespace MedicalClinic
 {
     public partial class PatientMedicalRecord : Form
     {
-        public PatientMedicalRecord()
+        public PatientMedicalRecord(string strID)
         {
             InitializeComponent();
+            txtID.Text = strID;
             AddComboboxColumn();
         }
 
@@ -66,7 +67,7 @@ namespace MedicalClinic
                 AddUpdateSocialHistory();
                 AddUpdateDrugHistory();
                 AddUpdateVaccinationHistory();
-                MessageBox.Show("Record Successfully Saved", "Message");
+                MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -965,6 +966,30 @@ namespace MedicalClinic
             InitiateDataGridDrugHistory();
             InitiateDataGridVaccination();
             AddComboboxColumn();
+        }
+
+        private void btnSign_Click(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                AddPresentComplaint();
+                AddPrescriptionData();
+                ReducePrescriptionData();
+                AddUpdatePastMedicalHistory();
+                AddUpdateFamilyHistory();
+                AddUpdateAllergyHistory();
+                AddUpdateSocialHistory();
+                AddUpdateDrugHistory();
+                AddUpdateVaccinationHistory();
+                MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                ViewDoctor viewDoctorForm = new ViewDoctor();
+                viewDoctorForm.MdiParent = this.ParentForm;
+                viewDoctorForm.MaximizeBox = false;
+                viewDoctorForm.WindowState = FormWindowState.Maximized;
+                viewDoctorForm.Show();
+                this.Close();
+            }
         }
     }
 }

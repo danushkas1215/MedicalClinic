@@ -45,6 +45,8 @@
             this.medicineListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medicineOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.patientsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doctorViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +55,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.patientToolStripMenuItem,
-            this.medicinesToolStripMenuItem});
+            this.medicinesToolStripMenuItem,
+            this.viewsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(792, 28);
@@ -175,6 +178,21 @@
             this.patientsListToolStripMenuItem.Text = "Patients List";
             this.patientsListToolStripMenuItem.Click += new System.EventHandler(this.patientsListToolStripMenuItem_Click);
             // 
+            // viewsToolStripMenuItem
+            // 
+            this.viewsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.doctorViewToolStripMenuItem});
+            this.viewsToolStripMenuItem.Name = "viewsToolStripMenuItem";
+            this.viewsToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
+            this.viewsToolStripMenuItem.Text = "Views";
+            // 
+            // doctorViewToolStripMenuItem
+            // 
+            this.doctorViewToolStripMenuItem.Name = "doctorViewToolStripMenuItem";
+            this.doctorViewToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.doctorViewToolStripMenuItem.Text = "Doctor View";
+            this.doctorViewToolStripMenuItem.Click += new System.EventHandler(this.doctorViewToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -211,6 +229,8 @@
         private System.Windows.Forms.ToolStripMenuItem patientToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem medicalRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem patientsListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doctorViewToolStripMenuItem;
     }
 }
 
