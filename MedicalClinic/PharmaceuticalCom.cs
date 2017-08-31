@@ -44,7 +44,8 @@ namespace MedicalClinic
                     con.Close();
                     AddRepData(intId.ToString());
                     AddDistributorData(intId.ToString());
-                    MessageBox.Show("Record Successfully Saved", "Message");
+                    MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     LoggingHelper.LogEntry("Pharmaceutical company", "Add", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim() 
                         + "|" + txtComEmail.Text.Trim(), intId);
                     FormRefresh();
@@ -67,7 +68,7 @@ namespace MedicalClinic
                     AddDistributorData(txtComID.Text);
                     LoggingHelper.LogEntry("Pharmaceutical company", "Update", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim() 
                         + "|" + txtComEmail.Text.Trim(), int.Parse(txtComID.Text.Trim()));
-                    MessageBox.Show("Record Successfuly Updated", "Message");
+                    MessageBox.Show("Record Successfully Updated", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     FormRefresh();
                     txtComID.Text = string.Empty;
@@ -307,7 +308,7 @@ namespace MedicalClinic
             if (string.IsNullOrEmpty(txtComName.Text.Trim()))
             {
                 blnValidated = true;
-                MessageBox.Show("Company Name cannot be empty", "Message");
+                MessageBox.Show("Company Name cannot be empty", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return blnValidated;
         }
@@ -336,7 +337,7 @@ namespace MedicalClinic
 
                     LoggingHelper.LogEntry("Pharmaceutical company", "Delete", txtComName.Text.Trim() + "|" + txtComAddress.Text.Trim() + "|" + txtComPhone.Text.Trim()
                         + "|" + txtComEmail.Text.Trim(), int.Parse(txtComID.Text.Trim()));
-                    MessageBox.Show("Records Successfuly Deleted");
+                    MessageBox.Show("Records Successfully  Deleted", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     FormRefresh();
                     txtComID.Text = string.Empty;

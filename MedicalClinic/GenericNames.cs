@@ -36,7 +36,7 @@ namespace MedicalClinic
                     cmd.CommandText = "Select @@Identity";
                     int intId = (int)cmd.ExecuteScalar();
                     con.Close();
-                    MessageBox.Show("Record Successfully Saved", "Message");
+                    MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoggingHelper.LogEntry("Generic Names", "Add", txtGenericName.Text, intId);
 
                     FormRefresh();
@@ -51,7 +51,7 @@ namespace MedicalClinic
                     cmd.ExecuteNonQuery();
                     con.Close();
                     LoggingHelper.LogEntry("Generic Names", "Update", txtGenericName.Text, int.Parse(txtID.Text.Trim()));
-                    MessageBox.Show("Record Successfuly Updated", "Message");
+                    MessageBox.Show("Record Successfully Updated", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     FormRefresh();
                 }
@@ -76,7 +76,7 @@ namespace MedicalClinic
             if (string.IsNullOrEmpty(txtGenericName.Text.Trim()))
             {
                 blnValidated = true;
-                MessageBox.Show("Generic Name cannot be empty", "Message");
+                MessageBox.Show("Generic Name cannot be empty", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return blnValidated;
         }
@@ -119,7 +119,7 @@ namespace MedicalClinic
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    MessageBox.Show("Records Successfuly Deleted");
+                    MessageBox.Show("Records Successfully Deleted", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoggingHelper.LogEntry("Generic Names", "Delete", txtGenericName.Text, int.Parse(txtID.Text.Trim()));
                     FormRefresh();
                 }

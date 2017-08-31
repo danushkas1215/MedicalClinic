@@ -106,7 +106,7 @@ namespace MedicalClinic
                     cmd.ExecuteNonQuery();
                     cmd.CommandText = "Select @@Identity";
                     int intId = (int)cmd.ExecuteScalar();
-                    MessageBox.Show("Record Successfully Saved", "Message");
+                    MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     con.Close();
                     LoggingHelper.LogEntry("Medicine", "Add", 
                         txtMedicineName.Text.Trim() +"|"+ comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
@@ -129,7 +129,7 @@ namespace MedicalClinic
                     LoggingHelper.LogEntry("Medicine", "Update",
                         txtMedicineName.Text.Trim() + "|" + comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
                         + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked + "|" + txtTradeName.Text.Trim(), int.Parse(txtID.Text.Trim()));
-                    MessageBox.Show("Record Successfuly Updated", "Message");
+                    MessageBox.Show("Record Successfully Updated", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     FormRefresh();
                 }
@@ -142,7 +142,7 @@ namespace MedicalClinic
             if (string.IsNullOrEmpty(txtMedicineName.Text.Trim()))
             {
                 blnValidated = true;
-                MessageBox.Show("Medicine Name cannot be empty", "Message");
+                MessageBox.Show("Medicine Name cannot be empty", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return blnValidated;
         }
@@ -212,7 +212,7 @@ namespace MedicalClinic
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    MessageBox.Show("Records Successfuly Deleted");
+                    MessageBox.Show("Record Successfully Deleted", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoggingHelper.LogEntry("Medicine", "Delete",
                         txtMedicineName.Text.Trim() + "|" + comGenericName.SelectedValue + "|" + comCompany.SelectedValue + "|" + txtContents.Text.Trim() + "|" + txtPrice.Text.Trim()
                         + "|" + txtUnits.Text.Trim() + "|" + txtUOM.Text.Trim() + "|" + chkDispensing.Checked + "|" + txtTradeName.Text.Trim(), int.Parse(txtID.Text.Trim()));

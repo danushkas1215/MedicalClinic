@@ -95,7 +95,7 @@ namespace MedicalClinic
                     cmd.CommandText = "Select @@Identity";
                     int intId = (int)cmd.ExecuteScalar();
                     con.Close();
-                    MessageBox.Show("Record Successfully Saved", "Message");
+                    MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoggingHelper.LogEntry("Patients", "Add", txtName.Text + "|" + txtBirthday.Text + "|" + txtAddress.Text + "|" + txtHomePhone.Text + "|" + txtMobile.Text + 
                         "|" + comSex.SelectedItem.ToString() + "|" + comBloodGroup.SelectedItem.ToString() + "|" + comMaritalStatus.SelectedItem.ToString() + 
                         "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text + "|" + txtOccupation.Text, intId);
@@ -118,7 +118,7 @@ namespace MedicalClinic
                     LoggingHelper.LogEntry("Patients", "Update", txtName.Text + "|" + txtBirthday.Text + "|" + txtAddress.Text + "|" + txtHomePhone.Text + "|" + txtMobile.Text +
                         "|" + comSex.SelectedItem.ToString() + "|" + comBloodGroup.SelectedItem.ToString() + "|" + comMaritalStatus.SelectedItem.ToString() +
                         "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text + "|" + txtOccupation.Text, int.Parse(txtID.Text.Trim()));
-                    MessageBox.Show("Record Successfuly Updated", "Message");
+                    MessageBox.Show("Record Successfully Updated", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     FormRefresh();
                 }
@@ -178,7 +178,7 @@ namespace MedicalClinic
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
-                    MessageBox.Show("Records Successfuly Deleted");
+                    MessageBox.Show("Record Successfully Deleted", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoggingHelper.LogEntry("Patients", "Delete", txtName.Text + "|" + txtBirthday.Text + "|" + txtAddress.Text + "|" + txtHomePhone.Text + "|" + txtMobile.Text +
                         "|" + comSex.SelectedItem.ToString() + "|" + comBloodGroup.SelectedItem.ToString() + "|" + comMaritalStatus.SelectedItem.ToString() +
                         "|" + txtNIC.Text + "|" + txtEmail.Text + "|" + txtAge.Text + "|" + txtOccupation.Text, int.Parse(txtID.Text.Trim()));
