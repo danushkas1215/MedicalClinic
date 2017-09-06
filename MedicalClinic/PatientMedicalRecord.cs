@@ -61,11 +61,11 @@ namespace MedicalClinic
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (ValidateForm())
-            {
+            //if (ValidateForm())
+            //{
                 AddPresentComplaint();
                 AddPrescriptionData();
-                ReducePrescriptionData();
+                //ReducePrescriptionData();
                 AddUpdatePastMedicalHistory();
                 AddUpdateFamilyHistory();
                 AddUpdateAllergyHistory();
@@ -73,7 +73,7 @@ namespace MedicalClinic
                 AddUpdateDrugHistory();
                 AddUpdateVaccinationHistory();
                 MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            //}
         }
 
         public void AddPresentComplaint()
@@ -164,7 +164,7 @@ namespace MedicalClinic
 			DataGridViewComboBoxColumn ColComboBoxMedicineFrequencyType = new DataGridViewComboBoxColumn();
 			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineFrequencyType);
 			ColComboBoxMedicineFrequencyType.DataPropertyName = "ID";
-			ColComboBoxMedicineFrequencyType.HeaderText = "Frequency Type";
+			ColComboBoxMedicineFrequencyType.HeaderText = "Frequency";
 			ColComboBoxMedicineFrequencyType.ValueType = typeof(string);
 			ColComboBoxMedicineFrequencyType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
 			ColComboBoxMedicineFrequencyType.DisplayIndex = 3;
@@ -210,7 +210,7 @@ namespace MedicalClinic
 			DataGridViewComboBoxColumn ColComboBoxMedicineRouteType = new DataGridViewComboBoxColumn();
 			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineRouteType);
 			ColComboBoxMedicineRouteType.DataPropertyName = "ID";
-			ColComboBoxMedicineRouteType.HeaderText = "Route Type";
+			ColComboBoxMedicineRouteType.HeaderText = "Route";
 			ColComboBoxMedicineRouteType.ValueType = typeof(string);
 			ColComboBoxMedicineRouteType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
 			ColComboBoxMedicineRouteType.DisplayIndex = 7;
@@ -369,13 +369,17 @@ namespace MedicalClinic
             {
                 if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
                 {
-                    cmd.CommandText = "INSERT INTO PatientPrescription(PatientID, MedicineID, MedicineTimes, MedicineQuantity, MedicineDays, LogDate)VALUES("
-                    + int.Parse(txtID.Text) + ","
-                    + ro.Cells[0].Value + ",'"
-                    + ro.Cells[1].Value + "',"
-                    + ro.Cells[2].Value + ","
+                    cmd.CommandText = "INSERT INTO PatientPrescription(PatientID, MedicineID, MedicineType, Dosage, FrequencyType, Duration, DurationType, RelationType, RouteType, LogDate)VALUES("
+					+ int.Parse(txtID.Text) + ","
+                    + ro.Cells[0].Value + ","
+                    + ro.Cells[1].Value + ",'"
+                    + ro.Cells[2].Value + "',"
                     + ro.Cells[3].Value + ",'"
-                    + DateTime.Now + "')";
+					+ ro.Cells[4].Value + "',"
+					+ ro.Cells[5].Value + ","
+					+ ro.Cells[6].Value + ","
+					+ ro.Cells[7].Value + ",'"
+					+ DateTime.Now + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
                 }
@@ -1200,8 +1204,8 @@ namespace MedicalClinic
 
         private void btnSign_Click(object sender, EventArgs e)
         {
-            if (ValidateForm())
-            {
+            //if (ValidateForm())
+            //{
                 AddPresentComplaint();
                 AddPrescriptionData();
                 ReducePrescriptionData();
@@ -1220,7 +1224,7 @@ namespace MedicalClinic
                 viewDoctorForm.WindowState = FormWindowState.Maximized;
                 viewDoctorForm.Show();
                 this.Close();
-            }
+            //}
         }
     }
 }
