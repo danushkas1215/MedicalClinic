@@ -83,16 +83,16 @@ namespace MedicalClinic
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
             cmd.CommandText = "INSERT INTO PatientPresentComplaint(PatientID, HistoryOfPresentComplaint, ExaminationFindings," +
-                "RelevantInvestigation, ProblemListCurrent, LogDate)VALUES(" + txtID.Text + ",'" + txtHistoryOfPresentComplaint.Text + "'," +
+				"RelevantInvestigation, ProblemListCurrent, LogDate, NextVisit)VALUES(" + txtID.Text + ",'" + txtHistoryOfPresentComplaint.Text + "'," +
                 "'" + txtExaminationFindings.Text + "', '" + txtRelevantInvestigation.Text + "'," +
-                "'" + txtProblemListCurrent.Text + "', '" + DateTime.Now + "')";
+                "'" + txtProblemListCurrent.Text + "', '" + DateTime.Now + "', '"+ DateTime.Parse(dtNextVisit.Text) +"')";
             cmd.Connection = con;
             cmd.ExecuteNonQuery();
             cmd.CommandText = "Select @@Identity";
             int intId = (int)cmd.ExecuteScalar();
             con.Close();
             LoggingHelper.LogEntry("Patient Present Complaint", "Add", txtID.Text + "|" + txtHistoryOfPresentComplaint.Text + "|" +
-                txtExaminationFindings.Text + "|" + txtRelevantInvestigation.Text + "|" + txtProblemListCurrent.Text, intId);
+                txtExaminationFindings.Text + "|" + txtRelevantInvestigation.Text + "|" + txtProblemListCurrent.Text + "|" + DateTime.Parse(dtNextVisit.Text), intId);
         }
 
         private void AddComboboxColumn()
@@ -103,7 +103,6 @@ namespace MedicalClinic
             cmd.CommandText = "select * from Medicines";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
-            //dataGridView1.DataSource = ds.Tables[0];
             DataTable data = new DataTable();
             data.Columns.Add(new DataColumn("ID", typeof(string)));
             data.Columns.Add(new DataColumn("MedicineName", typeof(string)));
@@ -129,6 +128,9 @@ namespace MedicalClinic
                 }
             }
 
+			reader.Close();
+			con.Close();
+
             DataGridViewComboBoxColumn ColComboBox = new DataGridViewComboBoxColumn();
             dataGridViewPrescription.Columns.Add(ColComboBox);
             ColComboBox.DataPropertyName = "ID";
@@ -143,13 +145,91 @@ namespace MedicalClinic
             ColComboBox.Name = "ID";
             ColComboBox.DataPropertyName = "ID";
 
-            dataGridViewPrescription.ColumnCount = 4;
-            dataGridViewPrescription.Columns[1].Name = "Times";
-            dataGridViewPrescription.Columns[2].Name = "Qty";
-            dataGridViewPrescription.Columns[3].Name = "Days";
-        }
+			DataGridViewComboBoxColumn ColComboBoxMedicineType = new DataGridViewComboBoxColumn();
+			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineType);
+			ColComboBoxMedicineType.DataPropertyName = "ID";
+			ColComboBoxMedicineType.HeaderText = "Medicine Type";
+			ColComboBoxMedicineType.ValueType = typeof(string);
+			ColComboBoxMedicineType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+			ColComboBoxMedicineType.Width = 100;
+			ColComboBoxMedicineType.DataSource = RetrieveMedicineTypes();
+			ColComboBoxMedicineType.DisplayMember = "MedicineType";
+			ColComboBoxMedicineType.ValueMember = "ID";
+			ColComboBoxMedicineType.Name = "ID";
+			ColComboBoxMedicineType.DataPropertyName = "ID";
 
-        public void AddPrescriptionData()
+			//dataGridViewPrescription.Columns[2].Name = "Dosage";
+
+			DataGridViewComboBoxColumn ColComboBoxMedicineFrequencyType = new DataGridViewComboBoxColumn();
+			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineFrequencyType);
+			ColComboBoxMedicineFrequencyType.DataPropertyName = "ID";
+			ColComboBoxMedicineFrequencyType.HeaderText = "Frequency Type";
+			ColComboBoxMedicineFrequencyType.ValueType = typeof(string);
+			ColComboBoxMedicineFrequencyType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+			ColComboBoxMedicineFrequencyType.Width = 100;
+			ColComboBoxMedicineFrequencyType.DataSource = RetrieveMedicineFrequencyTypes();
+			ColComboBoxMedicineFrequencyType.DisplayMember = "MedicineFrequencyType";
+			ColComboBoxMedicineFrequencyType.ValueMember = "ID";
+			ColComboBoxMedicineFrequencyType.Name = "ID";
+			ColComboBoxMedicineFrequencyType.DataPropertyName = "ID";
+
+
+			dataGridViewPrescription.ColumnCount = 7;
+
+			dataGridViewPrescription.Columns[4].Name = "Duration";
+			dataGridViewPrescription.Columns[5].Name = "RelationToMeal";
+			dataGridViewPrescription.Columns[6].Name = "Rout";
+		}
+
+		private DataTable RetrieveMedicineTypes()
+		{
+			string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+			OleDbConnection con = new OleDbConnection(conString);
+			OleDbCommand cmd = con.CreateCommand();
+			cmd.CommandText = "select * from MedicineTypes";
+			con.Open();
+			OleDbDataReader reader = cmd.ExecuteReader();
+			DataTable data = new DataTable();
+			data.Columns.Add(new DataColumn("ID", typeof(string)));
+			data.Columns.Add(new DataColumn("MedicineType", typeof(string)));
+
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					DataRow row = data.NewRow();
+					data.Rows.Add(reader["ID"], reader["MedicineType"]);
+				}
+			}
+
+			return data;
+		}
+
+		private DataTable RetrieveMedicineFrequencyTypes()
+		{
+			string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+			OleDbConnection con = new OleDbConnection(conString);
+			OleDbCommand cmd = con.CreateCommand();
+			cmd.CommandText = "select * from MedicineFrequencyTypes";
+			con.Open();
+			OleDbDataReader reader = cmd.ExecuteReader();
+			DataTable data = new DataTable();
+			data.Columns.Add(new DataColumn("ID", typeof(string)));
+			data.Columns.Add(new DataColumn("MedicineFrequencyType", typeof(string)));
+
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					DataRow row = data.NewRow();
+					data.Rows.Add(reader["ID"], reader["MedicineFrequencyType"]);
+				}
+			}
+
+			return data;
+		}
+
+		public void AddPrescriptionData()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
