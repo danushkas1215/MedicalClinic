@@ -27,7 +27,7 @@ namespace MedicalClinic
 
         private void txtID_TextChanged(object sender, EventArgs e)
         {
-            FormRefresh();
+            //FormRefresh();
 
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
@@ -106,7 +106,6 @@ namespace MedicalClinic
             DataTable data = new DataTable();
             data.Columns.Add(new DataColumn("ID", typeof(string)));
             data.Columns.Add(new DataColumn("MedicineName", typeof(string)));
-            //data = ds.Tables[0];
 
             if (reader.HasRows)
             {
@@ -131,14 +130,14 @@ namespace MedicalClinic
 			reader.Close();
 			con.Close();
 
-            DataGridViewComboBoxColumn ColComboBox = new DataGridViewComboBoxColumn();
+			DataGridViewComboBoxColumn ColComboBox = new DataGridViewComboBoxColumn();
             dataGridViewPrescription.Columns.Add(ColComboBox);
             ColComboBox.DataPropertyName = "ID";
             ColComboBox.HeaderText = "Medicine Name";
             ColComboBox.ValueType = typeof(string);
             ColComboBox.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-            //ColComboBox.DisplayIndex = 2;
-            ColComboBox.Width = 530;
+            ColComboBox.DisplayIndex = 0;
+            ColComboBox.Width = 300;
             ColComboBox.DataSource = data;
             ColComboBox.DisplayMember = "MedicineName";
             ColComboBox.ValueMember = "ID";
@@ -151,14 +150,16 @@ namespace MedicalClinic
 			ColComboBoxMedicineType.HeaderText = "Medicine Type";
 			ColComboBoxMedicineType.ValueType = typeof(string);
 			ColComboBoxMedicineType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-			ColComboBoxMedicineType.Width = 100;
+			ColComboBoxMedicineType.DisplayIndex = 1;
+			ColComboBoxMedicineType.Width = 90;
 			ColComboBoxMedicineType.DataSource = RetrieveMedicineTypes();
 			ColComboBoxMedicineType.DisplayMember = "MedicineType";
 			ColComboBoxMedicineType.ValueMember = "ID";
 			ColComboBoxMedicineType.Name = "ID";
 			ColComboBoxMedicineType.DataPropertyName = "ID";
 
-			//dataGridViewPrescription.Columns[2].Name = "Dosage";
+			dataGridViewPrescription.Columns.Add("Dosage", "Dosage");
+			dataGridViewPrescription.Columns["Dosage"].DisplayIndex = 2;
 
 			DataGridViewComboBoxColumn ColComboBoxMedicineFrequencyType = new DataGridViewComboBoxColumn();
 			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineFrequencyType);
@@ -166,19 +167,61 @@ namespace MedicalClinic
 			ColComboBoxMedicineFrequencyType.HeaderText = "Frequency Type";
 			ColComboBoxMedicineFrequencyType.ValueType = typeof(string);
 			ColComboBoxMedicineFrequencyType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
-			ColComboBoxMedicineFrequencyType.Width = 100;
+			ColComboBoxMedicineFrequencyType.DisplayIndex = 3;
+			ColComboBoxMedicineFrequencyType.Width = 80;
 			ColComboBoxMedicineFrequencyType.DataSource = RetrieveMedicineFrequencyTypes();
 			ColComboBoxMedicineFrequencyType.DisplayMember = "MedicineFrequencyType";
 			ColComboBoxMedicineFrequencyType.ValueMember = "ID";
 			ColComboBoxMedicineFrequencyType.Name = "ID";
 			ColComboBoxMedicineFrequencyType.DataPropertyName = "ID";
 
+			dataGridViewPrescription.Columns.Add("Duration", "Duration");
+			dataGridViewPrescription.Columns["Duration"].DisplayIndex = 4;
+			dataGridViewPrescription.Columns["Duration"].Width = 70;
 
-			dataGridViewPrescription.ColumnCount = 7;
+			DataGridViewComboBoxColumn ColComboBoxMedicineDurationType = new DataGridViewComboBoxColumn();
+			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineDurationType);
+			ColComboBoxMedicineDurationType.DataPropertyName = "ID";
+			ColComboBoxMedicineDurationType.HeaderText = "Duration Type";
+			ColComboBoxMedicineDurationType.ValueType = typeof(string);
+			ColComboBoxMedicineDurationType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+			ColComboBoxMedicineDurationType.DisplayIndex = 5;
+			ColComboBoxMedicineDurationType.Width = 80;
+			ColComboBoxMedicineDurationType.DataSource = RetrieveMedicineDurationTypes();
+			ColComboBoxMedicineDurationType.DisplayMember = "MedicineDurationType";
+			ColComboBoxMedicineDurationType.ValueMember = "ID";
+			ColComboBoxMedicineDurationType.Name = "ID";
+			ColComboBoxMedicineDurationType.DataPropertyName = "ID";
 
-			dataGridViewPrescription.Columns[4].Name = "Duration";
-			dataGridViewPrescription.Columns[5].Name = "RelationToMeal";
-			dataGridViewPrescription.Columns[6].Name = "Rout";
+			DataGridViewComboBoxColumn ColComboBoxMedicineRelationToMealType = new DataGridViewComboBoxColumn();
+			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineRelationToMealType);
+			ColComboBoxMedicineRelationToMealType.DataPropertyName = "ID";
+			ColComboBoxMedicineRelationToMealType.HeaderText = "Relation to Meal";
+			ColComboBoxMedicineRelationToMealType.ValueType = typeof(string);
+			ColComboBoxMedicineRelationToMealType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+			ColComboBoxMedicineRelationToMealType.DisplayIndex = 6;
+			ColComboBoxMedicineRelationToMealType.Width = 100;
+			ColComboBoxMedicineRelationToMealType.DataSource = RetrieveMedicineRelationToMealTypes();
+			ColComboBoxMedicineRelationToMealType.DisplayMember = "MedicineRelationToMealType";
+			ColComboBoxMedicineRelationToMealType.ValueMember = "ID";
+			ColComboBoxMedicineRelationToMealType.Name = "ID";
+			ColComboBoxMedicineRelationToMealType.DataPropertyName = "ID";
+
+			DataGridViewComboBoxColumn ColComboBoxMedicineRouteType = new DataGridViewComboBoxColumn();
+			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineRouteType);
+			ColComboBoxMedicineRouteType.DataPropertyName = "ID";
+			ColComboBoxMedicineRouteType.HeaderText = "Route Type";
+			ColComboBoxMedicineRouteType.ValueType = typeof(string);
+			ColComboBoxMedicineRouteType.DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton;
+			ColComboBoxMedicineRouteType.DisplayIndex = 7;
+			ColComboBoxMedicineRouteType.Width = 130;
+			ColComboBoxMedicineRouteType.DataSource = RetrieveMedicineRouteTypes();
+			ColComboBoxMedicineRouteType.DisplayMember = "MedicineRoutType";
+			ColComboBoxMedicineRouteType.ValueMember = "ID";
+			ColComboBoxMedicineRouteType.Name = "ID";
+			ColComboBoxMedicineRouteType.DataPropertyName = "ID";
+
+			SetGridStylesPrescription();
 		}
 
 		private DataTable RetrieveMedicineTypes()
@@ -227,6 +270,93 @@ namespace MedicalClinic
 			}
 
 			return data;
+		}
+
+		private DataTable RetrieveMedicineDurationTypes()
+		{
+			string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+			OleDbConnection con = new OleDbConnection(conString);
+			OleDbCommand cmd = con.CreateCommand();
+			cmd.CommandText = "select * from MedicineDurationTypes";
+			con.Open();
+			OleDbDataReader reader = cmd.ExecuteReader();
+			DataTable data = new DataTable();
+			data.Columns.Add(new DataColumn("ID", typeof(string)));
+			data.Columns.Add(new DataColumn("MedicineDurationType", typeof(string)));
+
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					DataRow row = data.NewRow();
+					data.Rows.Add(reader["ID"], reader["MedicineDurationType"]);
+				}
+			}
+
+			return data;
+		}
+
+		private DataTable RetrieveMedicineRelationToMealTypes()
+		{
+			string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+			OleDbConnection con = new OleDbConnection(conString);
+			OleDbCommand cmd = con.CreateCommand();
+			cmd.CommandText = "select * from MedicineRelationToMealTypes";
+			con.Open();
+			OleDbDataReader reader = cmd.ExecuteReader();
+			DataTable data = new DataTable();
+			data.Columns.Add(new DataColumn("ID", typeof(string)));
+			data.Columns.Add(new DataColumn("MedicineRelationToMealType", typeof(string)));
+
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					DataRow row = data.NewRow();
+					data.Rows.Add(reader["ID"], reader["MedicineRelationToMealType"]);
+				}
+			}
+
+			return data;
+		}
+
+		private DataTable RetrieveMedicineRouteTypes()
+		{
+			string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+			OleDbConnection con = new OleDbConnection(conString);
+			OleDbCommand cmd = con.CreateCommand();
+			cmd.CommandText = "select * from MedicineRoutTypes";
+			con.Open();
+			OleDbDataReader reader = cmd.ExecuteReader();
+			DataTable data = new DataTable();
+			data.Columns.Add(new DataColumn("ID", typeof(string)));
+			data.Columns.Add(new DataColumn("MedicineRoutType", typeof(string)));
+
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					DataRow row = data.NewRow();
+					data.Rows.Add(reader["ID"], reader["MedicineRoutType"]);
+				}
+			}
+
+			return data;
+		}
+
+		public void SetGridStylesPrescription()
+		{
+			this.dataGridViewPrescription.RowsDefaultCellStyle.BackColor = Color.LightBlue;
+			this.dataGridViewPrescription.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
+			this.dataGridViewPrescription.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
+			this.dataGridViewPrescription.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+			this.dataGridViewPrescription.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
+			this.dataGridViewPrescription.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.TopCenter;
+			this.dataGridViewPrescription.EnableHeadersVisualStyles = false;
+			this.dataGridViewPrescription.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+			this.dataGridViewPrescription.AllowUserToAddRows = true;
+			this.dataGridViewPrescription.EditMode = DataGridViewEditMode.EditOnKeystroke;
+			this.dataGridViewPrescription.AllowUserToDeleteRows = true;
 		}
 
 		public void AddPrescriptionData()

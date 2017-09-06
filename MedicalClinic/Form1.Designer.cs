@@ -183,7 +183,6 @@
 			this.viewsToolStripMenuItem.Name = "viewsToolStripMenuItem";
 			this.viewsToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
 			this.viewsToolStripMenuItem.Text = "Views";
-			this.viewsToolStripMenuItem.Visible = false;
 			// 
 			// doctorViewToolStripMenuItem
 			// 
