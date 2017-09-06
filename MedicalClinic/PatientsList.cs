@@ -26,6 +26,8 @@ namespace MedicalClinic
             this.dataGridView1.Columns["Address"].Width = 350;
             this.dataGridView1.Columns["NIC"].Width = 100;
             this.dataGridView1.Columns["Sex"].Width = 50;
+            this.dataGridView1.Columns["RecordNo"].Width = 110;
+            this.dataGridView1.Columns["RecordNo"].HeaderText = "Record No";
             this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
@@ -51,7 +53,7 @@ namespace MedicalClinic
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select ID, FullName, Address, NIC, Sex from Patients";
+            cmd.CommandText = "select ID, FullName, Address, NIC, Sex, RecordNo from Patients";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -62,6 +64,7 @@ namespace MedicalClinic
                 dt.Columns.Add("Address");
                 dt.Columns.Add("NIC");
                 dt.Columns.Add("Sex");
+				dt.Columns.Add("RecordNo");
                 while (reader.Read())
                 {
                     DataRow row = dt.NewRow();
@@ -70,7 +73,8 @@ namespace MedicalClinic
                     row["Address"] = reader["Address"];
                     row["NIC"] = reader["NIC"];
                     row["Sex"] = reader["Sex"];
-                    dt.Rows.Add(row);
+					row["RecordNo"] = reader["RecordNo"];
+					dt.Rows.Add(row);
                 }
                 dataGridView1.DataSource = dt;
             }
@@ -103,5 +107,15 @@ namespace MedicalClinic
         {
             (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("Address LIKE '%{0}%'", txtAddress.Text);
         }
-    }
+
+		private void txtRecordNo_TextChanged(object sender, EventArgs e)
+		{
+			(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("RecordNo LIKE '%{0}%'", txtRecordNo.Text);
+		}
+
+		private void txtNIC_TextChanged(object sender, EventArgs e)
+		{
+			(dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("NIC LIKE '%{0}%'", txtNIC.Text);
+		}
+	}
 }
