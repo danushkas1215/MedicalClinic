@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MedicalClinic
@@ -61,11 +58,11 @@ namespace MedicalClinic
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            //if (ValidateForm())
-            //{
+            if (ValidateForm())
+            {
                 AddPresentComplaint();
                 AddPrescriptionData();
-                //ReducePrescriptionData();
+                ReducePrescriptionData();
                 AddUpdatePastMedicalHistory();
                 AddUpdateFamilyHistory();
                 AddUpdateAllergyHistory();
@@ -73,7 +70,7 @@ namespace MedicalClinic
                 AddUpdateDrugHistory();
                 AddUpdateVaccinationHistory();
                 MessageBox.Show("Record Successfully Saved", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
+            }
         }
 
         public void AddPresentComplaint()
@@ -221,7 +218,7 @@ namespace MedicalClinic
 			ColComboBoxMedicineRouteType.Name = "ID";
 			ColComboBoxMedicineRouteType.DataPropertyName = "ID";
 
-			SetGridStylesPrescription();
+            SetGridStylesPrescription();
 		}
 
 		private DataTable RetrieveMedicineTypes()
@@ -403,12 +400,45 @@ namespace MedicalClinic
                     {
                         while (reader.Read())
                         {
-                            int intTotalMedicines = int.Parse(reader["MedUnits"].ToString());
-                            int intBalanceMedicines = intTotalMedicines - int.Parse(ro.Cells[2].Value.ToString());
+                            double intBalanceMedicines = 0;
+                            int intTotalMedicineUnits = int.Parse(reader["MedUnits"].ToString());
+                            double intMedicineContents = int.Parse(reader["MedContents"].ToString());
+                            int intFrequencyTimes = int.Parse(RetrieveFrequencyTimes(ro.Cells[3].Value.ToString()));
 
-                            string strUpdate = "UPDATE Medicines SET MedUnits=" + intBalanceMedicines + " WHERE ID=" + ro.Cells[0].Value + "";
-                            OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
-                            cmdUpdate.ExecuteNonQuery();
+                            var match = Regex.Match(ro.Cells[2].Value.ToString(), "(\\w+)(\\d+)");
+                            double intDosage = int.Parse(match.Groups[0].Value);
+
+                            int intNoOfDays = int.Parse(CalculateDays(ro.Cells[4].Value.ToString(), ro.Cells[5].Value.ToString()));
+                            int intTotalTimes = intFrequencyTimes * intNoOfDays;
+
+                            if (intDosage != intMedicineContents)
+                            {
+                                if (intMedicineContents > intDosage)
+                                {
+                                    double intHalfTablets = intMedicineContents / intDosage;
+                                    if (intHalfTablets == 2)
+                                    {
+                                        intBalanceMedicines = double.Parse(intTotalMedicineUnits.ToString()) - 0.5;
+                                        string strUpdate = "UPDATE Medicines SET MedUnits=" + intBalanceMedicines + " WHERE ID=" + ro.Cells[0].Value + "";
+                                        OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                                        cmdUpdate.ExecuteNonQuery();
+                                    }
+                                }
+                                else
+                                {
+                                    intBalanceMedicines = intTotalTimes;
+                                    string strUpdate = "UPDATE Medicines SET MedUnits=" + intBalanceMedicines + " WHERE ID=" + ro.Cells[0].Value + "";
+                                    OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                                    cmdUpdate.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                intBalanceMedicines = intTotalTimes;
+                                string strUpdate = "UPDATE Medicines SET MedUnits=" + intBalanceMedicines + " WHERE ID=" + ro.Cells[0].Value + "";
+                                OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+                                cmdUpdate.ExecuteNonQuery();
+                            }
                         }
                     }
                     reader.Close();
@@ -1057,7 +1087,7 @@ namespace MedicalClinic
                 {
                     foreach (DataGridViewRow ro in dataGridViewPrescription.Rows)
                     {
-                        if (Convert.ToString(ro.Cells[2].Value) != string.Empty)
+                        if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
                         {
                             cmd.CommandText = "SELECT * FROM Medicines WHERE ID = " + ro.Cells[0].Value + "";
                             OleDbDataReader reader = cmd.ExecuteReader();
@@ -1065,16 +1095,64 @@ namespace MedicalClinic
                             {
                                 while (reader.Read())
                                 {
-                                    int intTotalMedicines = int.Parse(reader["MedUnits"].ToString());
-                                    int intBalanceMedicines = intTotalMedicines - int.Parse(ro.Cells[2].Value.ToString());
-                                    if (intBalanceMedicines <= 0)
+                                    int intTotalMedicineUnits = int.Parse(reader["MedUnits"].ToString());
+                                    double intMedicineContents = int.Parse(reader["MedContents"].ToString());
+                                    int intFrequencyTimes = int.Parse(RetrieveFrequencyTimes(ro.Cells[3].Value.ToString()));
+
+                                    var match = Regex.Match(ro.Cells[2].Value.ToString(), "(\\w+)(\\d+)");
+                                    double intDosage = int.Parse(match.Groups[0].Value);
+
+                                    int intNoOfDays = int.Parse(CalculateDays(ro.Cells[4].Value.ToString(), ro.Cells[5].Value.ToString()));
+                                    int intTotalTimes = intFrequencyTimes * intNoOfDays;
+
+                                    if (intDosage != intMedicineContents)
                                     {
-                                        MessageBox.Show(reader["MedicineName"].ToString() + " does not have enough medicines to issue", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        goto endOfLoop;
+                                        if (intMedicineContents > intDosage)
+                                        {
+                                            double intHalfTablets = intMedicineContents / intDosage;
+                                            if (intHalfTablets != 2)
+                                            {
+                                                MessageBox.Show("Invalid value of the Dosage of medicine " + reader["MedicineName"].ToString(), "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                goto endOfLoop;
+                                            }
+                                            else
+                                            {
+                                                isValidated = true;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            double dblFullTablets = intDosage / intMedicineContents;
+                                            if ((dblFullTablets % 1) != 0)
+                                            {
+                                                MessageBox.Show("Invalid value of the Dosage of medicine " + reader["MedicineName"].ToString(), "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                goto endOfLoop;
+                                            }
+                                            else
+                                            {
+                                                if (intTotalTimes > intTotalMedicineUnits)
+                                                {
+                                                    MessageBox.Show(reader["MedicineName"].ToString() + " does not have enough medicines to issue", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                    goto endOfLoop;
+                                                }
+                                                else
+                                                {
+                                                    isValidated = true;
+                                                }
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        isValidated = true;
+                                        if (intTotalTimes > intTotalMedicineUnits)
+                                        {
+                                            MessageBox.Show(reader["MedicineName"].ToString() + " does not have enough medicines to issue", "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            goto endOfLoop;
+                                        }
+                                        else
+                                        {
+                                            isValidated = true;
+                                        }
                                     }
                                 }
                             }
@@ -1097,6 +1175,66 @@ namespace MedicalClinic
             return isValidated;
         }
 
+        public string CalculateDays(string strDuration, string strDurationTypeId)
+        {
+            string strNoOfDays = string.Empty;
+            string strDurationType = string.Empty;
+
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from MedicineDurationTypes where ID = " + strDurationTypeId + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    strDurationType = reader["MedicineDurationType"].ToString();
+                }
+            }
+            reader.Close();
+            con.Close();
+
+            if (strDurationType.Equals("days"))
+            {
+                strNoOfDays = strDuration;
+            }
+            else if (strDurationType.Equals("weeks"))
+            {
+                strNoOfDays = (int.Parse(strDuration) * 7).ToString();
+            }
+            else if (strDurationType.Equals("months"))
+            {
+                DateTime dtNextDate = DateTime.Today.AddMonths(int.Parse(strDuration));
+                strNoOfDays = dtNextDate.Date.Subtract(DateTime.Now.Date).Days.ToString();
+            }
+
+            return strNoOfDays;
+        }
+
+        public string RetrieveFrequencyTimes(string strID)
+        {
+            string strFrequencyTimes = string.Empty;
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            OleDbCommand cmd = con.CreateCommand();
+            cmd.CommandText = "select * from MedicineFrequencyTypes where ID = " + strID + "";
+            con.Open();
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    strFrequencyTimes = reader["MedicineNoOfTimes"].ToString();
+                }
+            }
+            reader.Close();
+            con.Close();
+
+            return strFrequencyTimes;
+        }
+
         private void dataGridViewPrescription_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
         {
             dataGridViewPrescription.Rows[e.RowIndex].ErrorText = string.Empty;
@@ -1105,11 +1243,20 @@ namespace MedicalClinic
             row.Cells[dataGridViewPrescription.Columns[1].Index].ErrorText = string.Empty;
             row.Cells[dataGridViewPrescription.Columns[2].Index].ErrorText = string.Empty;
             row.Cells[dataGridViewPrescription.Columns[3].Index].ErrorText = string.Empty;
+            row.Cells[dataGridViewPrescription.Columns[4].Index].ErrorText = string.Empty;
+            row.Cells[dataGridViewPrescription.Columns[5].Index].ErrorText = string.Empty;
+            row.Cells[dataGridViewPrescription.Columns[6].Index].ErrorText = string.Empty;
+            row.Cells[dataGridViewPrescription.Columns[7].Index].ErrorText = string.Empty;
             DataGridViewCell medicineNameCell = row.Cells[dataGridViewPrescription.Columns[0].Index];
-            DataGridViewCell timeCell = row.Cells[dataGridViewPrescription.Columns[1].Index];
-            DataGridViewCell quantityCell = row.Cells[dataGridViewPrescription.Columns[2].Index];
-            DataGridViewCell daysCell = row.Cells[dataGridViewPrescription.Columns[3].Index];
-            e.Cancel = !(IsMedicineEmpty(medicineNameCell) && IsTimesEmpty(timeCell) && IsQuantityEmpty(quantityCell) && IsDaysEmpty(daysCell));
+            DataGridViewCell medicineTypeCell = row.Cells[dataGridViewPrescription.Columns[1].Index];
+            DataGridViewCell dosageCell = row.Cells[dataGridViewPrescription.Columns[2].Index];
+            DataGridViewCell frequencyCell = row.Cells[dataGridViewPrescription.Columns[3].Index];
+            DataGridViewCell durationCell = row.Cells[dataGridViewPrescription.Columns[4].Index];
+            DataGridViewCell durationTypeCell = row.Cells[dataGridViewPrescription.Columns[5].Index];
+            DataGridViewCell relationCell = row.Cells[dataGridViewPrescription.Columns[6].Index];
+            DataGridViewCell routeCell = row.Cells[dataGridViewPrescription.Columns[7].Index];
+            e.Cancel = !(IsMedicineEmpty(medicineNameCell) && IsMedicineTypeEmpty(medicineTypeCell) && IsDosageEmpty(dosageCell) && IsFrequencyEmpty(frequencyCell) 
+                && IsDurationEmpty(durationCell) && IsDurationTypeEmpty(durationTypeCell) && IsRelationEmpty(relationCell) && IsRouteEmpty(routeCell));
         }
 
         private Boolean IsMedicineEmpty(DataGridViewCell cell)
@@ -1123,7 +1270,7 @@ namespace MedicalClinic
             return true;
         }
 
-        private Boolean IsTimesEmpty(DataGridViewCell cell)
+        private Boolean IsMedicineTypeEmpty(DataGridViewCell cell)
         {
             dataGridViewPrescription.Rows[cell.RowIndex].ErrorText = string.Empty;
             if (cell.Value == null)
@@ -1135,7 +1282,7 @@ namespace MedicalClinic
             return true;
         }
 
-        private Boolean IsQuantityEmpty(DataGridViewCell cell)
+        private Boolean IsDosageEmpty(DataGridViewCell cell)
         {
             if (cell.Value == null)
             {
@@ -1146,7 +1293,51 @@ namespace MedicalClinic
             return true;
         }
 
-        private Boolean IsDaysEmpty(DataGridViewCell cell)
+        private Boolean IsFrequencyEmpty(DataGridViewCell cell)
+        {
+            if (cell.Value == null)
+            {
+                cell.ErrorText = "Please enter a value";
+                dataGridViewPrescription.Rows[cell.RowIndex].ErrorText = "Please enter a value";
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean IsDurationEmpty(DataGridViewCell cell)
+        {
+            if (cell.Value == null)
+            {
+                cell.ErrorText = "Please enter a value";
+                dataGridViewPrescription.Rows[cell.RowIndex].ErrorText = "Please enter a value";
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean IsDurationTypeEmpty(DataGridViewCell cell)
+        {
+            if (cell.Value == null)
+            {
+                cell.ErrorText = "Please enter a value";
+                dataGridViewPrescription.Rows[cell.RowIndex].ErrorText = "Please enter a value";
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean IsRelationEmpty(DataGridViewCell cell)
+        {
+            if (cell.Value == null)
+            {
+                cell.ErrorText = "Please enter a value";
+                dataGridViewPrescription.Rows[cell.RowIndex].ErrorText = "Please enter a value";
+                return false;
+            }
+            return true;
+        }
+
+        private Boolean IsRouteEmpty(DataGridViewCell cell)
         {
             if (cell.Value == null)
             {
