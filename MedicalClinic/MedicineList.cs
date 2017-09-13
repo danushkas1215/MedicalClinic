@@ -21,7 +21,8 @@ namespace MedicalClinic
 
             this.dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightBlue;
             this.dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridView1.Columns["Medicine Name"].Width = 220;
+            this.dataGridView1.Columns["MedicineName"].Width = 220;
+            this.dataGridView1.Columns["MedicineName"].HeaderText = "Medicine Name";
             this.dataGridView1.Columns["Generic Name"].Width = 175;
             this.dataGridView1.Columns["Company"].Width = 150;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
@@ -29,11 +30,6 @@ namespace MedicalClinic
             this.dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);
             this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("MedicineName LIKE '%{0}%'", txtSearch.Text);
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -48,27 +44,26 @@ namespace MedicalClinic
                 this.Close();
             }
         }
-
         public void GetData()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select ID, MedicineName, MedGenericNameID, MedCompanyID from Medicines";
+            cmd.CommandText = "select ID, MedicineName, MedGenericNameID, MedCompanyID from Medicines ORDER BY MedicineName";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
             {
                 DataTable dt = new DataTable();
                 dt.Columns.Add("ID");
-                dt.Columns.Add("Medicine Name");
+                dt.Columns.Add("MedicineName");
                 dt.Columns.Add("Generic Name");
                 dt.Columns.Add("Company");
                 while (reader.Read())
                 {
                     DataRow row = dt.NewRow();
                     row["ID"] = reader["ID"];
-                    row["Medicine Name"] = reader["MedicineName"];
+                    row["MedicineName"] = reader["MedicineName"];
                     row["Generic Name"] = GetGenericName(reader["MedGenericNameID"].ToString());
                     row["Company"] = GetCompanyName(reader["MedCompanyID"].ToString());
                     dt.Rows.Add(row);
@@ -138,6 +133,11 @@ namespace MedicalClinic
             con.Close();
 
             return strCompanyName;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = string.Format("MedicineName LIKE '%{0}%'", txtSearch.Text);
         }
     }
 }

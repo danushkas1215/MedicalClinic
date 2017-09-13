@@ -52,7 +52,7 @@ namespace MedicalClinic
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("select ID, CompanyName from PharmaceuticalCompanies", con);
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT ID, CompanyName FROM PharmaceuticalCompanies ORDER BY CompanyName", con);
             DataSet ds = new DataSet();
             da.Fill(ds, "PharmaceuticalCompanies");
             dataGridView1.DataSource = ds.Tables[0];

@@ -53,7 +53,7 @@ namespace MedicalClinic
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select ID, FullName, Address, NIC, Sex, RecordNo from Patients";
+            cmd.CommandText = "select ID, FullName, Address, NIC, Sex, RecordNo from Patients ORDER BY FullName";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)

@@ -51,7 +51,7 @@ namespace MedicalClinic
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
             con.Open();
-            OleDbDataAdapter da = new OleDbDataAdapter("select * from GenericNames", con);
+            OleDbDataAdapter da = new OleDbDataAdapter("SELECT * FROM GenericNames ORDER BY GenericName", con);
             DataSet ds = new DataSet();
             da.Fill(ds, "GenericNames");
             dataGridView1.DataSource = ds.Tables[0];

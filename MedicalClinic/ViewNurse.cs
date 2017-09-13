@@ -46,7 +46,7 @@ namespace MedicalClinic
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT ID, PatientID, LogDate FROM PatientsArrival WHERE PatientStatus = 'Consulted'";
+            cmd.CommandText = "SELECT ID, PatientID, LogDate FROM PatientsArrival WHERE PatientStatus = 'Consulted' ORDER BY LogDate";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
