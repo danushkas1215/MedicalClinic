@@ -151,6 +151,12 @@
     <Compile Include="PharmaceuticalCom.Designer.cs">
       <DependentUpon>PharmaceuticalCom.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrescriptionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrescriptionView.Designer.cs">
+      <DependentUpon>PrescriptionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewNurse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PharmaceuticalCom.resx">
       <DependentUpon>PharmaceuticalCom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrescriptionView.resx">
+      <DependentUpon>PrescriptionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewNurse.resx">
       <DependentUpon>ViewNurse.cs</DependentUpon>

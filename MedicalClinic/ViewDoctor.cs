@@ -67,30 +67,28 @@ namespace MedicalClinic
                     dt.Rows.Add(row);
                 }
                 dataGridView1.DataSource = dt;
+
+                DataGridViewButtonColumn btnEditButtonColumn = new DataGridViewButtonColumn();
+                btnEditButtonColumn.Name = "edit_column";
+                btnEditButtonColumn.Text = "View";
+                btnEditButtonColumn.HeaderText = string.Empty;
+                btnEditButtonColumn.UseColumnTextForButtonValue = true;
+                btnEditButtonColumn.Width = 50;
+                int columnIndex = 1;
+                if (dataGridView1.Columns["edit_column"] == null)
+                {
+                    dataGridView1.Columns.Insert(columnIndex, btnEditButtonColumn);
+                }
+                dataGridView1.CellClick += dataGridView1_CellClick;
+
+                dataGridView1.Columns["ID"].Visible = false;
+                dataGridView1.Columns["PatientID"].Visible = false;
+                dataGridView1.Columns["LogDate"].Width = 170;
+                dataGridView1.Columns["LogDate"].HeaderText = "Log Time";
+                dataGridView1.Columns["PatientName"].Width = 500;
+                dataGridView1.Columns["PatientName"].HeaderText = "Patient Name";
             }
             reader.Close();
-            con.Close();
-
-            DataGridViewButtonColumn btnEditButtonColumn = new DataGridViewButtonColumn();
-            btnEditButtonColumn.Name = "edit_column";
-            btnEditButtonColumn.Text = "View";
-            btnEditButtonColumn.HeaderText = string.Empty;
-            btnEditButtonColumn.UseColumnTextForButtonValue = true;
-            btnEditButtonColumn.Width = 50;
-            int columnIndex = 1;
-            if (dataGridView1.Columns["edit_column"] == null)
-            {
-                dataGridView1.Columns.Insert(columnIndex, btnEditButtonColumn);
-            }
-            dataGridView1.CellClick += dataGridView1_CellClick;
-
-            dataGridView1.Columns["ID"].Visible = false;
-            dataGridView1.Columns["PatientID"].Visible = false;
-            dataGridView1.Columns["LogDate"].Width = 170;
-            dataGridView1.Columns["LogDate"].HeaderText = "Log Time";
-            dataGridView1.Columns["PatientName"].Width = 500;
-            dataGridView1.Columns["PatientName"].HeaderText = "Patient Name";
-
             con.Close();
         }
 

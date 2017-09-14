@@ -97,7 +97,7 @@ namespace MedicalClinic
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from Medicines";
+            cmd.CommandText = "select * from Medicines ORDER BY MedicineName";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             DataTable data = new DataTable();
@@ -366,8 +366,10 @@ namespace MedicalClinic
             {
                 if (Convert.ToString(ro.Cells[0].Value) != string.Empty)
                 {
-                    cmd.CommandText = "INSERT INTO PatientPrescription(PatientID, MedicineID, MedicineType, Dosage, FrequencyType, Duration, DurationType, RelationType, RouteType, LogDate)VALUES("
-					+ int.Parse(txtID.Text) + ","
+                    cmd.CommandText = "INSERT INTO PatientPrescription(PatientID, PatientArrivalID, MedicineID, MedicineType, Dosage, FrequencyType, " +
+                        "Duration, DurationType, RelationType, RouteType, LogDate)VALUES("
+                    + int.Parse(txtID.Text) + ","
+                    + int.Parse(strArrivalID) + ","
                     + ro.Cells[0].Value + ","
                     + ro.Cells[1].Value + ",'"
                     + ro.Cells[2].Value + "',"
@@ -379,6 +381,12 @@ namespace MedicalClinic
 					+ DateTime.Now + "')";
                     cmd.Connection = con;
                     cmd.ExecuteNonQuery();
+                    cmd.CommandText = "Select @@Identity";
+                    int intId = (int)cmd.ExecuteScalar();
+
+                    LoggingHelper.LogEntry("Patient Prescription", "Add", txtID.Text + "|" + strArrivalID + "|" + ro.Cells[0].Value + "|" + ro.Cells[1].Value + "|" +
+                        ro.Cells[2].Value + "|" + ro.Cells[3].Value + "|" + ro.Cells[4].Value + "|" + ro.Cells[5].Value + "|" + ro.Cells[6].Value + "|" +
+                        ro.Cells[7].Value + "|" + DateTime.Now, intId);
                 }
             }
             con.Close();
