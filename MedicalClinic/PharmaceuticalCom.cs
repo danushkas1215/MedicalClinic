@@ -92,6 +92,7 @@ namespace MedicalClinic
             btnDelete.Enabled = false;
             txtComName.Enabled = true;
             btnAdd.Text = "Add";
+            btnDelete.Enabled = false;
         }
 
         public void InitiateDatagrid()

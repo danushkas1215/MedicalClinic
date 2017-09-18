@@ -48,6 +48,7 @@ namespace MedicalClinic
             reader.Close();
             con.Close();
             btnAdd.Text = "Update";
+            btnDelete.Enabled = true;
         }
 
         public void PopulateGeneticName()
@@ -159,6 +160,7 @@ namespace MedicalClinic
             chkDispensing.Checked = false;
             txtTradeName.Text = "";
             btnAdd.Text = "Add";
+            btnDelete.Enabled = false;
         }
 
         private void txtPrice_KeyPress(object sender, KeyPressEventArgs e)

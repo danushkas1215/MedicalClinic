@@ -112,6 +112,7 @@
             // 
             // comGenericName
             // 
+            this.comGenericName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comGenericName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comGenericName.FormattingEnabled = true;
             this.comGenericName.Location = new System.Drawing.Point(251, 96);
@@ -121,6 +122,7 @@
             // 
             // comCompany
             // 
+            this.comCompany.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comCompany.FormattingEnabled = true;
             this.comCompany.Location = new System.Drawing.Point(251, 147);
@@ -200,6 +202,7 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.Enabled = false;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Location = new System.Drawing.Point(392, 330);
             this.btnDelete.Name = "btnDelete";

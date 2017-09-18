@@ -67,6 +67,7 @@ namespace MedicalClinic
         {
             txtGenericName.Text = "";
             btnAdd.Text = "Add";
+            btnDelete.Enabled = false;
             //txtID.Text = "";
         }
 
@@ -99,6 +100,7 @@ namespace MedicalClinic
             reader.Close();
             con.Close();
             btnAdd.Text = "Update";
+            btnDelete.Enabled = true;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

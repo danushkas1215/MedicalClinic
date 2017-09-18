@@ -93,6 +93,7 @@
             this.medicalRecordToolStripMenuItem.Name = "medicalRecordToolStripMenuItem";
             this.medicalRecordToolStripMenuItem.Size = new System.Drawing.Size(188, 26);
             this.medicalRecordToolStripMenuItem.Text = "Medical Record";
+            this.medicalRecordToolStripMenuItem.Visible = false;
             this.medicalRecordToolStripMenuItem.Click += new System.EventHandler(this.medicalRecordToolStripMenuItem_Click);
             // 
             // medicinesToolStripMenuItem
