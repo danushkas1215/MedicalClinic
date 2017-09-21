@@ -21,10 +21,10 @@ namespace MedicalClinic
 
             this.dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightBlue;
             this.dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Beige;
-            this.dataGridView1.Columns["MedicineName"].Width = 220;
+            this.dataGridView1.Columns["MedicineName"].Width = 250;
             this.dataGridView1.Columns["MedicineName"].HeaderText = "Medicine Name";
-            this.dataGridView1.Columns["Generic Name"].Width = 175;
-            this.dataGridView1.Columns["Company"].Width = 150;
+            this.dataGridView1.Columns["Generic Name"].Width = 400;
+            this.dataGridView1.Columns["Company"].Width = 300;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Gray;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Bold);

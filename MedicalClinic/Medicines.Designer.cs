@@ -134,10 +134,10 @@
             // 
             this.txtContents.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContents.Location = new System.Drawing.Point(251, 197);
-            this.txtContents.Multiline = true;
             this.txtContents.Name = "txtContents";
-            this.txtContents.Size = new System.Drawing.Size(353, 91);
+            this.txtContents.Size = new System.Drawing.Size(158, 27);
             this.txtContents.TabIndex = 8;
+            this.txtContents.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContents_KeyPress);
             // 
             // label6
             // 
@@ -219,7 +219,7 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
             this.btnCancel.TabIndex = 18;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Clear";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 

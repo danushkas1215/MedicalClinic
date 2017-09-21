@@ -260,7 +260,7 @@
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dataGridViewPrescriptionData.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewPrescriptionData.RowTemplate.Height = 24;
-            this.dataGridViewPrescriptionData.Size = new System.Drawing.Size(1458, 472);
+            this.dataGridViewPrescriptionData.Size = new System.Drawing.Size(1568, 472);
             this.dataGridViewPrescriptionData.TabIndex = 5;
             this.dataGridViewPrescriptionData.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridViewPrescriptionData_DataBindingComplete);
             // 
@@ -279,7 +279,7 @@
             this.btnDispense.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDispense.Location = new System.Drawing.Point(673, 748);
             this.btnDispense.Name = "btnDispense";
-            this.btnDispense.Size = new System.Drawing.Size(120, 30);
+            this.btnDispense.Size = new System.Drawing.Size(120, 40);
             this.btnDispense.TabIndex = 7;
             this.btnDispense.Text = "Dispense";
             this.btnDispense.UseVisualStyleBackColor = true;
@@ -289,7 +289,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1482, 853);
+            this.ClientSize = new System.Drawing.Size(1592, 853);
             this.Controls.Add(this.btnDispense);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dataGridViewPrescriptionData);

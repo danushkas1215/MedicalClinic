@@ -72,14 +72,14 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 503);
+            this.dataGridView1.Size = new System.Drawing.Size(1150, 503);
             this.dataGridView1.TabIndex = 3;
             // 
             // MedicineList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 670);
+            this.ClientSize = new System.Drawing.Size(1234, 670);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dataGridView1);

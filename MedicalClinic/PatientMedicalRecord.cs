@@ -157,8 +157,9 @@ namespace MedicalClinic
 
 			dataGridViewPrescription.Columns.Add("Dosage", "Dosage");
 			dataGridViewPrescription.Columns["Dosage"].DisplayIndex = 2;
+            dataGridViewPrescription.EditMode = DataGridViewEditMode.EditOnEnter;
 
-			DataGridViewComboBoxColumn ColComboBoxMedicineFrequencyType = new DataGridViewComboBoxColumn();
+            DataGridViewComboBoxColumn ColComboBoxMedicineFrequencyType = new DataGridViewComboBoxColumn();
 			dataGridViewPrescription.Columns.Add(ColComboBoxMedicineFrequencyType);
 			ColComboBoxMedicineFrequencyType.DataPropertyName = "ID";
 			ColComboBoxMedicineFrequencyType.HeaderText = "Frequency";

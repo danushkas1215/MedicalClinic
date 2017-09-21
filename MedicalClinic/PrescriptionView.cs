@@ -74,7 +74,8 @@ namespace MedicalClinic
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM PatientPrescription WHERE PatientID = " + txtID.Text + " AND PatientArrivalID = " + strArrivalID + "";
+            cmd.CommandText = "SELECT * FROM PatientPrescription INNER JOIN Medicines ON PatientPrescription.MedicineID = Medicines.ID WHERE " +
+                "PatientID = " + txtID.Text + " AND PatientArrivalID = " + strArrivalID + "";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             double dblColumnTotal = 0;
@@ -89,6 +90,7 @@ namespace MedicalClinic
                 dt.Columns.Add("DurationType");
                 dt.Columns.Add("RelationType");
                 dt.Columns.Add("RouteType");
+                dt.Columns.Add("UnitPrice");
                 dt.Columns.Add("Total");
                 dt.Columns.Add("Price");
 
@@ -103,7 +105,8 @@ namespace MedicalClinic
                     row["DurationType"] = GetDurationTypeName(reader["DurationType"].ToString());
                     row["RelationType"] = GetRelationTypeName(reader["RelationType"].ToString());
                     row["RouteType"] = GetRoutTypeName(reader["RouteType"].ToString());
-                    string strTotalTablets = GetTotalMedicines(reader["Duration"].ToString(), reader["DurationType"].ToString(), reader["FrequencyType"].ToString(),
+                    row["UnitPrice"] = Math.Round(Double.Parse(reader["MedPrice"].ToString()), 2).ToString("#.00");
+                    string strTotalTablets = GetTotalMedicines(reader["Duration"].ToString(), reader["DurationType"].ToString(), reader["FrequencyType"].ToString(), 
                         reader["Dosage"].ToString(), reader["MedicineID"].ToString());
                     row["Total"] = strTotalTablets;
                     string strRowTotal = Math.Round(GetPriceValues(reader["MedicineID"].ToString(), strTotalTablets), 2).ToString("#.00");
@@ -122,6 +125,7 @@ namespace MedicalClinic
                 rowBlank["DurationType"] = "";
                 rowBlank["RelationType"] = "";
                 rowBlank["RouteType"] = "";
+                rowBlank["UnitPrice"] = "";
                 rowBlank["Total"] = "";
                 rowBlank["Price"] = dblColumnTotal.ToString("#.00");
                 dt.Rows.Add(rowBlank);
@@ -150,6 +154,9 @@ namespace MedicalClinic
             this.dataGridViewPrescriptionData.Columns["DurationType"].Width = 110;
             this.dataGridViewPrescriptionData.Columns["RelationType"].HeaderText = "Relation";
             this.dataGridViewPrescriptionData.Columns["RouteType"].HeaderText = "Route";
+            this.dataGridViewPrescriptionData.Columns["UnitPrice"].Width = 80;
+            this.dataGridViewPrescriptionData.Columns["UnitPrice"].HeaderText = "Unit Price";
+            this.dataGridViewPrescriptionData.Columns["UnitPrice"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             this.dataGridViewPrescriptionData.Columns["Total"].Width = 80;
             this.dataGridViewPrescriptionData.Columns["Total"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             this.dataGridViewPrescriptionData.Columns["Price"].Width = 80;

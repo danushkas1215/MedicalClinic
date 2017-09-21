@@ -71,7 +71,7 @@ namespace MedicalClinic
                 DataGridViewButtonColumn btnEditButtonColumn = new DataGridViewButtonColumn();
                 btnEditButtonColumn.Name = "edit_column";
                 btnEditButtonColumn.Text = "View";
-                btnEditButtonColumn.HeaderText = "ww";
+                btnEditButtonColumn.HeaderText = "";
                 btnEditButtonColumn.UseColumnTextForButtonValue = true;
                 btnEditButtonColumn.Width = 50;
                 int columnIndex = 1;
@@ -86,7 +86,7 @@ namespace MedicalClinic
                 dataGridView1.Columns["LogDate"].Width = 170;
                 dataGridView1.Columns["LogDate"].HeaderText = "Log Time";
                 dataGridView1.Columns["PatientName"].Width = 500;
-                dataGridView1.Columns["PatientName"].HeaderText = "Log Time";
+                dataGridView1.Columns["PatientName"].HeaderText = "Patient Name";
             }
             reader.Close();
             con.Close();
