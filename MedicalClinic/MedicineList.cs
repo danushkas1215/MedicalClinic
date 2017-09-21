@@ -44,12 +44,15 @@ namespace MedicalClinic
                 this.Close();
             }
         }
+
         public void GetData()
         {
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select ID, MedicineName, MedGenericNameID, MedCompanyID from Medicines ORDER BY MedicineName";
+            cmd.CommandText = "SELECT Medicines.ID, Medicines.MedicineName, Medicines.MedGenericNameID, Medicines.MedCompanyID, GenericNames.GenericName, PharmaceuticalCompanies.CompanyName " +
+                "FROM(Medicines INNER JOIN GenericNames ON Medicines.MedGenericNameID = GenericNames.ID) INNER JOIN PharmaceuticalCompanies ON Medicines.MedCompanyID = PharmaceuticalCompanies.ID " +
+                "ORDER BY Medicines.MedicineName";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             if (reader.HasRows)
@@ -64,8 +67,8 @@ namespace MedicalClinic
                     DataRow row = dt.NewRow();
                     row["ID"] = reader["ID"];
                     row["MedicineName"] = reader["MedicineName"];
-                    row["Generic Name"] = GetGenericName(reader["MedGenericNameID"].ToString());
-                    row["Company"] = GetCompanyName(reader["MedCompanyID"].ToString());
+                    row["Generic Name"] = reader["GenericName"];
+                    row["Company"] = reader["CompanyName"];
                     dt.Rows.Add(row);
                 }
                 dataGridView1.DataSource = dt;
@@ -89,50 +92,6 @@ namespace MedicalClinic
 
             //ds.Tables.Clear();
             con.Close();
-        }
-
-        public string GetGenericName(string strGenericId)
-        {
-            string strGenericName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from GenericNames where ID = " + strGenericId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strGenericName = reader["GenericName"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strGenericName;
-        }
-
-        public string GetCompanyName(string strCompanyId)
-        {
-            string strCompanyName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from PharmaceuticalCompanies where ID = " + strCompanyId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strCompanyName = reader["CompanyName"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strCompanyName;
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)

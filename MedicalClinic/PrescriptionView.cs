@@ -450,5 +450,20 @@ namespace MedicalClinic
         {
             this.dataGridViewPrescriptionData.ClearSelection();
         }
+
+        private void btnDispense_Click(object sender, EventArgs e)
+        {
+            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
+            OleDbConnection con = new OleDbConnection(conString);
+            con.Open();
+
+            string strUpdate = "UPDATE PatientsArrival SET PatientStatus = 'Despense' " +
+                " WHERE ID = " + int.Parse(strArrivalID) + " AND PatientID = " + int.Parse(txtID.Text) + "";
+            OleDbCommand cmdUpdate = new OleDbCommand(strUpdate, con);
+            cmdUpdate.ExecuteNonQuery();
+
+            LoggingHelper.LogEntry("Patients Arrival", "Update", txtID.Text + "|Despense|", int.Parse(strArrivalID));
+            con.Close();
+        }
     }
 }
