@@ -74,8 +74,14 @@ namespace MedicalClinic
             string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
             OleDbConnection con = new OleDbConnection(conString);
             OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "SELECT * FROM PatientPrescription INNER JOIN Medicines ON PatientPrescription.MedicineID = Medicines.ID WHERE " +
-                "PatientID = " + txtID.Text + " AND PatientArrivalID = " + strArrivalID + "";
+            cmd.CommandText = "SELECT Medicines.MedTradeName, Medicines.MedicineName, Medicines.MedDispensing, Medicines.MedPrice, PatientPrescription.DurationType, PatientPrescription.FrequencyType, "+
+                "PatientPrescription.MedicineID, PatientPrescription.Dosage, PatientPrescription.Duration, MedicineTypes.MedicineType, MedicineFrequencyTypes.MedicineFrequencyType, "+
+                "MedicineDurationTypes.MedicineDurationType, MedicineRelationToMealTypes.MedicineRelationToMealType, MedicineRoutTypes.MedicineRoutType " +
+                "FROM (((((PatientPrescription INNER JOIN Medicines ON PatientPrescription.MedicineID = Medicines.ID) INNER JOIN MedicineTypes ON PatientPrescription.MedicineType = MedicineTypes.ID) " +
+                "INNER JOIN MedicineFrequencyTypes ON PatientPrescription.FrequencyType = MedicineFrequencyTypes.ID) INNER JOIN MedicineDurationTypes ON " +
+                "PatientPrescription.DurationType = MedicineDurationTypes.ID) INNER JOIN MedicineRelationToMealTypes ON PatientPrescription.RelationType = MedicineRelationToMealTypes.ID) " +
+                "INNER JOIN MedicineRoutTypes ON PatientPrescription.RouteType = MedicineRoutTypes.ID " +
+                "WHERE PatientID = " + txtID.Text + " AND PatientArrivalID = " + strArrivalID + " ORDER BY Medicines.MedicineName";
             con.Open();
             OleDbDataReader reader = cmd.ExecuteReader();
             double dblColumnTotal = 0;
@@ -97,20 +103,51 @@ namespace MedicalClinic
                 while (reader.Read())
                 {
                     DataRow row = dt.NewRow();
-                    row["MedicineID"] = GetMedicineName(reader["MedicineID"].ToString());
-                    row["MedicineType"] = GetMedicineTypeName(reader["MedicineType"].ToString());
+                    string strTradeName = string.Empty;
+                    string strMedicineName = string.Empty;
+                    strTradeName = reader["MedTradeName"].ToString();
+
+                    if (string.IsNullOrEmpty(strTradeName))
+                    {
+                        strMedicineName = reader["MedicineName"].ToString();
+                    }
+                    else
+                    {
+                        strMedicineName = reader["MedicineName"].ToString() + " - (" + reader["MedTradeName"].ToString() + ")";
+                    }
+                    row["MedicineID"] = strMedicineName;
+                    row["MedicineType"] = reader["MedicineType"];
                     row["Dosage"] = reader["Dosage"];
-                    row["FrequencyType"] = GetFrequencyTypeName(reader["FrequencyType"].ToString());
+                    row["FrequencyType"] = reader["MedicineFrequencyType"];
                     row["Duration"] = reader["Duration"];
-                    row["DurationType"] = GetDurationTypeName(reader["DurationType"].ToString());
-                    row["RelationType"] = GetRelationTypeName(reader["RelationType"].ToString());
-                    row["RouteType"] = GetRoutTypeName(reader["RouteType"].ToString());
-                    row["UnitPrice"] = Math.Round(Double.Parse(reader["MedPrice"].ToString()), 2).ToString("#.00");
+                    row["DurationType"] = reader["MedicineDurationType"];
+                    row["RelationType"] = reader["MedicineRelationToMealType"];
+                    row["RouteType"] = reader["MedicineRoutType"];
+                    bool boolIsDespensing = bool.Parse(reader["MedDispensing"].ToString());
+                    if (boolIsDespensing)
+                    {
+                        row["UnitPrice"] = "FOC";
+                    }
+                    else
+                    {
+                        row["UnitPrice"] = Math.Round(Double.Parse(reader["MedPrice"].ToString()), 2).ToString("#.00");
+                    }
+                    
                     string strTotalTablets = GetTotalMedicines(reader["Duration"].ToString(), reader["DurationType"].ToString(), reader["FrequencyType"].ToString(), 
                         reader["Dosage"].ToString(), reader["MedicineID"].ToString());
                     row["Total"] = strTotalTablets;
-                    string strRowTotal = Math.Round(GetPriceValues(reader["MedicineID"].ToString(), strTotalTablets), 2).ToString("#.00");
-                    dblColumnTotal = dblColumnTotal + Math.Round(GetPriceValues(reader["MedicineID"].ToString(), strTotalTablets), 2);
+
+                    string strRowTotal = string.Empty;
+                    if (boolIsDespensing)
+                    {
+                        strRowTotal = Math.Round(0.0, 2).ToString("#.00");
+                    }
+                    else
+                    {
+                        strRowTotal = Math.Round(GetPriceValues(reader["MedicineID"].ToString(), strTotalTablets), 2).ToString("#.00");
+                    }
+                         
+                    dblColumnTotal = dblColumnTotal + Math.Round(Double.Parse(strRowTotal), 2);
                     row["Price"] = strRowTotal;
 
                     dt.Rows.Add(row);
@@ -168,149 +205,6 @@ namespace MedicalClinic
             this.dataGridViewPrescriptionData.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             this.dataGridViewPrescriptionData.AllowUserToAddRows = false;
             this.dataGridViewPrescriptionData.AllowUserToDeleteRows = false;
-        }
-
-        public string GetMedicineName(string strMedicineId)
-        {
-            string strMedicineName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from Medicines where ID = " + strMedicineId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    string strTradeName = string.Empty;
-                    strTradeName = reader["MedTradeName"].ToString();
-
-                    if (string.IsNullOrEmpty(strTradeName))
-                    {
-                        strMedicineName = reader["MedicineName"].ToString();
-                    }
-                    else
-                    {
-                        strMedicineName = reader["MedicineName"].ToString() + " - (" + reader["MedTradeName"].ToString() + ")";
-                    }
-                    
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strMedicineName;
-        }
-
-        public string GetMedicineTypeName(string strMedicineTypeId)
-        {
-            string strMedicineTypeName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from MedicineTypes where ID = " + strMedicineTypeId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strMedicineTypeName = reader["MedicineType"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strMedicineTypeName;
-        }
-
-        public string GetFrequencyTypeName(string strFrequencyTypeId)
-        {
-            string strFrequencyTypeName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from MedicineFrequencyTypes where ID = " + strFrequencyTypeId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strFrequencyTypeName = reader["MedicineFrequencyType"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strFrequencyTypeName;
-        }
-
-        public string GetDurationTypeName(string strDurationTypeId)
-        {
-            string strDurationTypeName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from MedicineDurationTypes where ID = " + strDurationTypeId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strDurationTypeName = reader["MedicineDurationType"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strDurationTypeName;
-        }
-
-        public string GetRelationTypeName(string strRelationTypeId)
-        {
-            string strRelationTypeName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from MedicineRelationToMealTypes where ID = " + strRelationTypeId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strRelationTypeName = reader["MedicineRelationToMealType"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strRelationTypeName;
-        }
-
-        public string GetRoutTypeName(string strRoutTypeId)
-        {
-            string strRoutTypeName = string.Empty;
-            string conString = ConfigurationManager.ConnectionStrings["MyConnection"].ConnectionString;
-            OleDbConnection con = new OleDbConnection(conString);
-            OleDbCommand cmd = con.CreateCommand();
-            cmd.CommandText = "select * from MedicineRoutTypes where ID = " + strRoutTypeId + "";
-            con.Open();
-            OleDbDataReader reader = cmd.ExecuteReader();
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    strRoutTypeName = reader["MedicineRoutType"].ToString();
-                }
-            }
-            reader.Close();
-            con.Close();
-
-            return strRoutTypeName;
         }
 
         public string GetTotalMedicines(string strDuration, string strDurationTypeId, string strFrequencyId, string strDosage, string strMedicineId)
